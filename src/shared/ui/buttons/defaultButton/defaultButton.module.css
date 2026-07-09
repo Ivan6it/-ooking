@@ -1,0 +1,14 @@
+.defaultButton {
+  background-color: rgba(103, 187, 90, 1);
+  color: rgba(255, 255, 255, 1);
+  font-size: 20px;
+  font-weight: 700;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.4s ease-in-out;
+}
+
+.defaultButton:hover {
+  background-color: rgba(158, 225, 147, 1);
+  cursor: pointer;
+}

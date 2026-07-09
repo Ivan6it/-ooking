@@ -1,0 +1,8 @@
+.icon:focus {
+  outline: none;
+}
+
+.icon:focus-visible {
+  outline: 3px solid #67bb5a;
+  outline-offset: 2px;
+}

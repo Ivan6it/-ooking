@@ -1,0 +1,1 @@
+export { CardFoodCatalog } from './CardFoodCatalog';

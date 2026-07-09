@@ -1,0 +1,36 @@
+.sectionCards {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  background-color: transparent;
+}
+
+.sectionCards__heading {
+  font-size: 36px;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 1);
+}
+
+.sectionCards__cards {
+  display: grid;
+  grid-template-columns: repeat(4, max-content);
+  column-gap: auto;
+  row-gap: 50px;
+  justify-content: space-between;
+}
+
+.sectionCards__cards:nth-child(odd) {
+  justify-self: start;
+}
+
+.sectionCards__cards:nth-child(even) {
+  justify-self: end;
+}
+
+.sectionCards__button {
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px 38px;
+  border-radius: 10px;
+}

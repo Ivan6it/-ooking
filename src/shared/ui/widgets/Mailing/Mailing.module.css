@@ -1,0 +1,68 @@
+.mailing {
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0 4px 14px 0 rgba(66, 59, 59, 0.1);
+  border-radius: 5px;
+  display: flex;
+  gap: 79px;
+}
+
+.mailing__form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 50px 0 50px 65px;
+}
+
+.mailing__form__heading {
+  font-size: 36px;
+  font-weight: 700;
+  color: rgba(75, 71, 71, 1);
+}
+
+.mailing__form__personal__button {
+  padding: 0;
+  border: none;
+  display: inline-flex;
+}
+
+.mailing__form__button {
+  width: fit-content;
+  padding: 20px 91px;
+  border-radius: 10px;
+}
+
+.mailing__form__input {
+  width: 45.35vw;
+  border-radius: 5px;
+  border: 1px solid rgba(181, 195, 201, 1);
+  padding: 13px 0 13px 20px;
+}
+
+.mailing__form__input:focus {
+  outline: none;
+}
+
+.mailing__form__personal {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.mailing__form__personal__text {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.mailing__image {
+  width: 434px;
+  height: 504px;
+  transform: scaleX(-1);
+}
+
+.mailing__form__personal__text__link {
+  color: rgba(103, 187, 90, 1);
+  font-size: 20px;
+  font-weight: 400;
+  text-decoration-line: underline;
+  text-underline-offset: 4px;
+}

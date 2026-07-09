@@ -1,0 +1,70 @@
+.cardFood {
+  width: 246px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  cursor: pointer;
+}
+
+.cardFood__cardBlock {
+  height: 346px;
+  border-radius: 10px;
+  position: relative;
+}
+
+.cardFood__cardBlock__bookMark {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.cardFood__cardBlock__like {
+  display: flex;
+  font-size: 20px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 1);
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  align-items: center;
+  gap: 10px;
+}
+
+.cardFood__cardBlock__time {
+  font-size: 20px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 1);
+  position: absolute;
+  right: 10px;
+  bottom: 15px;
+}
+
+.cardFood__cardBlock__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 11px;
+}
+
+.cardFood__name {
+  font-size: 16px;
+  font-weight: 700;
+  color: rgba(28, 31, 29, 1);
+}
+
+.cardFood__cardBlock__overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 82px;
+  width: 100%;
+  background: linear-gradient(to top, rgba(75, 71, 71, 1) 0%, rgba(75, 71, 71, 0) 100%);
+  pointer-events: none;
+  border-radius: 11px;
+}
+
+.iconActive {
+  background-color: transparent;
+  padding: 0;
+  border: none;
+}

@@ -1,0 +1,8 @@
+.socialIcon path {
+  transition: fill 0.5s ease-in-out;
+}
+
+.socialIcon:hover path {
+  fill: rgba(158, 225, 147, 1);
+  cursor: pointer;
+}
