@@ -57,6 +57,7 @@
   width: 434px;
   height: 504px;
   transform: scaleX(-1);
+  border-radius: 5px;
 }
 
 .mailing__form__personal__text__link {

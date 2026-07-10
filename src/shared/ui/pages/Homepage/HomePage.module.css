@@ -1,0 +1,13 @@
+.homePage {
+  background-color: rgba(249, 249, 249, 1);
+  padding: 50px 5.48vw 152px 5.48vw;
+  display: flex;
+  flex-direction: column;
+  gap: 150px;
+}
+
+.homePage__text {
+  font-size: 24px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 1);
+}

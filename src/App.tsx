@@ -3,9 +3,7 @@ import '@/shared/styles/variables.css';
 import '@/shared/fonts/montserrat/index.css';
 import { Header } from '@/shared/ui/layouts/Header';
 import { Footer } from '@/shared/ui/layouts/Footer';
-import { SectionCards } from './shared/ui/widgets/SectionCards';
-import { Mailing } from '@/shared/ui/widgets/Mailing';
-import { RecipeBuilder } from '@/shared/ui/widgets/RecipeBuilder';
+import { RecipeCarousel } from './shared/ui/widgets/RecipeCarousel';
 
 export function App() {
   //затычка
@@ -13,9 +11,7 @@ export function App() {
   return (
     <>
       <Header />
-      <RecipeBuilder />
-      <SectionCards heading="Новые рецепты" />
-      <Mailing />
+      <RecipeCarousel />
       <Footer />
     </>
   );
