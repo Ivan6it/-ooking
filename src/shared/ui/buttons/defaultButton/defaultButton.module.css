@@ -4,11 +4,16 @@
   font-size: 20px;
   font-weight: 700;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   transition: background-color 0.4s ease-in-out;
 }
 
-.defaultButton:hover {
+.defaultButton:hover:not(:disabled) {
   background-color: rgba(158, 225, 147, 1);
   cursor: pointer;
+}
+
+.defaultButton:disabled {
+  cursor: not-allowed;
+  background-color: rgba(202, 223, 198, 1);
 }

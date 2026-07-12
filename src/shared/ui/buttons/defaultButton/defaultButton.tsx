@@ -5,6 +5,7 @@ type defaultButtonProps = {
   handleClick?: () => void;
   className?: string;
   disabled?: boolean;
+  type?: 'submit' | 'reset' | 'button' | undefined;
 };
 
 export function DefaultButton({
@@ -12,9 +13,11 @@ export function DefaultButton({
   className,
   handleClick,
   disabled = false,
+  type = 'button',
 }: defaultButtonProps) {
   return (
     <button
+      type={type}
       disabled={disabled}
       onClick={handleClick}
       className={`${styles.defaultButton} ${className}`}>

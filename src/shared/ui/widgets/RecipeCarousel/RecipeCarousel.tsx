@@ -99,7 +99,11 @@ export function RecipeCarousel() {
         />
         {visiblecatalog.map((kitchen, index) => (
           <button
-            onClick={() => setActiveKitchen(kitchen.id as KitchenName)}
+            onClick={
+              activeKitchen === kitchen.id
+                ? () => setActiveKitchen('none')
+                : () => setActiveKitchen(kitchen.id as KitchenName)
+            }
             key={kitchen.id}
             className={`${styles.recipeCarousel__cuisines_cuisine} ${kitchen.id === activeKitchen ? styles.recipeCarousel__cuisines_cuisine__active : ''}`}
             style={{ animationDelay: `${index * 0.05}s` }}>

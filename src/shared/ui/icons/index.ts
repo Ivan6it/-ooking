@@ -24,3 +24,4 @@ export { QuestionIcon } from './QuestionIcon';
 export { EllipseNumberIcon } from './EllipseNumberIcon';
 export { ExclamationMarkIcon } from './ExclamationMarkIcon';
 export { ArrowIcon } from './АrrowIcon';
+export { ArrowFilterIcon } from './ArrowFilterIcon';

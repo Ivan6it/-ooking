@@ -3,7 +3,7 @@ import styles from './iconActive.module.css';
 
 type IconActiveProps = {
   svg: ReactNode;
-  handleClick?: () => void;
+  handleClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   className?: string;
   text?: string;
   classNameText?: string;
@@ -21,7 +21,14 @@ export function IconActive({
   disabled = false,
 }: IconActiveProps) {
   return (
-    <button disabled={disabled} className={`${styles.icon} ${className}`} onClick={handleClick}>
+    <button
+      disabled={disabled}
+      className={`${styles.icon} ${className}`}
+      onClick={(e) => {
+        if (handleClick) {
+          handleClick(e);
+        }
+      }}>
       <div className={classNameSvg}>{svg}</div>
       {text && <p className={classNameText}>{text}</p>}
     </button>

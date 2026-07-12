@@ -1,0 +1,113 @@
+.sectionFilters {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  background-color: transparent;
+}
+
+.sectionFilters__heading {
+  font-size: 20px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 1);
+}
+
+.sectionFilters__form {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 5px;
+  box-shadow: 4px 4px 16px 0px rgba(0, 0, 0, 0.06);
+  gap: 16px;
+  align-items: start;
+}
+
+.sectionFilters__form__fieldset {
+  position: relative;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid rgba(103, 187, 90, 1);
+  display: flex;
+  flex-direction: column;
+  padding: 30px 0;
+  align-items: start;
+  transition: padding 0.3s ease;
+  margin: 0;
+}
+
+.sectionFilters__form__fieldset__icon {
+  position: absolute;
+  top: -20px;
+  right: 0;
+  transition: transform 0.3s ease;
+}
+
+.sectionFilters__form__fieldset__icon.rotated {
+  transform: rotate(180deg);
+}
+
+.sectionFilters__form__fieldset__legend {
+  font-size: 20px;
+  font-weight: 700;
+  color: rgba(28, 31, 29, 1);
+}
+
+.sectionFilters__form__fieldset__button {
+  background-color: transparent;
+  color: rgba(173, 223, 172, 1);
+  transition: none;
+}
+
+.sectionFilters__form__fieldset__button:hover:not(:disabled) {
+  background-color: transparent;
+}
+
+.sectionFilters__form__button {
+  padding: 18px 100px;
+}
+
+.classNameLabel {
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 400;
+  color: rgba(28, 31, 29, 1);
+  display: flex;
+  gap: 10px;
+}
+
+.collapsibleItem {
+  max-height: 0;
+  margin-bottom: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.3s ease,
+    margin-bottom 0.4s ease;
+}
+
+.collapsibleItem.visible {
+  max-height: 500px;
+  opacity: 1;
+  margin-bottom: 21px;
+}
+
+.collapsibleContent {
+  max-height: 1000px;
+  overflow: hidden;
+  opacity: 1;
+  transition:
+    max-height 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.collapsibleContent.expanded {
+  max-height: 0;
+  opacity: 0;
+}
+
+.sectionFilters__form__fieldset.fieldset {
+  padding: 10px 0;
+  margin: 0;
+}
