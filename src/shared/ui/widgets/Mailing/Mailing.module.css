@@ -3,20 +3,34 @@
   box-shadow: 0 4px 14px 0 rgba(66, 59, 59, 0.1);
   border-radius: 5px;
   display: flex;
-  gap: 79px;
+  gap: 5.48vw;
+}
+
+.mailing__small {
+  flex-direction: column-reverse;
+  width: 28.68vw;
+  gap: 0;
 }
 
 .mailing__form {
   display: flex;
   flex-direction: column;
   gap: 30px;
-  padding: 50px 0 50px 65px;
+  padding: 50px 0 50px 4.5vw;
+}
+
+.mailing__form__small {
+  padding: 40px 2.08vw 30px;
 }
 
 .mailing__form__heading {
   font-size: 36px;
   font-weight: 700;
   color: rgba(75, 71, 71, 1);
+}
+
+.mailing__form__heading__small {
+  font-size: 20px;
 }
 
 .mailing__form__personal__button {
@@ -27,15 +41,24 @@
 
 .mailing__form__button {
   width: fit-content;
-  padding: 20px 91px;
+  padding: 20px 6.3vw;
   border-radius: 10px;
+}
+
+.mailing__form__button__small {
+  align-self: center;
 }
 
 .mailing__form__input {
   width: 45.35vw;
   border-radius: 5px;
   border: 1px solid rgba(181, 195, 201, 1);
-  padding: 13px 0 13px 20px;
+  padding: 13px 0 13px 1.38vw;
+}
+
+.mailing__form__input__small {
+  width: 24.51vw;
+  padding: 18px 0 18px 1.38vw;
 }
 
 .mailing__form__input:focus {
@@ -45,7 +68,11 @@
 .mailing__form__personal {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 1.38vw;
+}
+
+.mailing__form__personal__small {
+  gap: 1.11vw;
 }
 
 .mailing__form__personal__text {
@@ -53,11 +80,21 @@
   font-weight: 400;
 }
 
+.mailing__form__personal__text__small {
+  font-size: 16px;
+}
+
 .mailing__image {
-  width: 434px;
+  width: 30.13vw;
   height: 504px;
   transform: scaleX(-1);
   border-radius: 5px;
+  object-fit: cover;
+}
+
+.mailing__image__small {
+  width: 23.61vw;
+  transform: scaleX(1);
 }
 
 .mailing__form__personal__text__link {
@@ -66,4 +103,8 @@
   font-weight: 400;
   text-decoration-line: underline;
   text-underline-offset: 4px;
+}
+
+.mailing__form__personal__text__link__small {
+  font-size: 16px;
 }

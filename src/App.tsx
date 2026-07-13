@@ -3,8 +3,7 @@ import '@/shared/styles/variables.css';
 import '@/shared/fonts/montserrat/index.css';
 import { Header } from '@/shared/ui/layouts/Header';
 import { Footer } from '@/shared/ui/layouts/Footer';
-import { SectionFilters } from './shared/ui/widgets/SectionFilters';
-import filters from '@/data/filters.json';
+import { RecipeCatalogPage } from '@/shared/ui/pages/RecipeCatalogPage';
 
 export function App() {
   //затычка
@@ -12,7 +11,7 @@ export function App() {
   return (
     <>
       <Header />
-      <SectionFilters filtersGroup={filters} />
+      <RecipeCatalogPage />
       <Footer />
     </>
   );

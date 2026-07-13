@@ -12,7 +12,7 @@
 
 .recipeCarousel__nav {
   display: flex;
-  gap: 27px;
+  gap: 1.87vw;
 }
 
 .recipeCarousel__cuisines {
@@ -49,8 +49,8 @@
 }
 
 .recipeCarousel__cuisines_cuisine > img {
-  width: 145px;
-  height: 145px;
+  width: 10vw;
+  height: 10vw;
   border-radius: 10px;
 }
 

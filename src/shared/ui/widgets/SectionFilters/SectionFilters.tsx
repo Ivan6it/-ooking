@@ -19,6 +19,7 @@ type SectionFiltersProps = {
   filtersGroup: FilterGroup[];
 };
 
+//Требует прокидывания фильтров json
 export function SectionFilters({ filtersGroup }: SectionFiltersProps) {
   const [selectedValues, setSelectedValues] = useState<Record<string, string>>({});
   const [showAllFilters, setShowAllFilters] = useState<Record<string, boolean>>({});
