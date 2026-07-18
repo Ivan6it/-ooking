@@ -3,15 +3,13 @@ import '@/shared/styles/variables.css';
 import '@/shared/fonts/montserrat/index.css';
 import { Header } from '@/shared/ui/layouts/Header';
 import { Footer } from '@/shared/ui/layouts/Footer';
-import { RecipeCatalogPage } from '@/shared/ui/pages/RecipeCatalogPage';
+import { RecipePage } from '@/shared/ui/pages/RecipePage';
 
 export function App() {
-  //затычка
-
   return (
     <>
       <Header />
-      <RecipeCatalogPage />
+      <RecipePage />
       <Footer />
     </>
   );

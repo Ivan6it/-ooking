@@ -1,0 +1,1 @@
+export { TagInTheRecipe } from './tagInTheRecipe';

@@ -25,3 +25,6 @@ export { EllipseNumberIcon } from './EllipseNumberIcon';
 export { ExclamationMarkIcon } from './ExclamationMarkIcon';
 export { ArrowIcon } from './АrrowIcon';
 export { ArrowFilterIcon } from './ArrowFilterIcon';
+export { Pot } from './Pot';
+export { StarIcon } from './StarIcon';
+export { ShareIcon } from './ShareIcon';

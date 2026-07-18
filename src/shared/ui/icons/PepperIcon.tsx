@@ -1,12 +1,14 @@
 type PepperIconProps = {
   active?: boolean;
+  className?: string;
 };
 
-export function PepperIcon({ active = false }: PepperIconProps) {
+export function PepperIcon({ active = false, className }: PepperIconProps) {
   return (
     <>
       {!active && (
         <svg
+          className={className}
           xmlns="http://www.w3.org/2000/svg"
           width="32"
           height="32"
@@ -20,6 +22,7 @@ export function PepperIcon({ active = false }: PepperIconProps) {
       )}
       {active && (
         <svg
+          className={className}
           xmlns="http://www.w3.org/2000/svg"
           width="32"
           height="32"

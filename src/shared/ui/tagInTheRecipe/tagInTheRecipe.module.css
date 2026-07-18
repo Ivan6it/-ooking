@@ -1,0 +1,10 @@
+.tagInTheRecipe {
+  border-radius: 5px;
+  border: 1px solid rgba(103, 187, 90, 1);
+  background-color: rgba(137, 210, 98, 0.13);
+  padding: 0.69vw 1.38vw;
+  font-size: 20px;
+  font-weight: 500;
+  color: rgba(28, 31, 29, 1);
+  white-space: nowrap;
+}

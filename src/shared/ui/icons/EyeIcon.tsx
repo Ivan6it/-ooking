@@ -1,12 +1,14 @@
 type EyeIconProps = {
   active?: boolean;
+  className?: string;
 };
 
-export function EyeIcon({ active = false }: EyeIconProps) {
+export function EyeIcon({ active = false, className }: EyeIconProps) {
   return (
     <>
       {!active && (
         <svg
+          className={className}
           xmlns="http://www.w3.org/2000/svg"
           width="24"
           height="24"
@@ -28,6 +30,7 @@ export function EyeIcon({ active = false }: EyeIconProps) {
       )}
       {active && (
         <svg
+          className={className}
           xmlns="http://www.w3.org/2000/svg"
           width="24"
           height="24"
