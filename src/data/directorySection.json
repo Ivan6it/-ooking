@@ -1,0 +1,1496 @@
+[
+  {
+    "name": "Молочные продукты и яйца",
+    "img": "src/images/DirectorySection/MilkAndEgg.jpg",
+    "products": [
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      }
+    ]
+  },
+  {
+    "name": "Молочные продукты и яйца",
+    "img": "src/images/DirectorySection/MilkAndEgg.jpg",
+    "products": [
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      }
+    ]
+  },
+  {
+    "name": "Молочные продукты и яйца",
+    "img": "src/images/DirectorySection/MilkAndEgg.jpg",
+    "products": [
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      }
+    ]
+  },
+  {
+    "name": "Молочные продукты и яйца",
+    "img": "src/images/DirectorySection/MilkAndEgg.jpg",
+    "products": [
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      }
+    ]
+  },
+  {
+    "name": "Молочные продукты и яйца",
+    "img": "src/images/DirectorySection/MilkAndEgg.jpg",
+    "products": [
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      }
+    ]
+  },
+  {
+    "name": "Молочные продукты и яйца",
+    "img": "src/images/DirectorySection/MilkAndEgg.jpg",
+    "products": [
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      }
+    ]
+  },
+  {
+    "name": "Молочные продукты и яйца",
+    "img": "src/images/DirectorySection/MilkAndEgg.jpg",
+    "products": [
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      }
+    ]
+  },
+  {
+    "name": "Молочные продукты и яйца",
+    "img": "src/images/DirectorySection/MilkAndEgg.jpg",
+    "products": [
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      }
+    ]
+  },
+  {
+    "name": "Молочные продукты и яйца",
+    "img": "src/images/DirectorySection/MilkAndEgg.jpg",
+    "products": [
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      },
+      {
+        "name": "Яйцо куриное (сырое, целое)",
+        "calorieContent": "157 Ккал",
+        "protein": "12.7 г",
+        "fats": "10.6 г",
+        "carbohydrates": "1.1 г",
+        "img": "src/images/DirectorySectionItem/Egg.jpg"
+      },
+      {
+        "name": "Молоко коровье, обычное (пастеризованное, 3.2% жирности)",
+        "calorieContent": "61 Ккал",
+        "protein": "3.2 г",
+        "fats": "3.2 г",
+        "carbohydrates": "4.7 г",
+        "img": "src/images/DirectorySectionItem/Milk.jpg"
+      }
+    ]
+  }
+]

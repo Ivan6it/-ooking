@@ -17,6 +17,7 @@
 .recipePage__recipe {
   display: flex;
   gap: 2.36vw;
+  margin-bottom: 6.94vw;
 }
 
 .recipePage__recipe__imgEndShoplist {
@@ -456,4 +457,101 @@
   padding: 0.93vw 3.88vw;
   font-size: 16px;
   font-weight: 700;
+}
+
+.recipePage__recipe__imgEndShoplist__tags {
+  margin-top: 3.47vw;
+  display: flex;
+  flex-direction: column;
+  gap: 1.38vw;
+  color: rgba(28, 31, 29, 1);
+}
+
+.recipePage__recipe__imgEndShoplist__tags > h3 {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.recipePage__recipe__imgEndShoplist__tags__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.69vw;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.recipePage__recipe__imgEndShoplist__tags__list__item {
+  background-color: rgba(220, 224, 255, 1);
+  border-radius: 26px;
+  padding: 0.69vw 1.38vw;
+  margin-bottom: 1.38vw;
+}
+
+.recipePage__recipe__description__feedback {
+  display: flex;
+  flex-direction: column;
+  gap: 2.15vw;
+  color: rgba(28, 31, 29, 1);
+}
+
+.recipePage__recipe__description__feedback__container {
+  display: flex;
+  gap: 1.38vw;
+  align-items: center;
+}
+
+.recipePage__recipe__description__feedback__container__heading {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.recipePage__recipe__description__feedback__container__stars {
+  display: flex;
+  gap: 0.69vw;
+}
+
+.stars {
+  transition: fill 0.3s ease;
+}
+
+.recipePage__recipe__description__feedback__container__stars:hover .stars {
+  fill: rgba(247, 147, 30, 1);
+}
+
+.recipePage__recipe__description__feedback__list {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.25vw;
+}
+
+.recipePage__recipe__description__feedback__list__favourites {
+  display: flex;
+  gap: 0.69vw;
+  align-items: center;
+}
+
+.recipePage__recipe__description__feedback__list__favourites > span {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.recipePage__recipe__description__feedback__list__links {
+  display: flex;
+  gap: 1.38vw;
+  align-items: center;
+}
+
+.recipePage__recipe__description__feedback__list__links > span {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.section__heading__text {
+  font-size: 24px;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 1);
+}
+
+.recipe__comments {
+  margin: 3.47vw 0 10.41vw 0;
 }

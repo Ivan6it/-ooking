@@ -28,3 +28,4 @@ export { ArrowFilterIcon } from './ArrowFilterIcon';
 export { Pot } from './Pot';
 export { StarIcon } from './StarIcon';
 export { ShareIcon } from './ShareIcon';
+export { ShareMinIcon } from './ShareMinIcon';

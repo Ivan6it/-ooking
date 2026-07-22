@@ -38,16 +38,16 @@ export function EyeIcon({ active = false, className }: EyeIconProps) {
           viewBox="0 0 34 34">
           <path
             stroke="#67bb5a"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="1.5"
             d="M22.071 17A5.067 5.067 0 0 1 17 22.072 5.067 5.067 0 0 1 11.928 17a5.067 5.067 0 0 1 5.071-5.072A5.067 5.067 0 0 1 22.071 17"
           />
           <path
             stroke="#67bb5a"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="1.5"
             d="M17 28.716c5.002 0 9.662-2.947 12.907-8.047 1.275-1.997 1.275-5.355 0-7.352C26.662 8.217 22.002 5.27 17 5.27S7.339 8.217 4.095 13.317c-1.275 1.997-1.275 5.355 0 7.352C7.339 25.77 12 28.716 17 28.716"
           />
         </svg>

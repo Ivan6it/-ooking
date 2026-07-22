@@ -1,9 +1,10 @@
 type StarIconProps = {
   active?: boolean;
   className?: string;
+  classPath?: string;
 };
 
-export function StarIcon({ active = false, className }: StarIconProps) {
+export function StarIcon({ active = false, className, classPath }: StarIconProps) {
   return (
     <>
       {!active && (
@@ -15,6 +16,7 @@ export function StarIcon({ active = false, className }: StarIconProps) {
           fill="none"
           viewBox="0 0 31 31">
           <path
+            className={classPath}
             fill="#e9f0f3"
             d="m29.998 10.916-9.293-1.414L16.55.682a1.2 1.2 0 0 0-.531-.556c-.578-.298-1.281-.05-1.57.556l-4.155 8.82-9.293 1.414c-.256.038-.49.165-.67.356a1.26 1.26 0 0 0-.332.873c.004.326.132.636.354.864l6.724 6.864-1.589 9.694c-.037.225-.013.457.07.67.081.211.219.395.396.53a1.13 1.13 0 0 0 1.233.092l8.312-4.577 8.312 4.576c.227.127.49.169.743.123.637-.115 1.066-.747.956-1.414l-1.589-9.694 6.724-6.864c.183-.188.304-.433.34-.702.1-.67-.347-1.291-.988-1.391"
           />
@@ -29,6 +31,7 @@ export function StarIcon({ active = false, className }: StarIconProps) {
           fill="none"
           viewBox="0 0 31 31">
           <path
+            className={classPath}
             fill="#f7931e"
             d="m29.998 10.916-9.293-1.414L16.55.682a1.2 1.2 0 0 0-.531-.556c-.578-.298-1.281-.05-1.57.556l-4.155 8.82-9.293 1.414c-.256.038-.49.165-.67.356a1.26 1.26 0 0 0-.332.873c.004.326.132.636.354.864l6.724 6.864-1.589 9.694c-.037.225-.013.457.07.67.081.211.219.395.396.53a1.13 1.13 0 0 0 1.233.092l8.312-4.577 8.312 4.576c.227.127.49.169.743.123.637-.115 1.066-.747.956-1.414l-1.589-9.694 6.724-6.864c.183-.188.304-.433.34-.702.1-.67-.347-1.291-.988-1.391"
           />

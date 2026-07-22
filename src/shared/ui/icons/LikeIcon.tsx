@@ -15,9 +15,9 @@ export function LikeIcon({ active = false, color }: LikeIconProps) {
           viewBox="0 0 34 34">
           <path
             stroke={color}
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="1.5"
             d="M17.879 29.48c-.482.17-1.275.17-1.757 0-4.108-1.402-13.288-7.253-13.288-17.17 0-4.377 3.527-7.918 7.877-7.918A7.81 7.81 0 0 1 17 7.565a7.83 7.83 0 0 1 6.29-3.173c4.349 0 7.876 3.541 7.876 7.919 0 9.917-9.18 15.767-13.288 17.17"
           />
         </svg>

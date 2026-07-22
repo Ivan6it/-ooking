@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "name": "Иван",
+    "surname": "Балаболкин",
+    "image": "src/images/imageUsers/defaultMan.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Валерия",
+    "surname": "Сердцеедка",
+    "image": "src/images/imageUsers/defaultWoman.jpg"
+  }
+]

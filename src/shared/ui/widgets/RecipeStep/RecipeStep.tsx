@@ -56,10 +56,10 @@ export function RecipeStep({
               ))}
             </div>
             <div className={styles.recipeStep__content__ingredients}>
-              {ingredientsListItems.map((item) => {
+              {ingredientsListItems.map((item, i) => {
                 const quantity = Object.entries(item);
                 return (
-                  <div className={styles.recipeStep__content__ingredients__container}>
+                  <div key={i} className={styles.recipeStep__content__ingredients__container}>
                     <span>{quantity[0][1]}</span>
                     <span>{quantity[0][0].toLowerCase()}</span>
                   </div>
@@ -71,10 +71,10 @@ export function RecipeStep({
           <div className={styles.recipeStep__content__custom}>
             <img src={stepData.imageStep[0]} />
             <div className={styles.recipeStep__content__custom__ingredients}>
-              {ingredientsListItems.map((item) => {
+              {ingredientsListItems.map((item, i) => {
                 const quantity = Object.entries(item);
                 return (
-                  <div className={styles.recipeStep__content__ingredients__container}>
+                  <div key={i} className={styles.recipeStep__content__ingredients__container}>
                     <span>{quantity[0][1]}</span>
                     <span>{quantity[0][0].toLowerCase()}</span>
                   </div>

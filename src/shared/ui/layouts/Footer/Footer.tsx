@@ -3,8 +3,10 @@ import styles from './Footer.module.css';
 import { IconLink } from '../../iconLinks/iconLink';
 import { DefaultButton } from '@/shared/ui/buttons/defaultButton';
 import { ButtonLink } from '@/shared/ui/buttonLinks';
+import { useState } from 'react';
 
 export function Footer() {
+  const [email, setEmail] = useState('');
   return (
     <footer className={styles.footer}>
       <div className={styles.footer__logo}>
@@ -40,7 +42,12 @@ export function Footer() {
         </div>
         <form className={styles.footer__nav__form}>
           <p className={styles.footer__nav__form__text}>Подпишитесь на рассылку:</p>
-          <input value="" type="email" placeholder="Ваш Email" />
+          <input
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+            type="email"
+            placeholder="Ваш Email"
+          />
           <DefaultButton
             className={styles.settingButton}
             handleClick={() => {}}

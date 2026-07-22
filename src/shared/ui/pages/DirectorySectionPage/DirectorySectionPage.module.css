@@ -1,0 +1,32 @@
+.directorySectionPage {
+  display: flex;
+  flex-direction: column;
+  padding: 3.47vw 5.55vw 10.55vw 5.55vw;
+  background-color: rgba(249, 249, 249, 1);
+  color: rgba(28, 31, 29, 1);
+}
+
+.directorySectionPage__text {
+  font-size: 20px;
+  font-weight: 500;
+  color: rgba(181, 195, 201, 1);
+}
+
+.directorySectionPage__text > span {
+  color: rgba(28, 31, 29, 1);
+}
+
+.directorySectionPage__heading {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 3.47vw 0;
+}
+
+.directorySectionPage__list {
+  display: grid;
+  grid-template-columns: repeat(4, max-content);
+  column-gap: auto;
+  row-gap: 3.47vw;
+  justify-content: space-between;
+  margin-bottom: 10.41vw;
+}

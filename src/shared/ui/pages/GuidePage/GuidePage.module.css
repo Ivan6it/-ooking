@@ -1,0 +1,26 @@
+.guidePage {
+  padding: 3.47vw 5.55vw 10.55vw 5.55vw;
+  background-color: rgba(249, 249, 249, 1);
+  color: rgba(28, 31, 29, 1);
+}
+
+.guidePage__heading {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.guidePage__text {
+  margin-top: 3.47vw;
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 11.25vw;
+}
+
+.guidePage__list {
+  margin-bottom: 10.41vw;
+  display: grid;
+  grid-template-columns: repeat(4, max-content);
+  column-gap: auto;
+  row-gap: 5.48vw;
+  justify-content: space-between;
+}

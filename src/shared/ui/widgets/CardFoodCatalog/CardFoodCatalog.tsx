@@ -6,7 +6,7 @@ type CardFoodCatalogProps = {
   quantityLike: number;
   img: string;
   imgAlt: string;
-  time: string;
+  time: number;
 };
 
 export function CardFoodCatalog({ quantityLike, img, imgAlt, time, name }: CardFoodCatalogProps) {
@@ -29,7 +29,7 @@ export function CardFoodCatalog({ quantityLike, img, imgAlt, time, name }: CardF
           <span>{quantityLike}</span>
         </div>
         <div className={styles.cardFood__cardBlock__time}>
-          <span>{time}</span>
+          <span>{time} мин</span>
         </div>
       </div>
       <p className={styles.cardFood__name}>{name}</p>

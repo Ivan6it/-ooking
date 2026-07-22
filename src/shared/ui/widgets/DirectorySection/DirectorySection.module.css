@@ -1,0 +1,30 @@
+.directorySection {
+  display: flex;
+  flex-direction: column;
+  gap: 1.38vw;
+  width: 19.44vw;
+  cursor: pointer;
+}
+
+.directorySection__img {
+  width: 19.44vw;
+  height: 19.44vw;
+  object-fit: cover;
+  border-radius: 15px;
+  transition: transform 0.4s ease;
+}
+
+.directorySection:hover .directorySection__img {
+  transform: scale(1.1);
+}
+
+.directorySection__text {
+  font-size: 24px;
+  font-weight: 400;
+  transition: 0.4s ease;
+}
+
+.directorySection:hover .directorySection__text {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
