@@ -3,28 +3,12 @@ import { DefaultButton } from '@/shared/ui/buttons/defaultButton';
 import { getCommentsCount } from '../../../helpers/helpersFunction';
 import { useState } from 'react';
 import { CommentsItem } from '@/shared/ui/widgets/CommentsItem';
+import type { DirectoryComment } from '@/data/directorySection.json';
 
-type User = {
-  id: number;
-};
-
-type Answers = {
-  date: number;
-  user: User;
-  comment: string;
-};
-
-type Comment = {
-  date: number;
-  user: User;
-  comment: string;
-  answers?: Answers[];
-};
-
-type CommentsProps = {
+interface CommentsProps {
   className?: string;
-  comments: Comment[];
-};
+  comments: DirectoryComment[];
+}
 
 export function Comments({ className, comments }: CommentsProps) {
   const [commentText, setCommentText] = useState('');

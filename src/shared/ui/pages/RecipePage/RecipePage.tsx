@@ -370,7 +370,7 @@ export function RecipePage() {
       </div>
       <SectionCards
         classNameHeading={styles.section__heading__text}
-        ogrinicatorOff={true}
+        ogrinicator={true}
         heading="Больше вкусных рецептов для вас"
       />
       <Comments

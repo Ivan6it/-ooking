@@ -5,17 +5,19 @@ import styles from './SectionCards.module.css';
 
 type SectionCardsProps = {
   heading: string;
-  ogrinicatorOff?: boolean;
+  ogrinicator?: boolean | 'none';
   classNameHeading?: string;
+  className?: string;
 };
 
 export function SectionCards({
   heading,
-  ogrinicatorOff = false,
+  ogrinicator = false,
   classNameHeading,
+  className,
 }: SectionCardsProps) {
   return (
-    <div className={styles.sectionCards}>
+    <div className={`${styles.sectionCards} ${className}`}>
       <h2 className={`${classNameHeading ? classNameHeading : styles.sectionCards__heading}`}>
         {heading}
       </h2>
@@ -31,8 +33,11 @@ export function SectionCards({
           />
         ))}
       </div>
-      {!ogrinicatorOff && (
+      {ogrinicator === false && (
         <DefaultButton className={styles.sectionCards__button} text="Смотреть все рецепты" />
+      )}
+      {ogrinicator === 'none' && (
+        <DefaultButton className={styles.directorySectionItemPage__button} text="Загрузить еще" />
       )}
     </div>
   );

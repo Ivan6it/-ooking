@@ -1,0 +1,37 @@
+.notFoundPage {
+  padding: 19.16vw 0 15.2vw;
+  display: flex;
+  flex-direction: column;
+  gap: 3.47vw;
+  background-color: rgba(249, 249, 249, 1);
+  color: rgba(28, 31, 29, 1);
+  align-items: center;
+}
+
+.notFoundPage__img {
+  width: 43.33vw;
+  height: 50.97vw;
+  object-fit: cover;
+}
+
+.notFoundPage__container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.38vw;
+  align-items: center;
+}
+
+.notFoundPage__container__heading {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.notFoundPage__container__text {
+  font-size: 20px;
+  font-weight: 400;
+  text-align: center;
+}
+
+.notFoundPage__button {
+  padding: 1.38vw;
+}

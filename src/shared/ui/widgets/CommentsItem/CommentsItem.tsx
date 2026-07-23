@@ -3,31 +3,17 @@ import users from '@/data/users.json';
 import { formatDate } from '@/shared/helpers/helpersFunction';
 import { IconActive } from '../../iconActive';
 import { ShareMinIcon } from '@/shared/ui/icons';
+import type { Answer } from '@/data/directorySection.json';
 
-type User = {
-  id: number;
-};
+type User = (typeof users)[number];
 
-type Answers = {
-  date: number;
-  user: User;
-  comment: string;
-};
-
-type Comment = {
-  date: number;
-  user: User;
-  comment: string;
-  answers: Answers[];
-};
-
-type CommentsItemProps = {
-  data: Comment | Answers;
+interface CommentsItemProps {
+  data: Answer;
   adressId?: number;
-};
+}
 
 export function CommentsItem({ data, adressId }: CommentsItemProps) {
-  const user = users.filter((item) => item.id === data.user.id)[0];
+  const user = users.filter((item) => item.id === data.user.id)[0] as User;
   const name = users.filter((item) => item.id === adressId)[0];
   console.log(name);
   return (

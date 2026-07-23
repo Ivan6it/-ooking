@@ -1,0 +1,149 @@
+.directorySectionItemPage {
+  color: rgba(28, 31, 29, 1);
+  background-color: rgba(249, 249, 249, 1);
+  display: flex;
+  flex-direction: column;
+  padding: 3.47vw 5.55vw 10.55vw 5.55vw;
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.directorySectionItemPage__text {
+  font-size: 20px;
+  font-weight: 500;
+  color: rgba(181, 195, 201, 1);
+}
+
+.directorySectionItemPage__text > span {
+  color: rgba(28, 31, 29, 1);
+}
+
+.directorySectionItemPage__container {
+  margin: 3.47vw 0 6.94vw 0;
+  display: flex;
+  gap: 2.77vw;
+}
+
+.directorySectionItemPage__container__img {
+  width: 36.25vw;
+  height: 36.25vw;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+.directorySectionItemPage__container__description {
+  display: flex;
+  flex-direction: column;
+  gap: 2.08vw;
+}
+
+.directorySectionItemPage__container__description__heading {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.directorySectionItemPage__container__description__container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.38vw;
+}
+
+.directorySectionItemPage__container__description__container__text {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.directorySectionItemPage__container__description__container__structure {
+  display: flex;
+  gap: 2.08vw;
+}
+
+.directorySectionItemPage__container__description__container__structure__energy {
+  width: 6.94vw;
+  height: 6.94vw;
+  background-color: rgba(234, 244, 229, 1);
+  border: 1px solid rgba(176, 222, 165, 1);
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 400;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.38vw;
+}
+
+.directorySectionItemPage__container__description__container__structure__energy span:nth-child(1) {
+  color: rgba(103, 187, 90, 1);
+}
+
+.directorySectionItemPage__container__description__container__structure__protein {
+  width: 6.94vw;
+  height: 6.94vw;
+  background-color: rgba(255, 223, 254, 0.52);
+  border: 1px solid rgba(231, 188, 229, 1);
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 400;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.38vw;
+}
+
+.directorySectionItemPage__container__description__container__structure__protein span:nth-child(1) {
+  color: rgba(229, 141, 227, 1);
+}
+
+.directorySectionItemPage__container__description__container__structure__fats {
+  width: 6.94vw;
+  height: 6.94vw;
+  background-color: rgba(220, 224, 255, 0.52);
+  border: 1px solid rgba(184, 190, 236, 1);
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 400;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.38vw;
+}
+
+.directorySectionItemPage__container__description__container__structure__fats span:nth-child(1) {
+  color: rgba(150, 158, 217, 1);
+}
+
+.directorySectionItemPage__container__description__container__structure__carbohydrates {
+  width: 6.94vw;
+  height: 6.94vw;
+  background-color: rgba(248, 237, 140, 0.22);
+  border: 1px solid rgba(248, 237, 140, 1);
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 400;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.38vw;
+}
+
+.directorySectionItemPage__container__description__container__structure__carbohydrates
+  span:nth-child(1) {
+  color: rgba(218, 201, 54, 1);
+}
+
+.directorySectionItemPage__heading {
+  font-weight: 700;
+  margin: 6.94vw 0 1.38vw 0;
+}
+
+.directorySectionItemPage__cards {
+  margin: 10.41vw 0 10.41vw 0;
+}
+
+.directorySectionItemPage__coments {
+  margin-bottom: 10.41vw;
+}
