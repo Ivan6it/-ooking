@@ -5,7 +5,7 @@ type IconActiveProps = {
   svg: ReactNode;
   handleClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   className?: string;
-  text?: string;
+  text?: string | ReactNode;
   classNameText?: string;
   classNameSvg?: string;
   disabled?: boolean;
@@ -22,6 +22,7 @@ export function IconActive({
 }: IconActiveProps) {
   return (
     <button
+      type="button"
       disabled={disabled}
       className={`${styles.icon} ${className}`}
       onClick={(e) => {

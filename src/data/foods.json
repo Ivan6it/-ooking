@@ -113,7 +113,7 @@
     ]
   },
   {
-    "id": 1,
+    "id": 2,
     "name": "Борщ",
     "image": "src/images/ImageRecipes/borsch.jpg",
     "imgAlt": "Фото борща",
@@ -212,7 +212,7 @@
     ]
   },
   {
-    "id": 1,
+    "id": 3,
     "name": "Борщ",
     "image": "src/images/ImageRecipes/borsch.jpg",
     "imgAlt": "Фото борща",
@@ -311,7 +311,7 @@
     ]
   },
   {
-    "id": 1,
+    "id": 4,
     "name": "Борщ",
     "image": "src/images/ImageRecipes/borsch.jpg",
     "imgAlt": "Фото борща",
@@ -410,7 +410,7 @@
     ]
   },
   {
-    "id": 1,
+    "id": 5,
     "name": "Борщ",
     "image": "src/images/ImageRecipes/borsch.jpg",
     "imgAlt": "Фото борща",
@@ -509,7 +509,7 @@
     ]
   },
   {
-    "id": 1,
+    "id": 6,
     "name": "Борщ",
     "image": "src/images/ImageRecipes/borsch.jpg",
     "imgAlt": "Фото борща",
@@ -608,7 +608,7 @@
     ]
   },
   {
-    "id": 1,
+    "id": 7,
     "name": "Борщ",
     "image": "src/images/ImageRecipes/borsch.jpg",
     "imgAlt": "Фото борща",
@@ -707,7 +707,7 @@
     ]
   },
   {
-    "id": 1,
+    "id": 8,
     "name": "Борщ",
     "image": "src/images/ImageRecipes/borsch.jpg",
     "imgAlt": "Фото борща",

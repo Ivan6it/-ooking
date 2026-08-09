@@ -8,6 +8,39 @@ export function getCommentsCount(count: number): string {
   }
 }
 
+export function getRecipesCountText(count: number): string {
+  const lastDigit = count % 10;
+  const lastTwoDigits = count % 100;
+
+  if (lastTwoDigits >= 11 && lastTwoDigits <= 14) {
+    return 'рецептов';
+  }
+  if (lastDigit === 1) {
+    return 'рецепт';
+  }
+  if (lastDigit >= 2 && lastDigit <= 4) {
+    return 'рецепта';
+  }
+  return 'рецептов';
+}
+
+export function getIngredientCountText(count: number): string {
+  const lastDigit = count % 10;
+  const lastTwoDigits = count % 100;
+
+  if (lastTwoDigits >= 11 && lastTwoDigits <= 14) {
+    return `ингредиентов`;
+  }
+  if (lastDigit === 1) {
+    return `ингредиент`;
+  }
+  if (lastDigit >= 2 && lastDigit <= 4) {
+    return `ингредиента`;
+  }
+
+  return `ингредиентов`;
+}
+
 export function formatDate(ms: number): string {
   const date = new Date(ms);
   const day = date.getDate();

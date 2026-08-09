@@ -23,6 +23,11 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
+body.no-scroll {
+  overflow: hidden;
+  height: 100vh;
+}
+
 ul,
 ol {
   margin: 0;

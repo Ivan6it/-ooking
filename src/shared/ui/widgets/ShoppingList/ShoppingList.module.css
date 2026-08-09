@@ -1,0 +1,116 @@
+.shoppingList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 3.47vw 0 9.37vw;
+}
+
+.shoppingList__icon {
+  box-shadow: 0px 4px 14px 0px rgba(66, 59, 59, 0.1);
+  margin-bottom: 2.01vw;
+}
+
+.shoppingList__heading {
+  color: rgba(28, 31, 29, 1);
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 1.38vw;
+}
+
+.shoppingList__text {
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 3.47vw;
+}
+
+.shoppingList__button {
+  padding: 1.38vw;
+}
+
+.shoppingList__itemList {
+  display: flex;
+  flex-direction: column;
+  gap: 2.08vw;
+  margin-top: 3.47vw;
+  margin-bottom: 11.04vw;
+}
+
+.shoppingList__itemList__item {
+  display: flex;
+  gap: 3.47vw;
+  padding-bottom: 2.08vw;
+  border-bottom: 1px solid rgba(103, 187, 90, 1);
+  cursor: pointer;
+  position: relative;
+}
+
+.shoppingList__itemList__item:last-child {
+  border-bottom: none;
+}
+
+.shoppingList__itemList__item__img {
+  object-fit: cover;
+  width: 13.88vw;
+  height: 13.88vw;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.shoppingList__itemList__item:hover > img {
+  transform: scale(1.03);
+}
+
+.shoppingList__itemList__item__container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.38vw;
+  justify-content: center;
+  color: rgba(28, 31, 29, 1);
+  align-items: flex-start;
+}
+
+.shoppingList__itemList__item__container__heading {
+  font-size: 24px;
+  font-weight: 700;
+  position: relative;
+}
+
+.shoppingList__itemList__item__container__heading::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: rgba(28, 31, 29, 1);
+  transition: width 0.8s ease-in-out;
+}
+
+.shoppingList__itemList__item:hover .shoppingList__itemList__item__container__heading::after,
+.shoppingList__itemList__item:hover .shoppingList__itemList__item__container__text::after {
+  width: 100%;
+}
+
+.shoppingList__itemList__item__container__text {
+  font-size: 20px;
+  font-weight: 400;
+  position: relative;
+}
+
+.shoppingList__itemList__item__container__text::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: rgba(28, 31, 29, 1);
+  transition: width 0.8s ease-in-out;
+}
+
+.shoppingList__itemList__item__icon {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, calc(-50% - 2.08vw)) rotate(90deg);
+  right: 0;
+}

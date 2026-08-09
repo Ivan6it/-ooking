@@ -1,8 +1,9 @@
 type RadioIconProps = {
   active?: boolean;
+  color?: string;
 };
 
-export function RadioIcon({ active = false }: RadioIconProps) {
+export function RadioIcon({ active = false, color = '' }: RadioIconProps) {
   return (
     <>
       {!active && (
@@ -12,7 +13,7 @@ export function RadioIcon({ active = false }: RadioIconProps) {
           height="24"
           fill="none"
           viewBox="0 0 24 24">
-          <circle cx="12" cy="12" r="11.5" stroke="#67bb5a" />
+          <circle cx="12" cy="12" r="11.5" stroke={color} />
         </svg>
       )}
       {active && (
@@ -22,7 +23,7 @@ export function RadioIcon({ active = false }: RadioIconProps) {
           height="24"
           fill="none"
           viewBox="0 0 24 24">
-          <circle cx="12" cy="12" r="12" fill="#67bb5a" />
+          <circle cx="12" cy="12" r="12" fill={color} />
           <path
             fill="#fff"
             fill-rule="evenodd"

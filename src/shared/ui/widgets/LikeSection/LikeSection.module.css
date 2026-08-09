@@ -1,0 +1,39 @@
+.likeSection {
+  margin-bottom: 18.68vw;
+}
+
+.likeSection__notItem {
+  margin: 3.47vw 0 10.41vw 0;
+  display: flex;
+  flex-direction: column;
+  color: rgba(28, 31, 29, 1);
+  align-items: center;
+}
+
+.likeSection__notItem__img {
+  width: 33.54vw;
+  height: 35vw;
+}
+
+.likeSection__notItem__text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.38vw;
+  margin: 2.08vw 0 3.47vw 0;
+  align-items: center;
+}
+
+.likeSection__notItem__text > h2 {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.likeSection__notItem__text > p {
+  font-size: 20px;
+  font-weight: 400;
+  text-align: center;
+}
+
+.likeSection__notItem__button {
+  padding: 1.38vw;
+}

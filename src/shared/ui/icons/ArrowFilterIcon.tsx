@@ -1,14 +1,15 @@
 type ArrowFilterIconProps = {
   className?: string;
+  size?: number;
 };
 
-export function ArrowFilterIcon({ className }: ArrowFilterIconProps) {
+export function ArrowFilterIcon({ className, size = 20 }: ArrowFilterIconProps) {
   return (
     <svg
       className={className}
       xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="10"
+      width={size}
+      height={size / 2}
       fill="none"
       viewBox="0 0 20 10">
       <path

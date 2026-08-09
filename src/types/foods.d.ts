@@ -1,5 +1,5 @@
 declare module '@/data/foods.json' {
-  interface Food {
+  export interface Food {
     id: number;
     name: string;
     image: string;

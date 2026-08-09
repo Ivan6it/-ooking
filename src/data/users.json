@@ -1,14 +1,62 @@
 [
   {
     "id": 1,
+    "mail": "rzv12453@mail.ru",
     "name": "Иван",
     "surname": "Балаболкин",
-    "image": "src/images/imageUsers/defaultMan.jpg"
+    "image": "src/images/imageUsers/defaultMan.jpg",
+    "gender": "male",
+    "birthday": 1785877200000,
+    "cookbooks": [
+      { "name": "супы", "recipes": [2, 4, 8] },
+      { "name": "супы", "recipes": [1] },
+      { "name": "супы", "recipes": [1, 3] },
+      { "name": "супы", "recipes": [] },
+      { "name": "супы", "recipes": [2, 3, 4, 5] }
+    ],
+    "shoppinglist": [
+      {
+        "id": 3,
+        "buyingredients": [2, 3],
+        "purchasedingredients": [0, 1]
+      },
+      {
+        "id": 2,
+        "buyingredients": [5, 3, 2],
+        "purchasedingredients": [0, 1]
+      },
+      {
+        "id": 4,
+        "buyingredients": [2],
+        "purchasedingredients": [0, 1]
+      },
+      {
+        "id": 1,
+        "buyingredients": [2, 3, 4],
+        "purchasedingredients": [0, 1]
+      }
+    ]
   },
   {
     "id": 2,
+    "mail": "mail332@mail.ru",
     "name": "Валерия",
     "surname": "Сердцеедка",
-    "image": "src/images/imageUsers/defaultWoman.jpg"
+    "image": "src/images/imageUsers/defaultWoman.jpg",
+    "gender": "female",
+    "birthday": 1785877200000,
+    "cookbooks": [
+      { "name": "супы", "recipes": [2, 4, 8] },
+      { "name": "супы", "recipes": [1] },
+      { "name": "супы", "recipes": [1, 3] },
+      { "name": "супы", "recipes": [] }
+    ],
+    "shoppinglist": [
+      {
+        "id": 3,
+        "buyingredients": [2, 3],
+        "purchasedingredients": [0, 1]
+      }
+    ]
   }
 ]

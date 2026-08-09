@@ -13,9 +13,9 @@
 
 .sectionCards__cards {
   display: grid;
-  grid-template-columns: repeat(4, max-content);
-  column-gap: auto;
-  row-gap: 50px;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 6.8vw;
+  row-gap: 3.47vw;
   justify-content: space-between;
 }
 

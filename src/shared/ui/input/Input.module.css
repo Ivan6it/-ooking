@@ -1,13 +1,50 @@
-.input {
+:where(.container) {
+  position: relative;
+  width: fit-content;
+}
+
+:where(.input) {
   border-radius: 5px;
   border: 1px solid rgba(181, 195, 201, 1);
   font-size: 20px;
   font-weight: 500;
   color: rgba(181, 195, 201, 1);
+  padding: 15px 0 15px 1.38vw;
+}
+
+:where(.input:focus) {
+  text-decoration: none;
+  outline: none;
 }
 
 .label {
   font-size: 20px;
   font-weight: 400;
   color: rgba(28, 31, 29, 1);
+}
+
+.svg {
+  position: absolute;
+  top: var(--input-height);
+  right: 1.38vw;
+}
+
+.text__error {
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(253, 59, 59, 1);
+}
+
+.svg__eye {
+  vertical-align: middle;
+}
+
+.error__input {
+  border: 1px solid rgba(253, 59, 59, 1);
+  box-shadow: 0px 1px 2px 0px rgba(253, 59, 59, 0.8);
+}
+
+.valid__input {
+  border: 1px solid rgba(103, 187, 90, 1);
+  box-shadow: 0px 1px 2px 0px rgba(103, 187, 90, 0.8);
 }

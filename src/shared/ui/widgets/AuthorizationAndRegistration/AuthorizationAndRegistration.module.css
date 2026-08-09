@@ -1,0 +1,218 @@
+.authorizationAndRegistration__overlay {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1000;
+}
+
+.authorizationAndRegistration {
+  width: 63.47vw;
+  height: 72.22dvh;
+  border-radius: 10px;
+  box-shadow: 0px 4px 14px 0px rgba(66, 59, 59, 0.1);
+  background-color: rgba(255, 255, 255, 1);
+  animation: fadeIn 0.3s ease-in-out;
+  overflow: hidden;
+  display: flex;
+  gap: 1.8vw;
+  position: relative;
+}
+
+.authorizationAndRegistration__img {
+  object-fit: cover;
+  width: 27.7vw;
+  height: 100%;
+}
+
+.authorizationAndRegistration__form {
+  display: flex;
+  flex-direction: column;
+  color: rgba(75, 71, 71, 1);
+  margin-right: 2.29vw;
+  justify-content: center;
+}
+
+.authorizationAndRegistration__form > h2 {
+  font-size: 32px;
+  font-weight: 500;
+}
+
+.authorizationAndRegistration__form > h3 {
+  font-size: 24px;
+  font-weight: 500;
+  margin: 2.77vh 0 1.85vh;
+}
+
+.authorizationAndRegistration__form__icons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.authorizationAndRegistration__form__icons__icon {
+  display: flex;
+  gap: 0.69vw;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 400;
+  box-shadow: 0px 4px 14px 0px rgba(66, 59, 59, 0.1);
+  border-radius: 5px;
+  width: 14.72vw;
+  height: 36px;
+  justify-content: center;
+  margin-bottom: 1.85vh;
+  position: relative;
+  transition: transform 0.3s ease-in-out;
+}
+
+.authorizationAndRegistration__form__icons__icon:hover {
+  transform: scale(1.03);
+}
+
+.authorizationAndRegistration__form__line {
+  display: flex;
+  color: rgba(181, 195, 201, 1);
+  font-size: 14px;
+  font-weight: 500;
+  align-items: center;
+  gap: 1.11vw;
+}
+
+.authorizationAndRegistration__form__line > span {
+  white-space: nowrap;
+}
+
+.authorizationAndRegistration__form__line__item {
+  height: 1px;
+  min-width: 0;
+  background-color: rgba(181, 195, 201, 1);
+  flex: 1;
+}
+
+.authorizationAndRegistration__form__details {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1.85vh;
+  gap: 1.85vh;
+}
+
+.authorizationAndRegistration__form__details__input {
+  font-size: 16px;
+  font-weight: 500;
+  padding: 15px 0 15px 1.38vw;
+  width: 100%;
+}
+
+.authorizationAndRegistration__form__details__input:focus {
+  outline: none;
+}
+
+.authorizationAndRegistration__form__details__button {
+  width: fit-content;
+  align-self: center;
+  padding: 13px 5vw;
+  margin-bottom: 0.92vh;
+}
+
+.authorizationAndRegistration__form__details__approval {
+  display: flex;
+  gap: 0.69vw;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.authorizationAndRegistration__form__details__approval__link {
+  text-decoration-line: underline;
+  text-underline-offset: 4px;
+}
+
+.authorizationAndRegistration__form__button {
+  display: flex;
+  margin-top: 2.77vh;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.authorizationAndRegistration__form__button__item {
+  background-color: transparent;
+  border: none;
+  display: inline;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: 'Montserrat', sans-serif;
+  padding: 0;
+  text-decoration-line: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+  color: rgba(103, 187, 90, 1);
+}
+
+.authorizationAndRegistration__cross {
+  position: absolute;
+  top: 2.87vh;
+  right: 2.36vw;
+}
+
+.authorizationAndRegistration__form__details__select {
+  display: flex;
+  justify-content: space-between;
+  margin-top: -0.92vh;
+}
+
+.authorizationAndRegistration__form__details__select__icon {
+  display: flex;
+  gap: 0.69vw;
+  align-items: center;
+}
+
+.authorizationAndRegistration__form__details__button__password {
+  background-color: transparent;
+  border: none;
+  display: inline;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: 'Montserrat', sans-serif;
+  padding: 0;
+  cursor: pointer;
+  color: rgba(103, 187, 90, 1);
+}
+
+.authorizationAndRegistration__form__details__button__entrance {
+  width: 22.5vw;
+  padding: 13px 0 13px;
+  align-self: center;
+}
+
+.line__auth {
+  margin: 2.77vh 0 2.77vh;
+}
+
+.svg__eye {
+  vertical-align: middle;
+}
+
+.error__input {
+  border: 1px solid rgba(253, 59, 59, 1);
+  box-shadow: 0px 1px 2px 0px rgba(253, 59, 59, 0.8);
+}
+
+.valid__input {
+  border: 1px solid rgba(103, 187, 90, 1);
+  box-shadow: 0px 1px 2px 0px rgba(103, 187, 90, 0.8);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

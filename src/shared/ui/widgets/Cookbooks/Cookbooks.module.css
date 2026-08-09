@@ -1,0 +1,33 @@
+.cookbooks {
+  margin: 7.36vw 0 10.41vw 0;
+  display: grid;
+  grid-template-columns: repeat(3, max-content);
+  column-gap: auto;
+  row-gap: 3.47vw;
+  justify-content: space-between;
+}
+
+.cookbooks__container {
+  background-color: rgba(219, 239, 208, 1);
+  width: 25.69vw;
+  height: 34.79vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  outline: 8px solid rgba(120, 150, 110, 1);
+  border-radius: 10px;
+  overflow: hidden;
+  gap: 2.08vw;
+  color: rgba(103, 187, 90, 1);
+  font-size: 20px;
+  font-weight: 700;
+  transition: transform 0.3s ease;
+}
+
+.cookbooks__container:hover {
+  transform: scale(1.03);
+}
+
+.cookbooks__container:focus {
+  outline: 8px solid rgba(120, 150, 110, 1);
+}

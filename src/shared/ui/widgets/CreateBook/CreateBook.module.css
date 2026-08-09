@@ -1,0 +1,127 @@
+.createBook__overlay {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  right: 0;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1000;
+}
+
+.createBook {
+  display: flex;
+  flex-direction: column;
+  padding: 5.83vw 6.8vw 3.47vw;
+  box-shadow: 0px 4px 14px 0px rgba(66, 59, 59, 0.1);
+  border-radius: 10px;
+  position: relative;
+  background-color: rgba(255, 255, 255, 1);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.createBook > span {
+  color: rgba(28, 31, 29, 1);
+  font-size: 32px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.createBook__container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  column-gap: 0.69vw;
+  row-gap: 0.69vw;
+  justify-content: space-between;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 1);
+  width: 20vw;
+  height: 22.01vw;
+  margin: 2.08vw auto 3.47vw;
+}
+
+.createBook__container__container__img {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(222, 255, 221, 1);
+}
+
+.createBook__container__container__img:nth-child(1) {
+  grid-column: 1 / span 2;
+}
+
+.createBook__container__container__img:nth-child(1) > img {
+  width: 14.23vw;
+  height: 8.75vw;
+}
+
+.createBook__container__container__img:nth-child(2) > img {
+  width: 8.47vw;
+  height: 3.81vw;
+}
+
+.createBook__container__container__img:nth-child(3) > img {
+  width: 8.47vw;
+  height: 3.26vw;
+}
+
+.createBook__input {
+  width: 45.2vw;
+  height: 3.33vw;
+  color: rgba(181, 195, 201, 1);
+  padding: 1.66vw;
+}
+
+.createBook__input:focus {
+  outline: none;
+}
+
+.createBook__buttons {
+  display: flex;
+  margin-top: 2.91vw;
+  gap: 2.08vw;
+  justify-content: end;
+}
+
+.createBook__buttons__buttonClose,
+.createBook__buttons__buttonCreate {
+  padding: 1.38vw;
+}
+
+.createBook__buttons__buttonClose {
+  color: #c51d34;
+  background-color: transparent;
+  border: 1px solid rgba(103, 187, 90, 1);
+  transition:
+    background-color 0.4s ease-in-out,
+    color 0.4s ease-in-out;
+}
+
+.createBook__buttons__buttonClose:hover:not(:disabled) {
+  background-color: #c51d34;
+  color: rgba(255, 255, 255, 1);
+}
+
+.createBook__cross {
+  position: absolute;
+  top: 2.08vw;
+  right: 2.36vw;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

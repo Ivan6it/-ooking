@@ -5,7 +5,7 @@ ul {
   cursor: pointer;
 }
 
-.shopList {
+:where(.shopList) {
   display: flex;
   align-items: center;
   font-size: 20px;
@@ -22,14 +22,13 @@ ul {
   width: 100%;
 }
 
-.shopList:hover .shopList__text > span:first-child {
+:where(.shopList):hover .shopList__text > span:first-child {
   text-decoration-line: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 4px;
-  text-decoration-color: rgba(28, 31, 29, 1);
 }
 
-.shopList__text__lastItem {
+.shopList:last-child {
   border-bottom: none;
 }
 

@@ -1,13 +1,14 @@
 import { DefaultButton } from '@/shared/ui/buttons/defaultButton';
-import foods from '@/data/foods.json';
 import { CardFoodCatalog } from '@/shared/ui/widgets/CardFoodCatalog';
 import styles from './SectionCards.module.css';
+import type { Food } from '@/data/foods.json';
 
 type SectionCardsProps = {
-  heading: string;
+  heading?: string;
   ogrinicator?: boolean | 'none';
   classNameHeading?: string;
   className?: string;
+  foods: Food[];
 };
 
 export function SectionCards({
@@ -15,6 +16,7 @@ export function SectionCards({
   ogrinicator = false,
   classNameHeading,
   className,
+  foods,
 }: SectionCardsProps) {
   return (
     <div className={`${styles.sectionCards} ${className}`}>

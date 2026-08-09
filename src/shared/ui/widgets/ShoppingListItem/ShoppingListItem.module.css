@@ -1,0 +1,104 @@
+.shoppingListItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4.93vw;
+  margin: 3.47vw 0 10.41vw;
+}
+
+.shoppingListItem__recipe {
+  display: flex;
+  gap: 3.47vw;
+  color: rgba(28, 31, 29, 1);
+}
+
+.shoppingListItem__recipe__img {
+  width: 36.25vw;
+  height: 36.25vw;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.shoppingListItem__recipe__info {
+  display: flex;
+  flex-direction: column;
+  gap: 3.47vw;
+  justify-content: center;
+}
+
+.shoppingListItem__recipe__info__container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.38vw;
+}
+
+.shoppingListItem__recipe__info__container__heading {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.shoppingListItem__recipe__info__container__text {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.shoppingListItem__recipe__info__buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1.38vw;
+}
+
+.shoppingListItem__recipe__info__buttons__button {
+  padding: 1.38vw;
+}
+
+.button__back {
+  color: #c51d34;
+  background-color: transparent;
+  border: 1px solid rgba(103, 187, 90, 1);
+  transition:
+    background-color 0.4s ease-in-out,
+    color 0.4s ease-in-out;
+}
+
+.button__back:hover:not(:disabled) {
+  background-color: #c51d34;
+  color: rgba(255, 255, 255, 1);
+}
+
+.shoppingListItem__ingredients {
+  display: flex;
+  justify-content: space-between;
+}
+
+.shoppingListItem__ingredients__buyingredients {
+  display: flex;
+  flex-direction: column;
+  gap: 2.08vw;
+  width: 36.25vw;
+}
+
+.shoppingListItem__ingredients__buyingredients__text {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.shoppingListItem__ingredients__purchasedingredients {
+  display: flex;
+  flex-direction: column;
+  gap: 2.08vw;
+  width: 36.25vw;
+}
+
+.shoppingListItem__ingredients__purchasedingredients__text {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.shoppingListItem__ingredients__purchasedingredients__list {
+  color: rgba(181, 195, 201, 1);
+  border-bottom: 1px solid rgba(181, 195, 201, 1);
+}
+
+.shoppingListItem__ingredients__purchasedingredients__list:hover {
+  color: rgba(181, 195, 201, 1);
+}

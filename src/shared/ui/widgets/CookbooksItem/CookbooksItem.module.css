@@ -1,0 +1,171 @@
+.cookbooksItem {
+  display: flex;
+  flex-direction: column;
+  gap: 1.38vw;
+}
+
+.cookbooksItem__triple {
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+  grid-template-rows: repeat(2, max-content);
+  column-gap: 0.69vw;
+  row-gap: 0.69vw;
+  justify-content: space-between;
+  border-radius: 10px;
+  overflow: hidden;
+  outline: 8px solid rgba(120, 150, 110, 1);
+  background-color: rgba(180, 200, 170, 1);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.cookbooksItem__triple:hover {
+  transform: scale(1.03);
+}
+
+.cookbooksItem__triple__empty {
+  background-color: rgba(219, 239, 208, 1);
+  width: 12.84vw;
+  height: 17.01vw;
+  aspect-ratio: 1;
+}
+
+.cookbooksItem__triple > *:first-child {
+  grid-column: 1 / span 2;
+  width: 100%;
+}
+
+.cookbooksItem__triple__empty__img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.cookbooksItem__double {
+  display: flex;
+  flex-direction: column;
+  gap: 0.69vw;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 25.69vw;
+  height: 34.79vw;
+  outline: 8px solid rgba(120, 150, 110, 1);
+  background-color: rgba(180, 200, 170, 1);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.cookbooksItem__double > * {
+  flex: 1;
+  height: 0;
+}
+
+.cookbooksItem__double__img {
+  object-fit: cover;
+  flex: 1;
+  height: 0;
+}
+
+.cookbooksItem__double:hover {
+  transform: scale(1.03);
+}
+
+.cookbooksItem__triple__empty__img {
+  object-fit: cover;
+}
+
+.cookbooksItem__empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25.69vw;
+  height: 34.79vw;
+  outline: 8px solid rgba(120, 150, 110, 1);
+  border-radius: 10px;
+  background-color: rgba(219, 239, 208, 1);
+  background-image: url('src/images/Шторка.jpg');
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.cookbooksItem__empty:hover {
+  transform: scale(1.03);
+}
+
+.cookbooksItem__empty__text {
+  font-size: 50px;
+  font-weight: bold;
+  background-color: #fff;
+  border-radius: 5px;
+  outline: 3px solid rgba(120, 150, 110, 1);
+  padding: 0.69vw;
+  text-align: center;
+}
+
+.cookbooksItem__info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.69vw;
+}
+
+.cookbooksItem__info__container {
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+  font-weight: 700;
+  position: relative;
+}
+
+.cookbooksItem__info > span {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.cookbooksItem__solo {
+  width: 25.69vw;
+  height: 34.79vw;
+  cursor: pointer;
+}
+
+.cookbooksItem__solo__img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  outline: 8px solid rgba(120, 150, 110, 1);
+  transition: transform 0.3s ease;
+}
+
+.cookbooksItem__solo__img:hover {
+  transform: scale(1.03);
+}
+
+.cookbooksItem__info__container__buttons {
+  position: absolute;
+  width: 24.86vw;
+  height: 8.88vw;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 4px 14px 0px rgba(66, 59, 59, 0.1);
+  padding: 0.69vw 0 0.69vw 0;
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 10px;
+  top: 2.08vw;
+  right: 1.49vw;
+}
+
+.cookbooksItem__info__container__buttons__button {
+  height: 50%;
+  border-radius: 0;
+  color: rgba(28, 31, 29, 1);
+  background-color: rgba(255, 255, 255, 1);
+  width: 100%;
+  padding-left: 2.08vw;
+  text-align: left;
+  font-weight: 400;
+}
+
+.deleteButton {
+  color: rgba(253, 59, 59, 1);
+}

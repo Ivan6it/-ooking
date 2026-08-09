@@ -1,14 +1,15 @@
 import styles from './socialIcon.module.css';
 
-export function VKIcon() {
+export function VKIcon({ hover = true, size = 34 }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="34"
-      height="34"
+      width={size}
+      height={size}
       fill="none"
       viewBox="0 0 34 34"
-      className={styles.socialIcon}>
+      className={hover ? styles.socialIcon : ''}
+      style={{ display: 'block' }}>
       <path
         fill="#67bb5a"
         fillRule="evenodd"

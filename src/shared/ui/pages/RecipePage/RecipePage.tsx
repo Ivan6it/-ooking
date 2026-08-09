@@ -113,7 +113,7 @@ export function RecipePage() {
                         </div>
                         <div className={styles.arrow__modal}></div>
                         <div className={styles.modal__text}>
-                          <h3>Сметана</h3>
+                          <h3>{item}</h3>
                           <span>ингредиент</span>
                           <p className={styles.modal__description}>
                             {addIngredients[item].description}
