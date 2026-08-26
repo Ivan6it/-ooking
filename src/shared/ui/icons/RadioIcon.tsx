@@ -1,13 +1,19 @@
 type RadioIconProps = {
   active?: boolean;
   color?: string;
+  className?: string;
 };
 
-export function RadioIcon({ active = false, color = '' }: RadioIconProps) {
+export function RadioIcon({
+  active = false,
+  color = 'rgba(103, 187, 90, 1)',
+  className = '',
+}: RadioIconProps) {
   return (
     <>
       {!active && (
         <svg
+          className={className}
           xmlns="http://www.w3.org/2000/svg"
           width="24"
           height="24"
@@ -18,6 +24,7 @@ export function RadioIcon({ active = false, color = '' }: RadioIconProps) {
       )}
       {active && (
         <svg
+          className={className}
           xmlns="http://www.w3.org/2000/svg"
           width="24"
           height="24"

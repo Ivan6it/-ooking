@@ -8,7 +8,7 @@ type DirectorySectionProps = {
 export function DirectorySection({ data }: DirectorySectionProps) {
   return (
     <div className={styles.directorySection}>
-      <img className={styles.directorySection__img} src={data.img} />
+      <img loading="lazy" className={styles.directorySection__img} src={data.img} />
       <span className={styles.directorySection__text}>{data.name}</span>
     </div>
   );

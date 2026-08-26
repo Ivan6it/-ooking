@@ -26,6 +26,7 @@ export function SectionCards({
       <div className={styles.sectionCards__cards}>
         {foods.map((food, i) => (
           <CardFoodCatalog
+            id={food.id}
             key={i}
             name={food.name}
             img={food.image}

@@ -1,4 +1,4 @@
-import FishImg from '../../../images/Fish.png';
+import FishImg from '/images/Fish.png';
 
 type FishIconProps = {
   active?: boolean;
@@ -21,6 +21,7 @@ export function FishIcon({ active = true }: FishIconProps) {
           <div
             style={{ width: '93px', height: '71px', position: 'absolute', top: '15px', left: '0' }}>
             <img
+              loading="lazy"
               src={FishImg}
               alt="Fish"
               style={{
@@ -58,6 +59,7 @@ export function FishIcon({ active = true }: FishIconProps) {
           <div
             style={{ width: '93px', height: '71px', position: 'absolute', top: '15px', left: '0' }}>
             <img
+              loading="lazy"
               src={FishImg}
               alt="Fish"
               style={{

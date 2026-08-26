@@ -308,3 +308,16 @@
   width: 22.5vw;
   height: 64px;
 }
+
+.profileEditor__text__link {
+  display: inline-block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.profileEditor__text__link:hover {
+  display: inline-block;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  color: rgba(103, 187, 90, 1);
+}

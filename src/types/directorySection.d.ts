@@ -17,6 +17,7 @@ declare module '@/data/directorySection.json' {
   }
 
   export interface DirectoryProduct {
+    id: string;
     name: string;
     calorieContent: string;
     protein: string;
@@ -30,6 +31,7 @@ declare module '@/data/directorySection.json' {
   }
 
   export interface DirectorySectionData {
+    id: string;
     name: string;
     img: string;
     products: DirectoryProduct[];

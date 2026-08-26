@@ -26,6 +26,9 @@ import { IconLink } from '../../iconLinks/iconLink';
 import { SectionCards } from '@/shared/ui/widgets/SectionCards';
 import { Comments } from '@/shared/ui/widgets/Comments';
 import { Mailing } from '../../widgets/Mailing';
+import { AddRecipeInBookModal } from '@/shared/ui/widgets/AddRecipeInBookModal';
+import { useParams, Link } from 'react-router-dom';
+import { NotFoundPage } from '../NotFoundPage';
 
 type JsonIngredient = {
   step: number[];
@@ -40,11 +43,16 @@ type AdditionalIngredientData = {
 
 type AdditionalIngredients = Record<string, AdditionalIngredientData>;
 
-export function RecipePage() {
+export default function RecipePage() {
   const [isVisible, setIsVisible] = useState('none');
   const [stars, setStars] = useState(0);
+  const [addMarkBook, setAddMarkBook] = useState(false);
 
-  const recipes = foods[0];
+  const idRecipe = useParams<{ recipeId: string | undefined }>();
+  const recipes = foods.filter((x) => x.id == +idRecipe.recipeId!)[0];
+  if (!recipes) {
+    return <NotFoundPage />;
+  }
   const addIngredients = addIngrenients as AdditionalIngredients;
   let textComplexity;
   if (recipes.complexity == 'easy') {
@@ -79,305 +87,345 @@ export function RecipePage() {
   }
 
   return (
-    <div className={styles.recipePage}>
-      <p className={styles.recipePage__heading}>
-        Главная / Каталог рецептов / <span>{recipes.name}</span>
-      </p>
-      <div className={styles.recipePage__recipe}>
-        <div className={styles.recipePage__recipe__imgEndShoplist}>
-          <img className={styles.recipePage__recipe__imgEndShoplist__img} src={recipes.image} />
-          <div className={styles.recipePage__recipe__imgEndShoplist__ingredients}>
-            <h2 className={styles.recipePage__recipe__imgEndShoplist__ingredients__heading}>
-              Ингредиенты:
-            </h2>
-            <div className={styles.recipePage__recipe__imgEndShoplist__ingredients__text}>
-              <div
-                className={styles.recipePage__recipe__imgEndShoplist__ingredients__text__container}>
-                <ExclamationMarkIcon />
-                <span>Дополнительные ингредиенты</span>
-              </div>
-              <div className={styles.recipePage__recipe__imgEndShoplist__ingredients__text__addIng}>
-                {recipes.additionalIngredients.map((item) => (
-                  <div key={item} className={styles.modal__addIng}>
-                    <AdditionalIngredientsItem text={item} onClick={() => handleClickIng(item)} />
-                    {isVisible === item && (
-                      <div
-                        className={
-                          styles.recipePage__recipe__imgEndShoplist__ingredients__text__addIng__modal
-                        }>
-                        <div className={styles.modal__imageWrapper}>
-                          <img
-                            className={styles.modal__imageWrapper}
-                            src={addIngredients[item].img}
-                          />
-                        </div>
-                        <div className={styles.arrow__modal}></div>
-                        <div className={styles.modal__text}>
-                          <h3>{item}</h3>
-                          <span>ингредиент</span>
-                          <p className={styles.modal__description}>
-                            {addIngredients[item].description}
-                          </p>
-                          <DefaultButton
-                            className={styles.modal__button}
-                            text="Читать больше"
-                            handleClick={() => window.open(addIngredients[item].url, '_blank')}
-                          />
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-          <div>
-            <ShopList baseItem={recipes.ingredients as JsonIngredient[]} />
-          </div>
-          <div className={styles.recipePage__recipe__imgEndShoplist__tags}>
-            <h3>Теги:</h3>
-            <div className={styles.recipePage__recipe__imgEndShoplist__tags__list}>
-              {recipes.tagsSearch.map((item) => (
-                <div
-                  key={item}
-                  className={styles.recipePage__recipe__imgEndShoplist__tags__list__item}>
-                  {item}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-        <div className={styles.recipePage__recipe__detailsRecipe}>
-          <div className={styles.container__details}>
-            <h1 className={styles.recipePage__recipe__detailsRecipe__heading}>{recipes.name}</h1>
-            <div className={styles.container__details__container}>
-              <div className={styles.container__details__tags}>
-                {recipes.tags.map((item) => (
-                  <TagInTheRecipe key={item} text={item} />
-                ))}
-              </div>
-              <div className={styles.container__details__container__icons}>
-                <IconActive svg={<Bookmark color={'rgba(255, 167, 86, 1)'} />} />
-                <IconActive svg={<ShareIcon />} />
-              </div>
-            </div>
-            <div className={styles.container__details__parameters}>
-              <div className={styles.container__details__parameters__complexity}>
-                <h2 className={styles.container__details__parameters__complexity__heading}>
-                  Готовность
-                </h2>
-                <div className={styles.container__details__parameters__complexity__svg}>
-                  <ComplexityIcon complexity={time} />
-                  <span className={styles.text__svg}>{`${recipes.prepTime}\nминут`}</span>
-                </div>
-              </div>
-              <div className={styles.container__details__parameters__complexity}>
-                <h2 className={styles.container__details__parameters__complexity__heading}>
-                  Сложность
-                </h2>
-                <div className={styles.container__details__parameters__complexity__svg}>
-                  <ComplexityIcon complexity={recipes.complexity as 'easy' | 'normal' | 'hard'} />
-                  <span className={styles.text__svg}>{textComplexity}</span>
-                </div>
-              </div>
-              <div className={styles.container__details__parameters__sharpness}>
-                <h2 className={styles.container__details__parameters__complexity__heading}>
-                  Острота
-                </h2>
-                {recipes.sharpness === 1 ? (
-                  <div className={styles.container__details__parameters__sharpness__icons}>
-                    <PepperIcon className={styles.icon__pepper} active={true} />
-                    <PepperIcon className={styles.icon__pepper} />
-                    <PepperIcon className={styles.icon__pepper} />
-                  </div>
-                ) : recipes.sharpness === 2 ? (
-                  <div className={styles.container__details__parameters__sharpness__icons}>
-                    <PepperIcon className={styles.icon__pepper} active={true} />
-                    <PepperIcon className={styles.icon__pepper} active={true} />
-                    <PepperIcon className={styles.icon__pepper} />
-                  </div>
-                ) : (
-                  <div className={styles.container__details__parameters__sharpness__icons}>
-                    <PepperIcon className={styles.icon__pepper} active={true} />
-                    <PepperIcon className={styles.icon__pepper} active={true} />
-                    <PepperIcon className={styles.icon__pepper} active={true} />
-                  </div>
-                )}
-              </div>
-            </div>
-            <div className={styles.container__details__value}>
-              <h2 className={styles.container__details__value__heading}>
-                Пищевая ценность на порцию:
+    <>
+      <div className={styles.recipePage}>
+        <p className={styles.recipePage__heading}>
+          <Link className={styles.recipePage__heading__link} to={'/'}>
+            Главная
+          </Link>{' '}
+          /{' '}
+          <Link className={styles.recipePage__heading__link} to={'/catalog'}>
+            Каталог рецептов
+          </Link>{' '}
+          / <span>{recipes.name}</span>
+        </p>
+        <div className={styles.recipePage__recipe}>
+          <div className={styles.recipePage__recipe__imgEndShoplist}>
+            <img
+              loading="lazy"
+              className={styles.recipePage__recipe__imgEndShoplist__img}
+              src={recipes.image}
+            />
+            <div className={styles.recipePage__recipe__imgEndShoplist__ingredients}>
+              <h2 className={styles.recipePage__recipe__imgEndShoplist__ingredients__heading}>
+                Ингредиенты:
               </h2>
-              <div className={styles.container__details__value__container}>
-                <div className={styles.container__details__value__container__energy}>
-                  <div className={styles.container__details__value__container__energy__container}>
-                    <span>Энергия</span>
-                    <span>{recipes.energy}</span>
-                  </div>
+              <div className={styles.recipePage__recipe__imgEndShoplist__ingredients__text}>
+                <div
+                  className={
+                    styles.recipePage__recipe__imgEndShoplist__ingredients__text__container
+                  }>
+                  <ExclamationMarkIcon />
+                  <span>Дополнительные ингредиенты</span>
                 </div>
-                <div className={styles.container__details__value__container__squirrels}>
-                  <div
-                    className={styles.container__details__value__container__squirrels__container}>
-                    <span>Белки</span>
-                    <span>{recipes.squirrels}</span>
-                  </div>
-                </div>
-                <div className={styles.container__details__value__container__fats}>
-                  <div className={styles.container__details__value__container__fats__container}>
-                    <span>Жиры</span>
-                    <span>{recipes.squirrels}</span>
-                  </div>
-                </div>
-                <div className={styles.container__details__value__container__carbohydrates}>
-                  <div
-                    className={
-                      styles.container__details__value__container__carbohydrates__container
-                    }>
-                    <span>Углеводы</span>
-                    <span>{recipes.carbohydrates}</span>
-                  </div>
+                <div
+                  className={styles.recipePage__recipe__imgEndShoplist__ingredients__text__addIng}>
+                  {recipes.additionalIngredients.map((item) => (
+                    <div key={item} className={styles.modal__addIng}>
+                      <AdditionalIngredientsItem text={item} onClick={() => handleClickIng(item)} />
+                      {isVisible === item && (
+                        <div
+                          className={
+                            styles.recipePage__recipe__imgEndShoplist__ingredients__text__addIng__modal
+                          }>
+                          <div className={styles.modal__imageWrapper}>
+                            <img
+                              loading="lazy"
+                              className={styles.modal__imageWrapper}
+                              src={addIngredients[item].img}
+                            />
+                          </div>
+                          <div className={styles.arrow__modal}></div>
+                          <div className={styles.modal__text}>
+                            <h3>{item}</h3>
+                            <span>ингредиент</span>
+                            <p className={styles.modal__description}>
+                              {addIngredients[item].description}
+                            </p>
+                            <DefaultButton
+                              className={styles.modal__button}
+                              text="Читать больше"
+                              handleClick={() => window.open(addIngredients[item].url, '_blank')}
+                            />
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
-            <div className={styles.container__details__metrics}>
-              <div className={styles.container__details__metrics__container}>
-                <div className={styles.container__details__metrics__container__like}>
-                  <IconActive svg={<LikeIcon color="rgba(103, 187, 90, 1)" />} />
-                  <p>{`${recipes.likes} понравилось`}</p>
-                </div>
-                <div className={styles.container__details__metrics__container__eye}>
-                  <EyeIcon className={styles.eyeicon} active={true} />
-                  <p>{`${recipes.views} просмотров`}</p>
-                </div>
-              </div>
-              <div className={styles.container__details__metrics__star}>
-                <StarIcon active={true} />
-                <span>{`${ratingValue.toFixed(1)}`}</span>
+            <div>
+              <ShopList baseItem={recipes.ingredients as JsonIngredient[]} />
+            </div>
+            <div className={styles.recipePage__recipe__imgEndShoplist__tags}>
+              <h3>Теги:</h3>
+              <div className={styles.recipePage__recipe__imgEndShoplist__tags__list}>
+                {recipes.tagsSearch.map((item) => (
+                  <div
+                    key={item}
+                    className={styles.recipePage__recipe__imgEndShoplist__tags__list__item}>
+                    {item}
+                  </div>
+                ))}
               </div>
             </div>
           </div>
-          <div className={styles.recipePage__recipe__description}>
-            <div className={styles.recipePage__recipe__description__text}>
-              <h2>Описание:</h2>
-              <p>{recipes.description}</p>
-            </div>
-            <div className={styles.recipePage__recipe__description__dishes}>
-              <h2>Посуда:</h2>
-              <p>{dishes.join(', ')}</p>
-            </div>
-            {Array.from({ length: recipes.steps }, (_, i) => {
-              const stepNum = i + 1;
-              return (
-                <RecipeStep
-                  step={i + 1}
-                  key={i}
-                  stepNum={`${stepNum} / ${recipes.steps}`}
-                  stepData={recipes.descriptionStep[i]}
-                  stepIngredients={recipes.ingredients as unknown as JsonIngredient[]}
-                  stepInventory={recipes.inventorySteps.filter((item) => item.id == i + 1)}
-                  inventory={recipes.inventory}
-                />
-              );
-            })}
-            <div className={styles.recipePage__recipe__description__feedback}>
-              <div className={styles.recipePage__recipe__description__feedback__container}>
-                <h4
-                  className={styles.recipePage__recipe__description__feedback__container__heading}>
-                  Вам понравился рецепт?
-                </h4>
-                <div className={styles.recipePage__recipe__description__feedback__container__stars}>
+          <div className={styles.recipePage__recipe__detailsRecipe}>
+            <div className={styles.container__details}>
+              <h1 className={styles.recipePage__recipe__detailsRecipe__heading}>{recipes.name}</h1>
+              <div className={styles.container__details__container}>
+                <div className={styles.container__details__tags}>
+                  {recipes.tags.map((item) => (
+                    <TagInTheRecipe key={item} text={item} />
+                  ))}
+                </div>
+                <div className={styles.container__details__container__icons}>
                   <IconActive
-                    handleClick={() => {
-                      if (stars == 1) {
-                        setStars(0);
-                      } else {
-                        setStars(1);
-                      }
-                    }}
-                    svg={<StarIcon classPath={styles.stars} active={stars > 0} />}
+                    handleClick={() => setAddMarkBook((prev) => !prev)}
+                    svg={<Bookmark color={'rgba(255, 167, 86, 1)'} />}
                   />
-                  <IconActive
-                    handleClick={() => {
-                      if (stars == 2) {
-                        setStars(0);
-                      } else {
-                        setStars(2);
-                      }
-                    }}
-                    svg={<StarIcon classPath={styles.stars} active={stars > 1} />}
-                  />
-                  <IconActive
-                    handleClick={() => {
-                      if (stars == 3) {
-                        setStars(0);
-                      } else {
-                        setStars(3);
-                      }
-                    }}
-                    svg={<StarIcon classPath={styles.stars} active={stars > 2} />}
-                  />
-                  <IconActive
-                    handleClick={() => {
-                      if (stars == 4) {
-                        setStars(0);
-                      } else {
-                        setStars(4);
-                      }
-                    }}
-                    svg={<StarIcon classPath={styles.stars} active={stars > 3} />}
-                  />
-                  <IconActive
-                    handleClick={() => {
-                      if (stars == 5) {
-                        setStars(0);
-                      } else {
-                        setStars(5);
-                      }
-                    }}
-                    svg={<StarIcon classPath={styles.stars} active={stars > 4} />}
-                  />
+                  <IconActive svg={<ShareIcon />} />
                 </div>
               </div>
-              <div className={styles.recipePage__recipe__description__feedback__list}>
-                <div className={styles.recipePage__recipe__description__feedback__list__favourites}>
-                  <IconActive svg={<Bookmark color={'rgba(247, 147, 30, 1)'} />} />
-                  <span>добавить в кулинарную книгу</span>
+              <div className={styles.container__details__parameters}>
+                <div className={styles.container__details__parameters__complexity}>
+                  <h2 className={styles.container__details__parameters__complexity__heading}>
+                    Готовность
+                  </h2>
+                  <div className={styles.container__details__parameters__complexity__svg}>
+                    <ComplexityIcon complexity={time} />
+                    <span className={styles.text__svg}>{`${recipes.prepTime}\nминут`}</span>
+                  </div>
                 </div>
-                <div className={styles.recipePage__recipe__description__feedback__list__links}>
-                  <span>поделиться</span>
-                  <IconLink href="https://vk.ru/vanek1499" label="Ссылка на ВК" svg={<VKIcon />} />
-                  <IconLink
-                    href="https://vk.ru/vanek1499"
-                    label="Ссылка на Одноклассники"
-                    svg={<OKIcon />}
+                <div className={styles.container__details__parameters__complexity}>
+                  <h2 className={styles.container__details__parameters__complexity__heading}>
+                    Сложность
+                  </h2>
+                  <div className={styles.container__details__parameters__complexity__svg}>
+                    <ComplexityIcon complexity={recipes.complexity as 'easy' | 'normal' | 'hard'} />
+                    <span className={styles.text__svg}>{textComplexity}</span>
+                  </div>
+                </div>
+                <div className={styles.container__details__parameters__sharpness}>
+                  <h2 className={styles.container__details__parameters__complexity__heading}>
+                    Острота
+                  </h2>
+                  {recipes.sharpness === 1 ? (
+                    <div className={styles.container__details__parameters__sharpness__icons}>
+                      <PepperIcon className={styles.icon__pepper} active={true} />
+                      <PepperIcon className={styles.icon__pepper} />
+                      <PepperIcon className={styles.icon__pepper} />
+                    </div>
+                  ) : recipes.sharpness === 2 ? (
+                    <div className={styles.container__details__parameters__sharpness__icons}>
+                      <PepperIcon className={styles.icon__pepper} active={true} />
+                      <PepperIcon className={styles.icon__pepper} active={true} />
+                      <PepperIcon className={styles.icon__pepper} />
+                    </div>
+                  ) : (
+                    <div className={styles.container__details__parameters__sharpness__icons}>
+                      <PepperIcon className={styles.icon__pepper} active={true} />
+                      <PepperIcon className={styles.icon__pepper} active={true} />
+                      <PepperIcon className={styles.icon__pepper} active={true} />
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className={styles.container__details__value}>
+                <h2 className={styles.container__details__value__heading}>
+                  Пищевая ценность на порцию:
+                </h2>
+                <div className={styles.container__details__value__container}>
+                  <div className={styles.container__details__value__container__energy}>
+                    <div className={styles.container__details__value__container__energy__container}>
+                      <span>Энергия</span>
+                      <span>{recipes.energy}</span>
+                    </div>
+                  </div>
+                  <div className={styles.container__details__value__container__squirrels}>
+                    <div
+                      className={styles.container__details__value__container__squirrels__container}>
+                      <span>Белки</span>
+                      <span>{recipes.squirrels}</span>
+                    </div>
+                  </div>
+                  <div className={styles.container__details__value__container__fats}>
+                    <div className={styles.container__details__value__container__fats__container}>
+                      <span>Жиры</span>
+                      <span>{recipes.squirrels}</span>
+                    </div>
+                  </div>
+                  <div className={styles.container__details__value__container__carbohydrates}>
+                    <div
+                      className={
+                        styles.container__details__value__container__carbohydrates__container
+                      }>
+                      <span>Углеводы</span>
+                      <span>{recipes.carbohydrates}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className={styles.container__details__metrics}>
+                <div className={styles.container__details__metrics__container}>
+                  <div className={styles.container__details__metrics__container__like}>
+                    <IconActive svg={<LikeIcon color="rgba(103, 187, 90, 1)" />} />
+                    <p>{`${recipes.likes} понравилось`}</p>
+                  </div>
+                  <div className={styles.container__details__metrics__container__eye}>
+                    <EyeIcon className={styles.eyeicon} active={true} />
+                    <p>{`${recipes.views} просмотров`}</p>
+                  </div>
+                </div>
+                <div className={styles.container__details__metrics__star}>
+                  <StarIcon active={true} />
+                  <span>{`${ratingValue.toFixed(1)}`}</span>
+                </div>
+              </div>
+            </div>
+            <div className={styles.recipePage__recipe__description}>
+              <div className={styles.recipePage__recipe__description__text}>
+                <h2>Описание:</h2>
+                <p>{recipes.description}</p>
+              </div>
+              <div className={styles.recipePage__recipe__description__dishes}>
+                <h2>Посуда:</h2>
+                <p>{dishes.join(', ')}</p>
+              </div>
+              {Array.from({ length: recipes.steps }, (_, i) => {
+                const stepNum = i + 1;
+                return (
+                  <RecipeStep
+                    step={i + 1}
+                    key={i}
+                    stepNum={`${stepNum} / ${recipes.steps}`}
+                    stepData={recipes.descriptionStep[i]}
+                    stepIngredients={recipes.ingredients as unknown as JsonIngredient[]}
+                    stepInventory={recipes.inventorySteps.filter((item) => item.id == i + 1)}
+                    inventory={recipes.inventory}
                   />
-                  <IconLink
-                    href="https://vk.ru/vanek1499"
-                    label="Ссылка на Телеграмм"
-                    svg={<TGIcon />}
-                  />
-                  <IconLink
-                    href="https://vk.ru/vanek1499"
-                    label="Ссылка на Вотсапп"
-                    svg={<WhatsappIcon />}
-                  />
+                );
+              })}
+              <div className={styles.recipePage__recipe__description__feedback}>
+                <div className={styles.recipePage__recipe__description__feedback__container}>
+                  <h4
+                    className={
+                      styles.recipePage__recipe__description__feedback__container__heading
+                    }>
+                    Вам понравился рецепт?
+                  </h4>
+                  <div
+                    className={styles.recipePage__recipe__description__feedback__container__stars}>
+                    <IconActive
+                      handleClick={() => {
+                        if (stars == 1) {
+                          setStars(0);
+                        } else {
+                          setStars(1);
+                        }
+                      }}
+                      svg={<StarIcon classPath={styles.stars} active={stars > 0} />}
+                    />
+                    <IconActive
+                      handleClick={() => {
+                        if (stars == 2) {
+                          setStars(0);
+                        } else {
+                          setStars(2);
+                        }
+                      }}
+                      svg={<StarIcon classPath={styles.stars} active={stars > 1} />}
+                    />
+                    <IconActive
+                      handleClick={() => {
+                        if (stars == 3) {
+                          setStars(0);
+                        } else {
+                          setStars(3);
+                        }
+                      }}
+                      svg={<StarIcon classPath={styles.stars} active={stars > 2} />}
+                    />
+                    <IconActive
+                      handleClick={() => {
+                        if (stars == 4) {
+                          setStars(0);
+                        } else {
+                          setStars(4);
+                        }
+                      }}
+                      svg={<StarIcon classPath={styles.stars} active={stars > 3} />}
+                    />
+                    <IconActive
+                      handleClick={() => {
+                        if (stars == 5) {
+                          setStars(0);
+                        } else {
+                          setStars(5);
+                        }
+                      }}
+                      svg={<StarIcon classPath={styles.stars} active={stars > 4} />}
+                    />
+                  </div>
+                </div>
+                <div className={styles.recipePage__recipe__description__feedback__list}>
+                  <div
+                    className={styles.recipePage__recipe__description__feedback__list__favourites}>
+                    <IconActive
+                      handleClick={() => setAddMarkBook((prev) => !prev)}
+                      svg={<Bookmark color={'rgba(247, 147, 30, 1)'} />}
+                    />
+                    <span>добавить в кулинарную книгу</span>
+                  </div>
+                  <div className={styles.recipePage__recipe__description__feedback__list__links}>
+                    <span>поделиться</span>
+                    <IconLink
+                      href="https://vk.ru/vanek1499"
+                      label="Ссылка на ВК"
+                      svg={<VKIcon />}
+                    />
+                    <IconLink
+                      href="https://vk.ru/vanek1499"
+                      label="Ссылка на Одноклассники"
+                      svg={<OKIcon />}
+                    />
+                    <IconLink
+                      href="https://vk.ru/vanek1499"
+                      label="Ссылка на Телеграмм"
+                      svg={<TGIcon />}
+                    />
+                    <IconLink
+                      href="https://vk.ru/vanek1499"
+                      label="Ссылка на Вотсапп"
+                      svg={<WhatsappIcon />}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <SectionCards
+          foods={foods}
+          classNameHeading={styles.section__heading__text}
+          ogrinicator={true}
+          heading="Больше вкусных рецептов для вас"
+        />
+        <Comments
+          comments={recipes.comments ? recipes.comments : []}
+          className={styles.recipe__comments}
+        />
+        <Mailing />
       </div>
-      <SectionCards
-        classNameHeading={styles.section__heading__text}
-        ogrinicator={true}
-        heading="Больше вкусных рецептов для вас"
-      />
-      <Comments
-        comments={recipes.comments ? recipes.comments : []}
-        className={styles.recipe__comments}
-      />
-      <Mailing />
-    </div>
+      {addMarkBook && (
+        <AddRecipeInBookModal
+          imgAlt={recipes.imgAlt}
+          img={recipes.image}
+          name={recipes.name}
+          closeModal={() => setAddMarkBook((prev) => !prev)}
+        />
+      )}
+    </>
   );
 }

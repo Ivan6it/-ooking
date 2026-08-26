@@ -4,12 +4,16 @@ import { RecipeCatalogFiltering } from '@/shared/ui/widgets/RecipeCatalogFilteri
 import { SectionFilters } from '@/shared/ui/widgets/SectionFilters';
 import filters from '@/data/filters.json';
 import { Mailing } from '@/shared/ui/widgets/Mailing';
+import { Link } from 'react-router-dom';
 
-export function RecipeCatalogPage() {
+export default function RecipeCatalogPage() {
   return (
     <div className={styles.recipeCatalogPage}>
       <p className={styles.recipeCatalogPage__heading}>
-        Главная / <span>Каталог рецептов</span>
+        <Link to={'/'} className={styles.recipeCatalogPage__heading__link}>
+          Главная
+        </Link>{' '}
+        / <span>Каталог рецептов</span>
       </p>
       <RecipeCarousel />
       <div className={styles.recipeCatalogPage__main}>

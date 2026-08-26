@@ -33,14 +33,14 @@ export function CookbooksItem({ data, handleClick }: CookbooksItemProps) {
       {data.recipes.length === 1 && (
         <div onClick={() => handleClick?.(recipes, name)} className={styles.cookbooksItem__solo}>
           {recipesList.map((item) => (
-            <img className={styles.cookbooksItem__solo__img} src={item.image} />
+            <img loading="lazy" className={styles.cookbooksItem__solo__img} src={item.image} />
           ))}
         </div>
       )}
       {data.recipes.length === 2 && (
         <div onClick={() => handleClick?.(recipes, name)} className={styles.cookbooksItem__double}>
           {recipesList.map((item) => (
-            <img src={item.image} className={styles.cookbooksItem__double__img} />
+            <img loading="lazy" src={item.image} className={styles.cookbooksItem__double__img} />
           ))}
         </div>
       )}
@@ -48,7 +48,11 @@ export function CookbooksItem({ data, handleClick }: CookbooksItemProps) {
         <div onClick={() => handleClick?.(recipes, name)} className={styles.cookbooksItem__triple}>
           {recipesList.map((item) => (
             <div className={styles.cookbooksItem__triple__empty}>
-              <img src={item.image} className={styles.cookbooksItem__triple__empty__img} />
+              <img
+                loading="lazy"
+                src={item.image}
+                className={styles.cookbooksItem__triple__empty__img}
+              />
             </div>
           ))}
         </div>

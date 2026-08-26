@@ -30,3 +30,16 @@
   justify-content: space-between;
   margin-bottom: 10.41vw;
 }
+
+.directorySectionPage__text__link {
+  display: inline-block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.directorySectionPage__text__link:hover {
+  display: inline-block;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  color: rgba(103, 187, 90, 1);
+}

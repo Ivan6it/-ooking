@@ -2,8 +2,9 @@ import styles from './GuidePage.module.css';
 import { Mailing } from '@/shared/ui/widgets/Mailing';
 import sectionProducts from '@/data/directorySection.json';
 import { DirectorySection } from '@/shared/ui/widgets/DirectorySection';
+import { Link } from 'react-router-dom';
 
-export function GuidePage() {
+export default function GuidePage() {
   return (
     <div className={styles.guidePage}>
       <h2 className={styles.guidePage__heading}>Справочник</h2>
@@ -17,11 +18,17 @@ export function GuidePage() {
         <br />
         <br /> Пусть каждый шаг в рецепте будет понятен — без догадок, без сомнений.
       </p>
-      <div className={styles.guidePage__list}>
+      <ul className={styles.guidePage__list}>
         {sectionProducts.map((item) => (
-          <DirectorySection data={item} />
+          <li key={item.id}>
+            <Link
+              style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}
+              to={`/guide/${item.id}`}>
+              <DirectorySection data={item} />
+            </Link>
+          </li>
         ))}
-      </div>
+      </ul>
       <Mailing />
     </div>
   );

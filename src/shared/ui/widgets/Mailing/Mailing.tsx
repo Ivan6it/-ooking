@@ -63,8 +63,9 @@ export function Mailing({ small = false }) {
       </form>
       <div>
         <img
+          loading="lazy"
           className={`${styles.mailing__image} ${small ? styles.mailing__image__small : ''}`}
-          src="src/images/Для рассылки.png"
+          src="/images/Для рассылки.png"
         />
       </div>
     </div>

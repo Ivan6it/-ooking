@@ -121,6 +121,7 @@ export function AuthorizationAndRegistration() {
     <div className={styles.authorizationAndRegistration__overlay}>
       <div className={styles.authorizationAndRegistration}>
         <img
+          loading="lazy"
           className={styles.authorizationAndRegistration__img}
           src={'src/images/regAndAuth.jpg'}
         />

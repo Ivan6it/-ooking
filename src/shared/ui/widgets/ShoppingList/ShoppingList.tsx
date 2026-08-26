@@ -5,6 +5,7 @@ import users from '@/data/users.json';
 import foods from '@/data/foods.json';
 import { getIngredientCountText } from '@/shared/helpers/helpersFunction';
 import type { Food } from '@/data/foods.json';
+import { Link } from 'react-router-dom';
 
 type ShoppingListProps = {
   handleclick: (
@@ -26,7 +27,9 @@ export function ShoppingList({ handleclick }: ShoppingListProps) {
             Когда вы добавите ингредиенты в свой список покупок, вы увидете их здесь. Хороших
             покупок!
           </p>
-          <DefaultButton className={styles.shoppingList__button} text="Посмотреть рецепты" />
+          <Link to={'/catalog'}>
+            <DefaultButton className={styles.shoppingList__button} text="Посмотреть рецепты" />
+          </Link>
         </div>
       ) : (
         <ul className={styles.shoppingList__itemList}>
@@ -43,6 +46,7 @@ export function ShoppingList({ handleclick }: ShoppingListProps) {
                 }
                 className={styles.shoppingList__itemList__item}>
                 <img
+                  loading="lazy"
                   className={styles.shoppingList__itemList__item__img}
                   src={recipe?.image}
                   alt={recipe?.imgAlt}

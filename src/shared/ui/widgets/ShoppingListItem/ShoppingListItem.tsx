@@ -23,6 +23,7 @@ export function ShoppingListItem({ data, handleBack }: ShoppingListItemProps) {
     <div className={styles.shoppingListItem}>
       <div className={styles.shoppingListItem__recipe}>
         <img
+          loading="lazy"
           className={styles.shoppingListItem__recipe__img}
           src={data.recipe.image}
           alt={data.recipe.imgAlt}

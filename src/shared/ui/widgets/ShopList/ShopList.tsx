@@ -41,7 +41,7 @@ export function ShopList({
   }
   return (
     <>
-      <ul>
+      <ul className={styles.shopList__list}>
         {baseItem.map((item) => {
           const ingredient = Object.entries(item);
           return (

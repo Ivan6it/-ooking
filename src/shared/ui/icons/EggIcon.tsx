@@ -1,4 +1,4 @@
-import EggImg from '../../../images/Egg.png';
+import EggImg from '/images/Egg.png';
 
 type EggIconProps = {
   active?: boolean;
@@ -27,6 +27,7 @@ export function EggIcon({ active = true }: EggIconProps) {
               left: '12px',
             }}>
             <img
+              loading="lazy"
               src={EggImg}
               alt="Egg"
               style={{
@@ -70,6 +71,7 @@ export function EggIcon({ active = true }: EggIconProps) {
               left: '12px',
             }}>
             <img
+              loading="lazy"
               src={EggImg}
               alt="Egg"
               style={{

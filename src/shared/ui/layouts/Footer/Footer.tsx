@@ -58,10 +58,10 @@ export function Footer() {
       <div className={styles.footer__separator}></div>
       <nav className={styles.footer__menu}>
         <h2 className={styles.footer__menu__heading}>Находите</h2>
-        <ButtonLink to={''} children="Главная" />
-        <ButtonLink to={''} children="Рецепты" />
-        <ButtonLink to={''} children="Справочник" />
-        <ButtonLink to={''} children="Мой профиль" />
+        <ButtonLink to={'/'} children="Главная" />
+        <ButtonLink to={'/catalog'} children="Рецепты" />
+        <ButtonLink to={'/guide'} children="Справочник" />
+        <ButtonLink to={'/profile'} children="Мой профиль" />
       </nav>
       <div className={styles.footer__separator}></div>
       <div className={styles.footer__feedBack}>

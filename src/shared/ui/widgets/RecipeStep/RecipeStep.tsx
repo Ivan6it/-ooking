@@ -52,7 +52,7 @@ export function RecipeStep({
           <div className={styles.recipeStep__content}>
             <div className={styles.recipeStep__content__img}>
               {stepData.imageStep.map((image, i) => (
-                <img key={i} src={image} />
+                <img loading="lazy" key={i} src={image} />
               ))}
             </div>
             <div className={styles.recipeStep__content__ingredients}>
@@ -69,7 +69,7 @@ export function RecipeStep({
           </div>
         ) : (
           <div className={styles.recipeStep__content__custom}>
-            <img src={stepData.imageStep[0]} />
+            <img loading="lazy" src={stepData.imageStep[0]} />
             <div className={styles.recipeStep__content__custom__ingredients}>
               {ingredientsListItems.map((item, i) => {
                 const quantity = Object.entries(item);

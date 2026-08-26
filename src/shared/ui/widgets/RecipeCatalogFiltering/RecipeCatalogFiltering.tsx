@@ -45,6 +45,7 @@ export function RecipeCatalogFiltering() {
         <div className={styles.recipeCatalogFiltering__catalog__recipes}>
           {foods.map((food) => (
             <CardFoodCatalog
+              id={food.id}
               name={food.name}
               img={food.image}
               quantityLike={food.likes}

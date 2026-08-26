@@ -107,7 +107,7 @@ export function RecipeCarousel() {
             key={kitchen.id}
             className={`${styles.recipeCarousel__cuisines_cuisine} ${kitchen.id === activeKitchen ? styles.recipeCarousel__cuisines_cuisine__active : ''}`}
             style={{ animationDelay: `${index * 0.05}s` }}>
-            <img src={kitchen.image} alt={kitchen.alt} />
+            <img loading="lazy" src={kitchen.image} alt={kitchen.alt} />
             <span>{kitchen.name.replace(' ', '\n')}</span>
           </button>
         ))}

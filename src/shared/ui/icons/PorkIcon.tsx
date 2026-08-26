@@ -1,4 +1,4 @@
-import PorkImg from '../../../images/Pork.png';
+import PorkImg from '/images/Pork.png';
 
 type PorkIconProps = {
   active?: boolean;
@@ -21,6 +21,7 @@ export function PorkIcon({ active = true }: PorkIconProps) {
           <div
             style={{ width: '62px', height: '92px', position: 'absolute', top: '0', left: '16px' }}>
             <img
+              loading="lazy"
               src={PorkImg}
               alt="Pork"
               style={{
@@ -57,6 +58,7 @@ export function PorkIcon({ active = true }: PorkIconProps) {
           <div
             style={{ width: '62px', height: '92px', position: 'absolute', top: '0', left: '16px' }}>
             <img
+              loading="lazy"
               src={PorkImg}
               alt="Pork"
               style={{

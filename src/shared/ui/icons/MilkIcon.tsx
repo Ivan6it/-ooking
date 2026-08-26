@@ -1,4 +1,4 @@
-import milkImage from '../../../images/Milk.png';
+import milkImage from '/images/Milk.png';
 
 type MilkIconProps = {
   active?: boolean;
@@ -37,6 +37,7 @@ export function MilkIcon({ active = true }: MilkIconProps) {
               left: '25px',
             }}>
             <img
+              loading="lazy"
               src={milkImage}
               alt="milk"
               style={{
@@ -69,6 +70,7 @@ export function MilkIcon({ active = true }: MilkIconProps) {
               left: '25px',
             }}>
             <img
+              loading="lazy"
               src={milkImage}
               alt="milk"
               style={{

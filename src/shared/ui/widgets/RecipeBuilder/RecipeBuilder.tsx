@@ -11,13 +11,21 @@ import {
   FishIcon,
   WineIcon,
   OnionIcon,
+  CrossIcon,
 } from '@/shared/ui/icons';
 import { SearchBar } from '../../SearchBar';
 import { IconActive } from '../../iconActive';
 import { DefaultButton } from '../../buttons/defaultButton';
+import ingredientsData from '@/data/ingredients.json';
 
 export function RecipeBuilder() {
-  const [ingredients, setIngredients] = useState([]);
+  const [ingredients, setIngredients] = useState<string[]>([]);
+  const [productsInStock, setProductsInStock] = useState<string[]>([]);
+  const [productsInStockText, setProductsInStockText] = useState('');
+  const [productsInStockInputVisible, setProductsInStockInputVisible] = useState(false);
+  const [additionalIngredients, setAdditionalIngredients] = useState<null | number>(null);
+  const [deleteIngredients, setDeleteIngredients] = useState<string[]>([]);
+  const [visibleHint, setVisibleHint] = useState(false);
   const [timer, setTimer] = useState(0);
   const handleRangeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = Number(e.target.value);
@@ -30,7 +38,38 @@ export function RecipeBuilder() {
     { label: 'ДО 60\nМИНУТ', min: 35, max: 67 },
     { label: 'БОЛЕЕ 1\nЧАСА', min: 68, max: 100 },
   ];
+  const products = [
+    { svg: MilkIcon, text: 'Молоко' },
+    { svg: EggIcon, text: 'Яйца' },
+    { svg: OnionIcon, text: 'Лук' },
+    { svg: PorkIcon, text: 'Свинина' },
+    { svg: FishIcon, text: 'Рыба' },
+    { svg: WineIcon, text: 'Алкоголь' },
+  ];
   const activeIndex = timeRanges.findIndex((range) => timer >= range.min && timer < range.max);
+  const ingredientsList = ingredientsData.filter((item) => !productsInStock.includes(item.name));
+
+  function handleSearch(e: string) {
+    setProductsInStockText(e);
+    if (!e.trim() && ingredients.length === 0) {
+      setIngredients([]);
+      return;
+    }
+    setIngredients([]);
+    const searchTerm = e.trim().toLowerCase();
+    const regex = new RegExp(searchTerm, 'i');
+    for (let i = 0; i < ingredientsList.length; i++) {
+      if (regex.test(ingredientsList[i].name)) {
+        setIngredients((prevOptions) => [...prevOptions, ingredientsList[i].name]);
+      }
+    }
+  }
+
+  function clearSearch() {
+    setIngredients([]);
+    setProductsInStockText('');
+  }
+
   return (
     <div className={styles.recipeBuilder}>
       <div className={styles.recipeBuilder__header}>
@@ -44,16 +83,60 @@ export function RecipeBuilder() {
         <div className={styles.recipeBuilder__products}>
           <h2 className={styles.recipeBuilder__products__heading}>Введите имеющиеся продукты:</h2>
           <div className={styles.recipeBuilder__products__section}>
-            {ingredients && <div>{}</div>}
+            {productsInStock.length > 0 && (
+              <ul className={styles.recipeBuilder__products__section__list}>
+                {productsInStock.map((item) => (
+                  <li className={styles.recipeBuilder__products__section__list__item}>
+                    <span>{item}</span>
+                    <IconActive
+                      handleClick={() =>
+                        setProductsInStock((prev) => prev.filter((i) => i !== item))
+                      }
+                      svg={<CrossIcon color={'rgba(255, 255, 255, 1)'} size={14} />}
+                    />
+                  </li>
+                ))}
+              </ul>
+            )}
             <div className={styles.recipeBuilder__products__section__button}>
-              <PlusIcon />
-              <p className={styles.recipeBuilder__products__section__button__text}>Ингредиент</p>
+              <IconActive
+                className={styles.recipeBuilder__products__section__button__container}
+                text="Ингредиент"
+                classNameText={styles.recipeBuilder__products__section__button__text}
+                handleClick={() => {
+                  setProductsInStockInputVisible((prev) => !prev);
+                  clearSearch();
+                }}
+                svg={<PlusIcon />}
+              />
             </div>
-            <SearchBar
-              className={styles.recipeBuilder__products__section__input}
-              placeholder="Введите ингредиент"
-            />
           </div>
+          {productsInStockInputVisible && (
+            <div className={styles.recipeBuilder__products__section__container}>
+              <SearchBar
+                value={productsInStockText}
+                onChange={handleSearch}
+                className={styles.recipeBuilder__products__section__input}
+                placeholder="Введите ингредиент"
+              />
+              {productsInStockText.trim().length > 0 && ingredients.length > 0 && (
+                <ul className={styles.recipeBuilder__products__list}>
+                  {ingredients.map((item) => (
+                    <li
+                      onClick={() => {
+                        if (productsInStock.length < 7) {
+                          setProductsInStock((prev) => [...prev, item]);
+                          clearSearch();
+                        }
+                      }}
+                      className={styles.recipeBuilder__products__list__item}>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          )}
         </div>
         <div className={styles.recipeBuilder__timer}>
           <h2 className={styles.recipeBuilder__timer__heading}>Время приготовления:</h2>
@@ -84,92 +167,95 @@ export function RecipeBuilder() {
             ингредиенты?
           </h2>
           <IconActive
+            handleClick={() => setVisibleHint((prev) => !prev)}
             className={styles.recipeBuilder__container__dop__ingredients__button}
             svg={<QuestionIcon />}
           />
           <div className={styles.recipeBuilder__container__dop__ingredients__numberButtons}>
             <IconActive
+              handleClick={() =>
+                additionalIngredients === 1
+                  ? setAdditionalIngredients(null)
+                  : setAdditionalIngredients(1)
+              }
               className={styles.recipeBuilder__container__dop__ingredients__number}
-              svg={<EllipseNumberIcon number={1} />}
+              svg={<EllipseNumberIcon active={additionalIngredients === 1} number={1} />}
             />
             <IconActive
+              handleClick={() =>
+                additionalIngredients === 2
+                  ? setAdditionalIngredients(null)
+                  : setAdditionalIngredients(2)
+              }
               className={styles.recipeBuilder__container__dop__ingredients__number}
-              svg={<EllipseNumberIcon number={2} />}
+              svg={<EllipseNumberIcon active={additionalIngredients === 2} number={2} />}
             />
             <IconActive
+              handleClick={() =>
+                additionalIngredients === 3
+                  ? setAdditionalIngredients(null)
+                  : setAdditionalIngredients(3)
+              }
               className={styles.recipeBuilder__container__dop__ingredients__number}
-              svg={<EllipseNumberIcon number={3} />}
+              svg={<EllipseNumberIcon active={additionalIngredients === 3} number={3} />}
             />
             <IconActive
+              handleClick={() =>
+                additionalIngredients === 4
+                  ? setAdditionalIngredients(null)
+                  : setAdditionalIngredients(4)
+              }
               className={styles.recipeBuilder__container__dop__ingredients__number}
-              svg={<EllipseNumberIcon number={4} />}
+              svg={<EllipseNumberIcon active={additionalIngredients === 4} number={4} />}
             />
             <IconActive
+              handleClick={() =>
+                additionalIngredients === 5
+                  ? setAdditionalIngredients(null)
+                  : setAdditionalIngredients(5)
+              }
               className={styles.recipeBuilder__container__dop__ingredients__number}
-              svg={<EllipseNumberIcon number={5} />}
+              svg={<EllipseNumberIcon active={additionalIngredients === 5} number={5} />}
             />
           </div>
-          <div className={styles.recipeBuilder__container__dop__ingredients__info}>
-            <ExclamationMarkIcon />
-            <p className={styles.recipeBuilder__container__dop__ingredients__info__text}>
-              Специи, соусы, сиропы и зелень не <br />
-              являются основными ингредиентами
-            </p>
-          </div>
+          {visibleHint && (
+            <div className={styles.recipeBuilder__container__dop__ingredients__info}>
+              <ExclamationMarkIcon />
+              <p className={styles.recipeBuilder__container__dop__ingredients__info__text}>
+                Специи, соусы, сиропы и зелень не <br />
+                являются основными ингредиентами
+              </p>
+            </div>
+          )}
         </div>
         <div className={styles.recipeBuilder__container__dop__ingredients__products}>
           <h2 className={styles.recipeBuilder__container__dop__ingredients__products__heading}>
             Исключить из рецепта:
           </h2>
           <div className={styles.recipeBuilder__container__dop__ingredients__products__filters}>
-            <IconActive
-              className={styles.recipeBuilder__container__dop__ingredients__products__filters__icon}
-              svg={<MilkIcon />}
-              text="Молоко"
-              classNameText={
-                styles.recipeBuilder__container__dop__ingredients__products__filters__text
-              }
-            />
-            <IconActive
-              className={styles.recipeBuilder__container__dop__ingredients__products__filters__icon}
-              svg={<EggIcon />}
-              text="Яйца"
-              classNameText={
-                styles.recipeBuilder__container__dop__ingredients__products__filters__text
-              }
-            />
-            <IconActive
-              className={styles.recipeBuilder__container__dop__ingredients__products__filters__icon}
-              svg={<OnionIcon />}
-              text="Лук"
-              classNameText={
-                styles.recipeBuilder__container__dop__ingredients__products__filters__text
-              }
-            />
-            <IconActive
-              className={styles.recipeBuilder__container__dop__ingredients__products__filters__icon}
-              svg={<PorkIcon />}
-              text="Свинина"
-              classNameText={
-                styles.recipeBuilder__container__dop__ingredients__products__filters__text
-              }
-            />
-            <IconActive
-              className={styles.recipeBuilder__container__dop__ingredients__products__filters__icon}
-              svg={<FishIcon />}
-              text="Рыба"
-              classNameText={
-                styles.recipeBuilder__container__dop__ingredients__products__filters__text
-              }
-            />
-            <IconActive
-              className={styles.recipeBuilder__container__dop__ingredients__products__filters__icon}
-              svg={<WineIcon />}
-              text="Алкоголь"
-              classNameText={
-                styles.recipeBuilder__container__dop__ingredients__products__filters__text
-              }
-            />
+            {products.map((item) => (
+              <IconActive
+                handleClick={() => {
+                  if (deleteIngredients.length > 0) {
+                    if (deleteIngredients.includes(item.text)) {
+                      setDeleteIngredients((prev) => prev.filter((i) => i !== item.text));
+                    } else {
+                      setDeleteIngredients((prev) => [...prev, item.text]);
+                    }
+                  } else {
+                    setDeleteIngredients((prev) => [...prev, item.text]);
+                  }
+                }}
+                className={
+                  styles.recipeBuilder__container__dop__ingredients__products__filters__icon
+                }
+                svg={<item.svg active={!deleteIngredients.includes(item.text)} />}
+                text={item.text}
+                classNameText={
+                  styles.recipeBuilder__container__dop__ingredients__products__filters__text
+                }
+              />
+            ))}
           </div>
         </div>
       </div>

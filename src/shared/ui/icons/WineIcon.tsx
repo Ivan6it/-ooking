@@ -1,4 +1,4 @@
-import WineImage from '../../../images/Wine.png';
+import WineImage from '/images/Wine.png';
 
 type WineIconProps = {
   active?: boolean;
@@ -21,6 +21,7 @@ export function WineIcon({ active = true }: WineIconProps) {
           <div
             style={{ width: '41px', height: '98px', position: 'absolute', top: '0', left: '27px' }}>
             <img
+              loading="lazy"
               src={WineImage}
               alt="Wine"
               style={{
@@ -57,6 +58,7 @@ export function WineIcon({ active = true }: WineIconProps) {
           <div
             style={{ width: '41px', height: '98px', position: 'absolute', top: '0', left: '27px' }}>
             <img
+              loading="lazy"
               src={WineImage}
               alt="Wine"
               style={{

@@ -35,13 +35,13 @@ export function CreateBook({ closeModal }: CreateBookProps) {
         </span>
         <div className={styles.createBook__container}>
           <div className={styles.createBook__container__container__img}>
-            <img src="src/images/CreateBookImg__1.png" />
+            <img loading="lazy" src="/images/CreateBookImg__1.png" />
           </div>
           <div className={styles.createBook__container__container__img}>
-            <img src="src/images/CreateBookImg__2.png" />
+            <img loading="lazy" src="/images/CreateBookImg__2.png" />
           </div>
           <div className={styles.createBook__container__container__img}>
-            <img src="src/images/CreateBookImg__3.png" />
+            <img loading="lazy" src="/images/CreateBookImg__3.png" />
           </div>
         </div>
         <Input

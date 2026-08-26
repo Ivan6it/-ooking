@@ -44,6 +44,7 @@
 }
 
 .directorySectionItem__button {
+  width: 100%;
   padding: 0.9vw 0;
   margin-top: 0.69vw;
 }

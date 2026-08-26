@@ -1,1 +1,1 @@
-export { DirectorySectionItemPage } from './DirectorySectionItemPage';
+export { default as DirectorySectionItemPage } from './DirectorySectionItemPage';

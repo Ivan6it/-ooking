@@ -10,6 +10,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { format } from 'date-fns';
 import { ru } from 'date-fns/locale/ru';
+import { Link } from 'react-router-dom';
 
 type FileState = {
   fileImage: File | null;
@@ -21,7 +22,7 @@ type BirthdayState = {
   nextDate: Date | null;
 };
 
-export function ProfileEditor() {
+export default function ProfileEditor() {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [selectedFile, setSelectedFile] = useState<FileState>({ fileImage: null, preview: '' });
   const [birthdayVerificationResult, setBirthdayVerificationResult] = useState<BirthdayState>({
@@ -150,12 +151,20 @@ export function ProfileEditor() {
   return (
     <div className={styles.profileEditor}>
       <span className={styles.profileEditor__text}>
-        Главная / Профиль /&nbsp;<span>Редактировать профиль</span>
+        <Link to={'/'} className={styles.profileEditor__text__link}>
+          Главная
+        </Link>{' '}
+        /{' '}
+        <Link to={'/profile'} className={styles.profileEditor__text__link}>
+          Профиль
+        </Link>{' '}
+        /&nbsp;<span>Редактировать профиль</span>
       </span>
       <h2 className={styles.profileEditor__heading}>Редактировать профиль</h2>
       <form>
         <div className={styles.profileEditor__editorImage}>
           <img
+            loading="lazy"
             className={styles.profileEditor__editorImage__image}
             alt="Аватар пользователя"
             src={selectedFile.preview ? selectedFile.preview : previewUrl ? previewUrl : ''}

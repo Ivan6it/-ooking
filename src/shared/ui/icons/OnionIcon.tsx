@@ -1,4 +1,4 @@
-import OnionImg from '../../../images/Onion.png';
+import OnionImg from '/images/Onion.png';
 
 type OnionIconProps = {
   active?: boolean;
@@ -30,6 +30,7 @@ export function OnionIcon({ active = true }: OnionIconProps) {
           <div
             style={{ height: '115px', width: '93px', position: 'absolute', top: '0', left: '0' }}>
             <img
+              loading="lazy"
               src={OnionImg}
               alt="Onion"
               style={{
@@ -57,6 +58,7 @@ export function OnionIcon({ active = true }: OnionIconProps) {
           <div
             style={{ height: '115px', width: '93px', position: 'absolute', top: '0', left: '0' }}>
             <img
+              loading="lazy"
               src={OnionImg}
               alt="Onion"
               style={{

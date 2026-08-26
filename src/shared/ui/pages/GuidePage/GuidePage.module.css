@@ -24,3 +24,7 @@
   row-gap: 5.48vw;
   justify-content: space-between;
 }
+
+.guidePage__list__link {
+  text-decoration: none;
+}

@@ -1,0 +1,117 @@
+.addRecipeInBookModal__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 3;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.addRecipeInBookModal {
+  width: fit-content;
+  max-height: 90vh;
+  position: relative;
+  box-shadow: 0px 4px 14px 0px rgba(66, 59, 59, 0.1);
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 1);
+  padding: 5.83vw 3.47vw 3.47vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: scroll;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.addRecipeInBookModal__cross {
+  position: absolute;
+  top: 2.08vw;
+  right: 2.36vw;
+}
+
+.addRecipeInBookModal__heading {
+  font-size: 32px;
+  font-weight: 500;
+}
+
+.addRecipeInBookModal__img {
+  height: 36.25vw;
+  object-fit: cover;
+  border-radius: 10px;
+  margin: 2.08vw 0 1.38vw;
+  display: block;
+  width: 36.25vw;
+  aspect-ratio: 1 / 1;
+}
+
+.addRecipeInBookModal__text {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.addRecipeInBookModal__classSelect {
+  border: 1px solid rgba(181, 195, 201, 1);
+  border-radius: 5px;
+  width: 45.2vw;
+  height: fit-content;
+  padding: 7px 1.66vw;
+  justify-content: space-between;
+  margin: 3.47vw 0 2.43vw;
+}
+
+.addRecipeInBookModal__classSelect:focus {
+  border: 1px solid rgba(103, 187, 90, 1);
+}
+
+.addRecipeInBookModal__classValue {
+  color: rgba(28, 31, 29, 1);
+}
+
+.addRecipeInBookModal__classList {
+  width: 45.2vw;
+  max-height: 140px;
+  top: calc(100% + 1px);
+  padding: 10px 0;
+  gap: 0;
+}
+
+.addRecipeInBookModal__classOption {
+  padding-left: 2.08vw;
+}
+
+.addRecipeInBookModal__buttons {
+  display: flex;
+  width: 100%;
+  justify-content: end;
+  gap: 2.08vw;
+}
+
+.addRecipeInBookModal__buttons__create {
+  padding: 20px 2.08vw 20px 0.69vw;
+  border: 1px solid rgba(103, 187, 90, 1);
+  background-color: transparent;
+  color: rgba(103, 187, 90, 1);
+}
+
+.addRecipeInBookModal__buttons__add {
+  padding: 20px 1.38vw 20px 1.38vw;
+}
+
+.addRecipeInBookModal__buttons__create:hover:not(:disabled) {
+  color: rgba(255, 255, 255, 1);
+  background-color: rgba(103, 187, 90, 1);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

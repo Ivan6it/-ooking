@@ -4,22 +4,39 @@ import { SectionCards } from '@/shared/ui/widgets/SectionCards';
 import { getGenitive } from '@/utils/russian';
 import { Comments } from '@/shared/ui/widgets/Comments';
 import { Mailing } from '@/shared/ui/widgets/Mailing';
+import foods from '@/data/foods.json';
+import { useParams, Link } from 'react-router-dom';
+import { NotFoundPage } from '../NotFoundPage';
 
-export function DirectorySectionItemPage() {
+export default function DirectorySectionItemPage() {
+  const { sectionName, itemId } = useParams();
+  const currentSection = directorySection.filter((item) => item.id === sectionName)[0];
+  const currentSectionItem = currentSection.products.filter((item) => item.id === itemId)[0];
+  if (!currentSectionItem) {
+    return <NotFoundPage />;
+  }
+
   return (
     <div className={styles.directorySectionItemPage}>
       <span className={styles.directorySectionItemPage__text}>
-        Справочник / {directorySection[0].name} /{' '}
-        <span>{directorySection[0].products[0].name}</span>
+        <Link className={styles.directorySectionItemPage__text__link} to={`/guide`}>
+          Справочник
+        </Link>
+        &nbsp;/{' '}
+        <Link className={styles.directorySectionItemPage__text__link} to={`/guide/${sectionName}`}>
+          {currentSection.name}
+        </Link>{' '}
+        / <span>{currentSectionItem.name}</span>
       </span>
       <div className={styles.directorySectionItemPage__container}>
         <img
+          loading="lazy"
           className={styles.directorySectionItemPage__container__img}
-          src={directorySection[0].products[0].img}
+          src={currentSectionItem.img}
         />
         <div className={styles.directorySectionItemPage__container__description}>
           <h2 className={styles.directorySectionItemPage__container__description__heading}>
-            {directorySection[0].products[0].name}
+            {currentSectionItem.name}
           </h2>
           <div className={styles.directorySectionItemPage__container__description__container}>
             <span
@@ -35,46 +52,47 @@ export function DirectorySectionItemPage() {
                   styles.directorySectionItemPage__container__description__container__structure__energy
                 }>
                 <span>Энергия</span>
-                <span>{directorySection[0].products[0].calorieContent}</span>
+                <span>{currentSectionItem.calorieContent}</span>
               </div>
               <div
                 className={
                   styles.directorySectionItemPage__container__description__container__structure__protein
                 }>
                 <span>Белки</span>
-                <span>{directorySection[0].products[0].protein}</span>
+                <span>{currentSectionItem.protein}</span>
               </div>
               <div
                 className={
                   styles.directorySectionItemPage__container__description__container__structure__fats
                 }>
                 <span>Жиры</span>
-                <span>{directorySection[0].products[0].fats}</span>
+                <span>{currentSectionItem.fats}</span>
               </div>
               <div
                 className={
                   styles.directorySectionItemPage__container__description__container__structure__carbohydrates
                 }>
                 <span>Углеводы</span>
-                <span>{directorySection[0].products[0].carbohydrates}</span>
+                <span>{currentSectionItem.carbohydrates}</span>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <p>{directorySection[0].products[0].description}</p>
+      <p>{currentSectionItem.description}</p>
       <h3 className={styles.directorySectionItemPage__heading}>Полезные свойства</h3>
-      <p>{directorySection[0].products[0].benefit}</p>
+      <p>{currentSectionItem.benefit}</p>
       <h4 className={styles.directorySectionItemPage__heading}>Применения</h4>
-      <p>{directorySection[0].products[0].application}</p>
+      <p>{currentSectionItem.application}</p>
       <SectionCards
+        foods={foods}
         className={styles.directorySectionItemPage__cards}
         ogrinicator={'none'}
-        heading={`Рецепты из ${getGenitive(directorySection[0].products[0].name)}`}
+        heading={`Рецепты из ${getGenitive(currentSectionItem.name)}`}
       />
       <Comments
         className={styles.directorySectionItemPage__coments}
-        comments={directorySection[0].products[0].comments || []}
+        comments={currentSectionItem.comments || []}
       />
       <Mailing />
     </div>

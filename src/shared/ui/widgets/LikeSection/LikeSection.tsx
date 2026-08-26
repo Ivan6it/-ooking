@@ -1,5 +1,6 @@
 import { DefaultButton } from '@/shared/ui/buttons/defaultButton';
 import styles from './LikeSection.module.css';
+import foods from '@/data/foods.json';
 import { SectionCards } from '@/shared/ui/widgets/SectionCards';
 
 export function LikeSection() {
@@ -7,10 +8,14 @@ export function LikeSection() {
   const step = true;
   return (
     <div>
-      {!step && <SectionCards className={styles.likeSection} ogrinicator={true} />}
+      {!step && <SectionCards foods={foods} className={styles.likeSection} ogrinicator={true} />}
       {step && (
         <div className={styles.likeSection__notItem}>
-          <img className={styles.likeSection__notItem__img} src="src/images/LikeNotItem.png" />
+          <img
+            loading="lazy"
+            className={styles.likeSection__notItem__img}
+            src="/images/LikeNotItem.png"
+          />
           <div className={styles.likeSection__notItem__text}>
             <h2>Похоже, тебе еще ничего не понравилось!</h2>
             <p>

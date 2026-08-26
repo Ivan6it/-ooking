@@ -11,8 +11,9 @@ import { DefaultButton } from '../../buttons/defaultButton';
 import { CreateBook } from '@/shared/ui/widgets/CreateBook';
 import { ShoppingList } from '../../widgets/ShoppingList';
 import { ShoppingListItem } from '@/shared/ui/widgets/ShoppingListItem';
+import { Link } from 'react-router-dom';
 
-export function ProfileUserPage() {
+export default function ProfileUserPage() {
   const [createBook, setCreateBook] = useState(false);
   const [chapter, setChapter] = useState('cookbooks');
   const [visibleBook, setVisibleBook] = useState<{
@@ -56,16 +57,22 @@ export function ProfileUserPage() {
 
   return (
     <div className={styles.profileUserPage}>
-      <button className={styles.profileUserPage__settingButton}>
+      <Link to={'/profile/setting'} className={styles.profileUserPage__settingButton}>
         <GearIcon className={styles.profileUserPage__settingButton__svg} />
         <span>Настройки</span>
-      </button>
+      </Link>
       <div className={styles.profileUserPage__profile}>
         <div className={styles.profileUserPage__profile__container}>
-          <img className={styles.profileUserPage__profile__container__img} src={users[0].image} />
-          <div className={styles.profileUserPage__profile__container__svg}>
-            <PencilIcon className={styles.profileUserPage__profile__container__svg__setting} />
-          </div>
+          <img
+            loading="lazy"
+            className={styles.profileUserPage__profile__container__img}
+            src={users[0].image}
+          />
+          <Link to={'/profile/setting'}>
+            <div className={styles.profileUserPage__profile__container__svg}>
+              <PencilIcon className={styles.profileUserPage__profile__container__svg__setting} />
+            </div>
+          </Link>
         </div>
         <div className={styles.profileUserPage__profile__info}>
           <span className={styles.profileUserPage__profile__info__name}>{users[0].name}</span>
@@ -133,10 +140,12 @@ export function ProfileUserPage() {
             <br />
             Пора добавить что-то
           </span>
-          <DefaultButton
-            className={styles.profileUserPage__sectionCards__empty__button}
-            text="В каталог"
-          />
+          <Link style={{ width: '100%' }} to={'/catalog'}>
+            <DefaultButton
+              className={styles.profileUserPage__sectionCards__empty__button}
+              text="В каталог"
+            />
+          </Link>
           <DefaultButton
             handleClick={() => setVisibleBook(null)}
             className={styles.profileUserPage__sectionCards__empty__button}

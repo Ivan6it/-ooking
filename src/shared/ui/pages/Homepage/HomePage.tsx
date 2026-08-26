@@ -2,8 +2,25 @@ import { RecipeBuilder } from '@/shared/ui/widgets/RecipeBuilder';
 import { SectionCards } from '@/shared/ui/widgets/SectionCards';
 import { Mailing } from '@/shared/ui/widgets/Mailing';
 import styles from './HomePage.module.css';
+import foods from '@/data/foods.json';
 
-export function HomePage() {
+async function loadFoods() {
+  try {
+    const response = await fetch('/api/foods');
+    if (!response.ok) {
+      throw new Error(`Сервер вернул ошибку: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Не удалось загрузить продукты:', error);
+  }
+}
+loadFoods().then((foods) => {
+  console.log(foods);
+});
+
+export default function HomePage() {
   return (
     <div className={styles.homePage}>
       <RecipeBuilder />
@@ -13,9 +30,9 @@ export function HomePage() {
         инструкциями, но и секретами, которые помогут раскрыть потенциал каждого ингредиента. Пусть
         готовка приносит вам радость, а блюда радуют близких!
       </p>
-      <SectionCards heading="Новые рецепты" />
-      <SectionCards heading="Популярные рецепты" />
-      <SectionCards heading="Каталог рецептов" />
+      <SectionCards foods={foods} heading="Новые рецепты" />
+      <SectionCards foods={foods} heading="Популярные рецепты" />
+      <SectionCards foods={foods} heading="Каталог рецептов" />
       <Mailing />
     </div>
   );

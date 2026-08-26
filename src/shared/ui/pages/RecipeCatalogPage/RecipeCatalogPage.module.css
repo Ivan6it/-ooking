@@ -26,3 +26,16 @@
   flex-direction: column;
   gap: 3.47vw;
 }
+
+.recipeCatalogPage__heading__link {
+  display: inline-block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.recipeCatalogPage__heading__link:hover {
+  display: inline-block;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  color: rgba(103, 187, 90, 1);
+}

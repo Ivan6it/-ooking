@@ -15,11 +15,10 @@ interface CommentsItemProps {
 export function CommentsItem({ data, adressId }: CommentsItemProps) {
   const user = users.filter((item) => item.id === data.user.id)[0] as User;
   const name = users.filter((item) => item.id === adressId)[0];
-  console.log(name);
   return (
     <div className={styles.commentsItem}>
       <div className={styles.commentsItem__user}>
-        <img className={styles.commentsItem__user__img} src={user.image} />
+        <img loading="lazy" className={styles.commentsItem__user__img} src={user.image} />
         <div className={styles.commentsItem__user__info}>
           <span className={styles.commentsItem__user__info__name}>
             {user.name} {user.surname}

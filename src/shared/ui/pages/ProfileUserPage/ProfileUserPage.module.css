@@ -13,13 +13,15 @@
   left: 0;
   width: 100%;
   height: 20.83vw;
-  background-image: url('src/images/PrifuleUserBackgraundImage.jpg');
+  background-image: url('/images/PrifuleUserBackgraundImage.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
 .profileUserPage__settingButton {
+  text-decoration: none;
+  color: inherit;
   position: absolute;
   top: 2.08vw;
   right: 2.63vw;
@@ -148,7 +150,7 @@
   outline: 8px solid rgba(120, 150, 110, 1);
   width: fit-content;
   padding: 3.47vw;
-  background-image: url('src/images/Шторка.jpg');
+  background-image: url('/images/Шторка.jpg');
   gap: 3.47vw;
   border-radius: 10px;
 }

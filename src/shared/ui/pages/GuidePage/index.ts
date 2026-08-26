@@ -1,1 +1,1 @@
-export { GuidePage } from './GuidePage';
+export { default as GuidePage } from './GuidePage';

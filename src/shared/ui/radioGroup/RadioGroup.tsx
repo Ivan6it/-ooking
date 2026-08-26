@@ -24,7 +24,9 @@ export function RadioGroup({
 }: RadioGroupProps) {
   return (
     <label className={classNameLabel}>
-      <RadioIcon active={checked} />
+      <div className={styles.className__container}>
+        <RadioIcon className={styles.className__svg} active={checked} />
+      </div>
       <input
         className={`${styles.radioGroup__input} ${classNameInput}`}
         type="radio"

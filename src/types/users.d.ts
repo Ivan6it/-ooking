@@ -8,6 +8,7 @@ declare module '@/data/users.json' {
   export interface Cookbook {
     name: string;
     recipes: number[];
+    id: string;
   }
 
   export interface User {

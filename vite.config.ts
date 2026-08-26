@@ -7,6 +7,12 @@ import path from 'path';
 export default defineConfig({
   server: {
     hmr: { overlay: true },
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3001',
+        changeOrigin: true,
+      },
+    },
   },
   plugins: [react()],
   resolve: {

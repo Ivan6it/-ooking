@@ -8,3 +8,13 @@
   opacity: 0;
   z-index: 1;
 }
+
+.className__container {
+  width: 27px;
+  height: 27px;
+}
+
+.className__svg {
+  width: 27px;
+  height: 27px;
+}
