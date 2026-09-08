@@ -13,7 +13,7 @@ export function Bookmark({ active = false, color }: BookmarkProps) {
           height="34"
           fill="none"
           viewBox="0 0 34 34">
-          <g clip-path="url(#a)">
+          <g clipPath="url(#a)">
             <path
               fill={color}
               d="M4.25 4.25v28.688a1.062 1.062 0 0 0 1.572.932L17 27.772l11.177 6.098a1.063 1.063 0 0 0 1.573-.932V4.25A4.25 4.25 0 0 0 25.5 0h-17a4.25 4.25 0 0 0-4.25 4.25"

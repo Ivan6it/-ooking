@@ -1,5 +1,5 @@
 import styles from './DirectorySectionItem.module.css';
-import type { DirectoryProduct } from '@/data/directorySection.json';
+import type { DirectoryProduct } from '@/types/directorySection';
 import { DefaultButton } from '@/shared/ui/buttons/defaultButton';
 import { Link } from 'react-router-dom';
 

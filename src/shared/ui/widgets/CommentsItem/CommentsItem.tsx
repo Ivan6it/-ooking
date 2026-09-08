@@ -3,12 +3,12 @@ import users from '@/data/users.json';
 import { formatDate } from '@/shared/helpers/helpersFunction';
 import { IconActive } from '../../iconActive';
 import { ShareMinIcon } from '@/shared/ui/icons';
-import type { Answer } from '@/data/directorySection.json';
+import type { DirectoryComment } from '@/types/directorySection';
 
 type User = (typeof users)[number];
 
 interface CommentsItemProps {
-  data: Answer;
+  data: DirectoryComment;
   adressId?: number;
 }
 

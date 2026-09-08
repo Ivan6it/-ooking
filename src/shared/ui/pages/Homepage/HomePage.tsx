@@ -2,25 +2,12 @@ import { RecipeBuilder } from '@/shared/ui/widgets/RecipeBuilder';
 import { SectionCards } from '@/shared/ui/widgets/SectionCards';
 import { Mailing } from '@/shared/ui/widgets/Mailing';
 import styles from './HomePage.module.css';
-import foods from '@/data/foods.json';
-
-async function loadFoods() {
-  try {
-    const response = await fetch('/api/foods');
-    if (!response.ok) {
-      throw new Error(`Сервер вернул ошибку: ${response.status}`);
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error('Не удалось загрузить продукты:', error);
-  }
-}
-loadFoods().then((foods) => {
-  console.log(foods);
-});
+import type { FoodsState } from '@/store/foodsListSlice';
+import type { RootState } from '@/store';
+import { useSelector } from 'react-redux';
 
 export default function HomePage() {
+  const { foods }: FoodsState = useSelector<RootState, FoodsState>((state) => state.foodsList);
   return (
     <div className={styles.homePage}>
       <RecipeBuilder />

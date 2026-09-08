@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { IconActive } from '../../iconActive';
 import { ArrowIcon } from '../../icons';
 import styles from './RecipeCarousel.module.css';
-import kitchens from '@/data/kitchens.json';
+import type { Kitchen } from '@/types/kitchen';
 
 type KitchenName =
   | 'Russian'
@@ -22,9 +22,22 @@ type KitchenName =
 
 export function RecipeCarousel() {
   const [quantityClick, setQuantityClick] = useState(0);
+  const [kitchens, setKitchens] = useState<Kitchen[]>([]);
   const [isSliding, setIsSliding] = useState<'none' | 'down' | 'up'>('none');
   const [isAnimating, setIsAnimating] = useState(false);
   const [activeKitchen, setActiveKitchen] = useState<KitchenName>('none');
+
+  useEffect(() => {
+    const loadData = async () => {
+      const res = await fetch('/api/kitchens');
+      if (!res.ok) {
+        throw new Error('Failed to fetch kitchens');
+      }
+      const data = await res.json();
+      setKitchens(data);
+    };
+    loadData();
+  }, []);
 
   //Логика карусели
   const catalog = kitchens;

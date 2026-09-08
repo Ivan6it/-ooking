@@ -1,12 +1,14 @@
 import styles from './CookbooksItem.module.css';
-import type { Cookbook } from '@/data/users.json';
+import type { Cookbook } from '@/types/users';
 import { getRecipesCountText } from '@/shared/helpers/helpersFunction';
-import foods from '@/data/foods.json';
 import { IconActive } from '../../iconActive';
 import { Ellipsis } from '@/shared/ui/icons';
-import type { Food } from '@/data/foods.json';
 import { DefaultButton } from '@/shared/ui/buttons/defaultButton';
 import { useState } from 'react';
+import type { FoodsState } from '@/store/foodsListSlice';
+import type { RootState } from '@/store';
+import { useSelector } from 'react-redux';
+import type { Food } from '@/types/foods';
 
 interface CookbooksItemProps {
   data: Cookbook;
@@ -15,6 +17,8 @@ interface CookbooksItemProps {
 
 export function CookbooksItem({ data, handleClick }: CookbooksItemProps) {
   const [menuVisible, setMenuVisible] = useState(false);
+  const { foods }: FoodsState = useSelector<RootState, FoodsState>((state) => state.foodsList);
+
   const recipes = foods.filter((item) => data.recipes.includes(item.id));
   let recipesList: Food[] = [];
   if (recipes.length > 3) {
@@ -32,22 +36,32 @@ export function CookbooksItem({ data, handleClick }: CookbooksItemProps) {
       )}
       {data.recipes.length === 1 && (
         <div onClick={() => handleClick?.(recipes, name)} className={styles.cookbooksItem__solo}>
-          {recipesList.map((item) => (
-            <img loading="lazy" className={styles.cookbooksItem__solo__img} src={item.image} />
+          {recipesList.map((item, index) => (
+            <img
+              key={index}
+              loading="lazy"
+              className={styles.cookbooksItem__solo__img}
+              src={item.image}
+            />
           ))}
         </div>
       )}
       {data.recipes.length === 2 && (
         <div onClick={() => handleClick?.(recipes, name)} className={styles.cookbooksItem__double}>
-          {recipesList.map((item) => (
-            <img loading="lazy" src={item.image} className={styles.cookbooksItem__double__img} />
+          {recipesList.map((item, index) => (
+            <img
+              key={index}
+              loading="lazy"
+              src={item.image}
+              className={styles.cookbooksItem__double__img}
+            />
           ))}
         </div>
       )}
       {data.recipes.length > 2 && (
         <div onClick={() => handleClick?.(recipes, name)} className={styles.cookbooksItem__triple}>
-          {recipesList.map((item) => (
-            <div className={styles.cookbooksItem__triple__empty}>
+          {recipesList.map((item, index) => (
+            <div key={index} className={styles.cookbooksItem__triple__empty}>
               <img
                 loading="lazy"
                 src={item.image}

@@ -1,6 +1,6 @@
 import { DefaultButton } from '../../buttons/defaultButton';
 import styles from './ShoppingListItem.module.css';
-import type { Food } from '@/data/foods.json';
+import type { Food } from '@/types/foods';
 import { getIngredientCountText } from '@/shared/helpers/helpersFunction';
 import { ShopList } from '@/shared/ui/widgets/ShopList';
 

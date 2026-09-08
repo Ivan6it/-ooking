@@ -1,5 +1,5 @@
 import styles from './DirectorySection.module.css';
-import type { DirectorySectionData } from '@/data/directorySection.json';
+import type { DirectorySectionData } from '@/types/directorySection';
 
 type DirectorySectionProps = {
   data: DirectorySectionData;

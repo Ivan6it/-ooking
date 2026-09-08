@@ -1,6 +1,6 @@
 import styles from './Input.module.css';
 import type { ReactNode } from 'react';
-import { useState, useLayoutEffect, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { IconActive } from '../iconActive';
 import { EyeIcon } from '@/shared/ui/icons';
 
@@ -29,6 +29,8 @@ type InputProps = {
   validateName?: (text: string, result: boolean) => void;
   nameInput?: boolean;
   userName?: string;
+  classSvg?: string;
+  readOnly?: boolean;
 };
 
 export function Input({
@@ -51,6 +53,8 @@ export function Input({
   validatePassword,
   validateName,
   userName = '',
+  classSvg,
+  readOnly = false,
 }: InputProps) {
   const [passwordError, setPasswordError] = useState({ text: '', active: false });
   const [name, setName] = useState('');
@@ -115,58 +119,51 @@ export function Input({
   };
   //Конец блока с валидацией пароля
 
-  //Блок с рассчетами высоты для позиционирования глазика
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useLayoutEffect(() => {
-    const containerHTML = containerRef.current;
-
-    if (containerHTML) {
-      const labelHTML = containerHTML.querySelector('label');
-      const inputHTML = containerHTML.querySelector('input');
-
-      if (labelHTML && inputHTML) {
-        const labelHeight = Math.round(labelHTML.getBoundingClientRect().height);
-        const inputHeight = Math.round(inputHTML.getBoundingClientRect().height);
-        const computedStyles = getComputedStyle(containerHTML);
-        const gapValue = Math.round(parseFloat(computedStyles.rowGap));
-        const result = labelHeight + gapValue + (inputHeight - 20) / 2;
-        containerHTML.style.setProperty('--input-height', `${result}px`);
-      }
-    }
-  }, [label]);
-  //Конец блока с рассчетами высоты для позиционирования глазика
-
   return (
-    <div ref={containerRef} className={`${styles.container} ${className}`}>
+    <div className={`${styles.container} ${className}`}>
       {label && (
         <label className={`${styles.label} ${classLabel}`} htmlFor={id}>
           {label}
         </label>
       )}
-      <input
-        onBlur={passwordInput ? handleBlurPassword : nameInput ? handleBlurName : handleBlur}
-        value={passwordInput ? password : nameInput ? name : value}
-        id={id}
-        type={passwordInput ? (passwordVisible ? 'text' : 'password') : type}
-        placeholder={placeholder}
-        className={`${styles.input} ${classInput} ${passwordError.active ? (passwordError.text ? styles.error__input : styles.valid__input) : ''}`}
-        onChange={passwordInput ? handlePasswordChange : nameInput ? handleNameChange : onChange}
-        required={required}
-        disabled={disabled}
-      />
-      {passwordInput && (
-        <IconActive
-          className={styles.svg}
-          handleClick={() => setPasswordVisible((prev) => !prev)}
-          svg={<EyeIcon active={passwordVisible} className={styles.svg__eye} />}
+
+      <div className={styles.inputWrapper}>
+        <input
+          readOnly={readOnly}
+          onBlur={passwordInput ? handleBlurPassword : nameInput ? handleBlurName : handleBlur}
+          value={passwordInput ? password : nameInput ? name : value}
+          id={id}
+          type={passwordInput ? (passwordVisible ? 'text' : 'password') : type}
+          placeholder={placeholder}
+          className={`${styles.input} ${classInput} ${
+            passwordError.active
+              ? passwordError.text
+                ? styles.error__input
+                : styles.valid__input
+              : ''
+          }`}
+          onChange={passwordInput ? handlePasswordChange : nameInput ? handleNameChange : onChange}
+          required={required}
+          disabled={disabled}
         />
-      )}
-      {svg && <div className={styles.svg}>{svg}</div>}
+
+        {passwordInput && (
+          <IconActive
+            className={`${styles.svg} ${classSvg}`}
+            handleClick={() => setPasswordVisible((prev) => !prev)}
+            svg={<EyeIcon active={passwordVisible} className={styles.svg__eye} />}
+          />
+        )}
+
+        {svg && <div className={styles.svg}>{svg}</div>}
+      </div>
+
       {nameInput && nameError.text && <div className={styles.text__error}>{nameError.text}</div>}
+
       {passwordInput && passwordError.text && (
         <div className={styles.text__error}>{passwordError.text}</div>
       )}
+
       {error && <div className={styles.text__error}>{error}</div>}
     </div>
   );

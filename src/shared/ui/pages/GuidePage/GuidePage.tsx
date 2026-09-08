@@ -1,10 +1,25 @@
 import styles from './GuidePage.module.css';
 import { Mailing } from '@/shared/ui/widgets/Mailing';
-import sectionProducts from '@/data/directorySection.json';
 import { DirectorySection } from '@/shared/ui/widgets/DirectorySection';
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import type { DirectorySectionData } from '@/types/directorySection';
 
 export default function GuidePage() {
+  const [sectionProducts, setSectionProducts] = useState<DirectorySectionData[]>([]);
+
+  useEffect(() => {
+    const loadData = async () => {
+      const res = await fetch('/api/directorySection');
+      if (!res.ok) {
+        throw new Error('Failed to fetch directorySection');
+      }
+      const data = await res.json();
+      setSectionProducts(data);
+    };
+    loadData();
+  }, []);
+
   return (
     <div className={styles.guidePage}>
       <h2 className={styles.guidePage__heading}>Справочник</h2>

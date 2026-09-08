@@ -4,23 +4,9 @@ import { DefaultButton } from '../../buttons/defaultButton';
 import { useState } from 'react';
 import { ArrowFilterIcon } from '../../icons';
 import { IconActive } from '../../iconActive';
+import type { Filters } from '@/types/filters';
 
-type FilterItem = {
-  name: string;
-  id: string;
-};
-
-type FilterGroup = {
-  title: string;
-  items: FilterItem[];
-};
-
-type SectionFiltersProps = {
-  filtersGroup: FilterGroup[];
-};
-
-//Требует прокидывания фильтров json
-export function SectionFilters({ filtersGroup }: SectionFiltersProps) {
+export function SectionFilters({ filtersGroup }: Filters) {
   const [selectedValues, setSelectedValues] = useState<Record<string, string>>({});
   const [showAllFilters, setShowAllFilters] = useState<Record<string, boolean>>({});
   const [collapsedFieldsets, setCollapsedFieldsets] = useState<Record<string, boolean>>({});
@@ -54,12 +40,13 @@ export function SectionFilters({ filtersGroup }: SectionFiltersProps) {
         className={styles.sectionFilters__form}
         aria-labelledby="filters-title"
         aria-label="Дополнительные фильтры">
-        {filtersGroup.map((filters) => {
+        {filtersGroup.map((filters, index) => {
           const lenght = filters.items.length > 5;
           const showAll = showAllFilters[filters.title] || false;
           const isFieldsetCollapsed = collapsedFieldsets[filters.title] || false;
           return (
             <fieldset
+              key={index}
               className={`${styles.sectionFilters__form__fieldset} ${isFieldsetCollapsed ? styles.fieldset : ''}`}>
               <IconActive
                 className={`${styles.sectionFilters__form__fieldset__icon} ${isFieldsetCollapsed ? styles.rotated : ''}`}
@@ -77,7 +64,9 @@ export function SectionFilters({ filtersGroup }: SectionFiltersProps) {
                 {filters.items.map((filter, index) => {
                   const isVisible = showAll || index < 5;
                   return (
-                    <div className={`${styles.collapsibleItem} ${isVisible ? styles.visible : ''}`}>
+                    <div
+                      key={index}
+                      className={`${styles.collapsibleItem} ${isVisible ? styles.visible : ''}`}>
                       <RadioGroup
                         classNameLabel={styles.classNameLabel}
                         key={filter.id}

@@ -1,27 +1,27 @@
-declare module '@/data/users.json' {
-  export interface Shoppinglist {
-    id: number;
-    buyingredients: number[] | [];
-    purchasedingredients: number[] | [];
-  }
-
-  export interface Cookbook {
-    name: string;
-    recipes: number[];
-    id: string;
-  }
-
-  export interface User {
-    id: number;
-    mail: string;
-    name: string;
-    surname: string;
-    image: string;
-    gender: 'male' | 'female' | 'none';
-    birthday: Date | null;
-    cookbooks: Cookbook[];
-    shoppinglist: Shoppinglist[];
-  }
-  const users: User[];
-  export default users;
+export interface Shoppinglist {
+  id: number;
+  buyingredients: number[] | [];
+  purchasedingredients: number[] | [];
 }
+
+export interface Cookbook {
+  name: string;
+  recipes: number[];
+  id: string;
+}
+
+export interface User {
+  id: number;
+  mail: string;
+  name: string;
+  password: string;
+  surname: string;
+  image: string;
+  gender: 'male' | 'female' | 'none';
+  birthday: Date | null;
+  liked: number[];
+  cookbooks: Cookbook[];
+  shoppinglist: Shoppinglist[];
+}
+const users: User[];
+export default users;

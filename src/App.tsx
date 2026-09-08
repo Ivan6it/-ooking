@@ -4,7 +4,8 @@ import '@/shared/fonts/montserrat/index.css';
 import { lazy } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { Layout } from '@/shared/ui/layouts/Layout/Layout';
-import { NotFoundPage } from '@/shared/ui/pages/NotFoundPage';
+import { ProtectedRoute } from '@/components/ProtectedRoute';
+import { AuthorizationAndRegistration } from '@/shared/ui/widgets/AuthorizationAndRegistration';
 
 const Home = lazy(() => import('@/shared/ui/pages/Homepage/HomePage'));
 const RecipeCatalog = lazy(() => import('@/shared/ui/pages/RecipeCatalogPage/RecipeCatalogPage'));
@@ -37,8 +38,22 @@ const router = createBrowserRouter([
         element: <DirectorySection />,
       },
       { path: 'guide/:sectionName/:itemId', element: <DirectorySectionItem /> },
-      { path: 'profile', element: <ProfileUser /> },
-      { path: 'profile/setting', element: <ProfileEditor /> },
+      {
+        path: 'profile',
+        element: (
+          <ProtectedRoute>
+            <ProfileUser />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: 'profile/setting',
+        element: (
+          <ProtectedRoute>
+            <ProfileEditor />
+          </ProtectedRoute>
+        ),
+      },
       { path: '*', element: <NotFound /> },
     ],
   },
@@ -48,6 +63,7 @@ export function App() {
   return (
     <>
       <RouterProvider router={router} />
+      <AuthorizationAndRegistration />
     </>
   );
 }

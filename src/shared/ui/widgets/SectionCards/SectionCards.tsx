@@ -1,7 +1,7 @@
 import { DefaultButton } from '@/shared/ui/buttons/defaultButton';
 import { CardFoodCatalog } from '@/shared/ui/widgets/CardFoodCatalog';
 import styles from './SectionCards.module.css';
-import type { Food } from '@/data/foods.json';
+import type { Food } from '@/types/foods';
 
 type SectionCardsProps = {
   heading?: string;

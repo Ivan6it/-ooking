@@ -1,20 +1,22 @@
 :where(.container) {
   position: relative;
-  width: fit-content;
+  width: 100%;
+}
+
+.inputWrapper {
+  position: relative;
+  width: 100%;
 }
 
 :where(.input) {
+  width: 100%;
+  box-sizing: border-box;
   border-radius: 5px;
   border: 1px solid rgba(181, 195, 201, 1);
   font-size: 20px;
   font-weight: 500;
   color: rgba(181, 195, 201, 1);
   padding: 15px 0 15px 1.38vw;
-}
-
-:where(.input:focus) {
-  text-decoration: none;
-  outline: none;
 }
 
 .label {
@@ -25,8 +27,9 @@
 
 .svg {
   position: absolute;
-  top: var(--input-height);
+  top: 50%;
   right: 1.38vw;
+  transform: translateY(-50%);
 }
 
 .text__error {

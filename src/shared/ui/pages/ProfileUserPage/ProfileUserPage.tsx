@@ -1,17 +1,17 @@
 import styles from './ProfileUserPage.module.css';
 import { Bookmark, GearIcon, LikeIcon, PencilIcon, TaskIcon } from '@/shared/ui/icons';
-import users from '@/data/users.json';
 import { IconActive } from '@/shared/ui/iconActive';
 import { useState } from 'react';
 import { LikeSection } from '@/shared/ui/widgets/LikeSection';
 import { Cookbooks } from '@/shared/ui/widgets/Cookbooks';
-import type { Food } from '@/data/foods.json';
+import type { Food } from '@/types/foods';
 import { SectionCards } from '@/shared/ui/widgets/SectionCards';
 import { DefaultButton } from '../../buttons/defaultButton';
 import { CreateBook } from '@/shared/ui/widgets/CreateBook';
 import { ShoppingList } from '../../widgets/ShoppingList';
 import { ShoppingListItem } from '@/shared/ui/widgets/ShoppingListItem';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 export default function ProfileUserPage() {
   const [createBook, setCreateBook] = useState(false);
@@ -26,6 +26,15 @@ export default function ProfileUserPage() {
     buyingredients: number[] | [];
     purchasedingredients: number[] | [];
   } | null>(null);
+  const userState = useSelector((state: any) => state.user);
+
+  if (userState.loading) {
+    return <div>Загрузка...</div>;
+  }
+  if (!userState.userData || !userState.userData.id) {
+    return null;
+  }
+  const users = userState.userData;
 
   function createBookFunction() {
     setCreateBook((prev) => !prev);
@@ -66,7 +75,7 @@ export default function ProfileUserPage() {
           <img
             loading="lazy"
             className={styles.profileUserPage__profile__container__img}
-            src={users[0].image}
+            src={users.image}
           />
           <Link to={'/profile/setting'}>
             <div className={styles.profileUserPage__profile__container__svg}>
@@ -75,7 +84,7 @@ export default function ProfileUserPage() {
           </Link>
         </div>
         <div className={styles.profileUserPage__profile__info}>
-          <span className={styles.profileUserPage__profile__info__name}>{users[0].name}</span>
+          <span className={styles.profileUserPage__profile__info__name}>{users.name}</span>
           <span>Член сообщества</span>
         </div>
       </div>

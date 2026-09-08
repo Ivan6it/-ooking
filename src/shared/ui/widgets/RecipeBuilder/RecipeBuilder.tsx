@@ -1,5 +1,5 @@
 import styles from './RecipeBuilder.module.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   QuestionIcon,
   EllipseNumberIcon,
@@ -16,9 +16,13 @@ import {
 import { SearchBar } from '../../SearchBar';
 import { IconActive } from '../../iconActive';
 import { DefaultButton } from '../../buttons/defaultButton';
-import ingredientsData from '@/data/ingredients.json';
+
+interface Ingredient {
+  name: string;
+}
 
 export function RecipeBuilder() {
+  const [ingredientsData, setIngredientsData] = useState<Ingredient[]>([]);
   const [ingredients, setIngredients] = useState<string[]>([]);
   const [productsInStock, setProductsInStock] = useState<string[]>([]);
   const [productsInStockText, setProductsInStockText] = useState('');
@@ -27,6 +31,19 @@ export function RecipeBuilder() {
   const [deleteIngredients, setDeleteIngredients] = useState<string[]>([]);
   const [visibleHint, setVisibleHint] = useState(false);
   const [timer, setTimer] = useState(0);
+
+  useEffect(() => {
+    const loadData = async () => {
+      const res = await fetch('/api/ingredients');
+      if (!res.ok) {
+        throw new Error('Failed to fetch ingredients');
+      }
+      const data = await res.json();
+      setIngredientsData(data);
+    };
+    loadData();
+  }, []);
+
   const handleRangeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = Number(e.target.value);
     setTimer(newValue);
@@ -47,7 +64,7 @@ export function RecipeBuilder() {
     { svg: WineIcon, text: 'Алкоголь' },
   ];
   const activeIndex = timeRanges.findIndex((range) => timer >= range.min && timer < range.max);
-  const ingredientsList = ingredientsData.filter((item) => !productsInStock.includes(item.name));
+  const ingredientsList = ingredientsData?.filter((item) => !productsInStock.includes(item.name));
 
   function handleSearch(e: string) {
     setProductsInStockText(e);
@@ -85,8 +102,8 @@ export function RecipeBuilder() {
           <div className={styles.recipeBuilder__products__section}>
             {productsInStock.length > 0 && (
               <ul className={styles.recipeBuilder__products__section__list}>
-                {productsInStock.map((item) => (
-                  <li className={styles.recipeBuilder__products__section__list__item}>
+                {productsInStock.map((item, index) => (
+                  <li key={index} className={styles.recipeBuilder__products__section__list__item}>
                     <span>{item}</span>
                     <IconActive
                       handleClick={() =>
@@ -121,8 +138,9 @@ export function RecipeBuilder() {
               />
               {productsInStockText.trim().length > 0 && ingredients.length > 0 && (
                 <ul className={styles.recipeBuilder__products__list}>
-                  {ingredients.map((item) => (
+                  {ingredients.map((item, index) => (
                     <li
+                      key={index}
                       onClick={() => {
                         if (productsInStock.length < 7) {
                           setProductsInStock((prev) => [...prev, item]);
@@ -233,8 +251,9 @@ export function RecipeBuilder() {
             Исключить из рецепта:
           </h2>
           <div className={styles.recipeBuilder__container__dop__ingredients__products__filters}>
-            {products.map((item) => (
+            {products.map((item, index) => (
               <IconActive
+                key={index}
                 handleClick={() => {
                   if (deleteIngredients.length > 0) {
                     if (deleteIngredients.includes(item.text)) {

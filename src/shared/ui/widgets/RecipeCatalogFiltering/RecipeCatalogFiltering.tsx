@@ -1,9 +1,11 @@
 import styles from './RecipeCatalogFiltering.module.css';
 import { DefaultButton } from '@/shared/ui/buttons/defaultButton';
 import { Select } from '@/shared/ui/select';
-import kitchensData from '@/data/filters.json';
-import foods from '@/data/foods.json';
 import { CardFoodCatalog } from '@/shared/ui/widgets/CardFoodCatalog';
+import type { FoodsState } from '@/store/foodsListSlice';
+import type { RootState } from '@/store';
+import { useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
 
 type FilterItem = {
   name: string;
@@ -24,7 +26,31 @@ type FilterData = {
 };
 
 export function RecipeCatalogFiltering() {
-  const { additional } = kitchensData as FilterData;
+  const [kitchensData, setKitchensData] = useState<FilterData | null>(null);
+  const { foods }: FoodsState = useSelector<RootState, FoodsState>((state) => state.foodsList);
+
+  useEffect(() => {
+    const loadData = async () => {
+      const res = await fetch('/api/filters');
+      if (!res.ok) {
+        throw new Error('Failed to fetch filters');
+      }
+      const data = await res.json();
+      setKitchensData(data);
+    };
+    loadData();
+  }, []);
+
+  if (!kitchensData) {
+    return (
+      <div>
+        {' '}
+        <p>Загрузка фильтров...</p>{' '}
+      </div>
+    );
+  }
+
+  const { additional } = kitchensData;
   return (
     <div className={styles.recipeCatalogFiltering}>
       <div className={styles.recipeCatalogFiltering__filters}>
@@ -43,8 +69,9 @@ export function RecipeCatalogFiltering() {
       </div>
       <div className={styles.recipeCatalogFiltering__catalog}>
         <div className={styles.recipeCatalogFiltering__catalog__recipes}>
-          {foods.map((food) => (
+          {foods.map((food, index) => (
             <CardFoodCatalog
+              key={index}
               id={food.id}
               name={food.name}
               img={food.image}

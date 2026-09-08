@@ -3,7 +3,7 @@ import { DefaultButton } from '@/shared/ui/buttons/defaultButton';
 import { getCommentsCount } from '../../../helpers/helpersFunction';
 import { useState } from 'react';
 import { CommentsItem } from '@/shared/ui/widgets/CommentsItem';
-import type { DirectoryComment } from '@/data/directorySection.json';
+import type { DirectoryComment } from '@/types/directorySection';
 
 interface CommentsProps {
   className?: string;

@@ -315,6 +315,19 @@
 .container__details__container__icons {
   display: flex;
   gap: 2.77vw;
+  position: relative;
+}
+
+.container__details__container__icons__text {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: max-content;
+  border: 1px solid rgba(103, 187, 90, 1);
+  padding: 5px;
+  border-radius: 5px;
+  background-color: rgba(219, 239, 208, 1);
+  color: rgba(103, 187, 90, 1);
 }
 
 .recipePage__recipe__imgEndShoplist__img {

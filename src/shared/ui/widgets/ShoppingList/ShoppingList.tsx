@@ -2,10 +2,12 @@ import { DefaultButton } from '../../buttons/defaultButton';
 import styles from './ShoppingList.module.css';
 import { ArrowFilterIcon, ShoppingListIcon } from '@/shared/ui/icons';
 import users from '@/data/users.json';
-import foods from '@/data/foods.json';
 import { getIngredientCountText } from '@/shared/helpers/helpersFunction';
-import type { Food } from '@/data/foods.json';
+import type { Food } from '@/types/foods';
 import { Link } from 'react-router-dom';
+import type { FoodsState } from '@/store/foodsListSlice';
+import type { RootState } from '@/store';
+import { useSelector } from 'react-redux';
 
 type ShoppingListProps = {
   handleclick: (
@@ -16,6 +18,8 @@ type ShoppingListProps = {
 };
 
 export function ShoppingList({ handleclick }: ShoppingListProps) {
+  const { foods }: FoodsState = useSelector<RootState, FoodsState>((state) => state.foodsList);
+
   const user = users[0];
   return (
     <>
@@ -41,6 +45,7 @@ export function ShoppingList({ handleclick }: ShoppingListProps) {
               : 0;
             return (
               <li
+                key={index}
                 onClick={() =>
                   handleclick(recipe, item.buyingredients || [], item.purchasedingredients || [])
                 }

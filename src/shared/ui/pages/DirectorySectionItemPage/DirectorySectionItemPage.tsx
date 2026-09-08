@@ -1,17 +1,35 @@
 import styles from './DirectorySectionItemPage.module.css';
-import directorySection from '@/data/directorySection.json';
 import { SectionCards } from '@/shared/ui/widgets/SectionCards';
 import { getGenitive } from '@/utils/russian';
 import { Comments } from '@/shared/ui/widgets/Comments';
 import { Mailing } from '@/shared/ui/widgets/Mailing';
-import foods from '@/data/foods.json';
 import { useParams, Link } from 'react-router-dom';
 import { NotFoundPage } from '../NotFoundPage';
+import { useSelector } from 'react-redux';
+import type { RootState } from '@/store';
+import type { FoodsState } from '@/store/foodsListSlice';
+import type { DirectorySectionData } from '@/types/directorySection';
+import { useState, useEffect } from 'react';
 
 export default function DirectorySectionItemPage() {
+  const [directorySection, setDirectorySection] = useState<DirectorySectionData[]>([]);
   const { sectionName, itemId } = useParams();
+  const { foods }: FoodsState = useSelector<RootState, FoodsState>((state) => state.foodsList);
+
+  useEffect(() => {
+    const loadData = async () => {
+      const res = await fetch('/api/directorySection');
+      if (!res.ok) {
+        throw new Error('Failed to fetch directorySection');
+      }
+      const data = await res.json();
+      setDirectorySection(data);
+    };
+    loadData();
+  }, []);
+
   const currentSection = directorySection.filter((item) => item.id === sectionName)[0];
-  const currentSectionItem = currentSection.products.filter((item) => item.id === itemId)[0];
+  const currentSectionItem = currentSection?.products?.filter((item) => item.id === itemId)[0];
   if (!currentSectionItem) {
     return <NotFoundPage />;
   }

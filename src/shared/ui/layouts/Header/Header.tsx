@@ -3,8 +3,19 @@ import { SearchBar } from '@/shared/ui/SearchBar';
 import { LogoIcon } from '@/shared/ui/icons';
 import styles from './Header.module.css';
 import { Link } from 'react-router-dom';
+import { apiPut } from '@/utils/api';
+import { useDispatch, useSelector } from 'react-redux';
+import { openAuthModal, logout } from '@/store/userSlice';
 
 export function Header() {
+  const dispatch = useDispatch();
+  const userState = useSelector((state: any) => state.user);
+  if (userState.loading) return null;
+  const hasUser = Object.keys(userState.userData).length > 0;
+
+  const changePassword = async (id: number, mail: string) => {
+    apiPut('/api/users', { id: id, mail: mail });
+  };
   return (
     <header className={styles.header}>
       <div className={styles.header__nav}>
@@ -29,7 +40,10 @@ export function Header() {
           <SearchBar placeholder={'Поиск рецептов'} />
         </div>
       </div>
-      <AuthButton text={'Войти'} />
+      <AuthButton
+        handleClick={hasUser ? () => dispatch(logout()) : () => dispatch(openAuthModal())}
+        text={`${hasUser ? 'Выйти' : 'Войти'}`}
+      />
     </header>
   );
 }

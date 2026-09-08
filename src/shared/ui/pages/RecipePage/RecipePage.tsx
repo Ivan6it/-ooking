@@ -1,6 +1,4 @@
 import styles from './RecipePage.module.css';
-import foods from '@/data/foods.json';
-import addIngrenients from '@/data/additionalIngredients.json';
 import { RecipeStep } from '@/shared/ui/widgets/RecipeStep';
 import {
   PepperIcon,
@@ -20,7 +18,7 @@ import { IconActive } from '@/shared/ui/iconActive';
 import { TagInTheRecipe } from '@/shared/ui/tagInTheRecipe';
 import { AdditionalIngredientsItem } from '@/shared/ui/AdditionalIngredientsItem';
 import { DefaultButton } from '@/shared/ui/buttons/defaultButton';
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { ShopList } from '@/shared/ui/widgets/ShopList';
 import { IconLink } from '../../iconLinks/iconLink';
 import { SectionCards } from '@/shared/ui/widgets/SectionCards';
@@ -29,6 +27,10 @@ import { Mailing } from '../../widgets/Mailing';
 import { AddRecipeInBookModal } from '@/shared/ui/widgets/AddRecipeInBookModal';
 import { useParams, Link } from 'react-router-dom';
 import { NotFoundPage } from '../NotFoundPage';
+import type { FoodsState } from '@/store/foodsListSlice';
+import type { RootState, AppDispatch } from '@/store';
+import { useSelector, useDispatch } from 'react-redux';
+import { openAuthModal, updateUser } from '@/store/userSlice';
 
 type JsonIngredient = {
   step: number[];
@@ -45,14 +47,95 @@ type AdditionalIngredients = Record<string, AdditionalIngredientData>;
 
 export default function RecipePage() {
   const [isVisible, setIsVisible] = useState('none');
+  const [copied, setCopied] = useState<boolean>(false);
   const [stars, setStars] = useState(0);
   const [addMarkBook, setAddMarkBook] = useState(false);
+  const [addIngrenients, setAddIngrerdients] = useState<AdditionalIngredients>();
+  const { foods }: FoodsState = useSelector<RootState, FoodsState>((state) => state.foodsList);
 
   const idRecipe = useParams<{ recipeId: string | undefined }>();
   const recipes = foods.filter((x) => x.id == +idRecipe.recipeId!)[0];
   if (!recipes) {
     return <NotFoundPage />;
   }
+
+  const userState = useSelector((state: any) => state.user.userData.id);
+  const hasData = !!userState;
+  const dispatch = useDispatch<AppDispatch>();
+
+  const isLikedData = useSelector((state: any) => state.user.userData.liked);
+  const isLiked = isLikedData.find((i: number) => i === recipes.id);
+
+  // копирование ссылки
+  const handleShare = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+      fallbackCopyTextToClipboard(window.location.href);
+    }
+  };
+  const fallbackCopyTextToClipboard = (text: string) => {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    try {
+      document.execCommand('copy');
+    } catch (err) {
+      console.error('Fallback: Oops, unable to copy', err);
+    }
+    document.body.removeChild(textArea);
+  };
+
+  function clickMarkBook() {
+    if (!hasData) {
+      dispatch(openAuthModal());
+    } else {
+      // сделать запрос на сервер
+    }
+  }
+
+  function clickStar(number: number) {
+    if (!hasData) {
+      dispatch(openAuthModal());
+    } else {
+      // сделать запрос на сервер
+      if (stars == number) {
+        setStars(0);
+      } else {
+        setStars(number);
+      }
+    }
+  }
+
+  function clickLike(e: React.MouseEvent) {
+    e.stopPropagation();
+    if (!hasData) {
+      dispatch(openAuthModal());
+    } else {
+      const newLiked = isLiked
+        ? isLikedData.filter((i: number) => i !== recipes.id)
+        : [...isLikedData, recipes.id];
+      dispatch(updateUser({ userData: { id: userState, liked: newLiked } }));
+    }
+  }
+
+  useEffect(() => {
+    const loadData = async () => {
+      const res = await fetch('/api/additionalIngredients');
+      if (!res.ok) {
+        throw new Error('Failed to fetch ingredients');
+      }
+      const data = await res.json();
+      setAddIngrerdients(data);
+    };
+    loadData();
+  }, []);
+
   const addIngredients = addIngrenients as AdditionalIngredients;
   let textComplexity;
   if (recipes.complexity == 'easy') {
@@ -78,13 +161,9 @@ export default function RecipePage() {
   const dishes: string[] = [];
   recipes.inventory.forEach((item) => dishes.push(item.name));
 
-  function handleClickIng(item: string) {
-    if (item === isVisible) {
-      setIsVisible('none');
-    } else {
-      setIsVisible(item);
-    }
-  }
+  const handleClickIng = (item: string) => {
+    setIsVisible((prev) => (prev === item ? 'none' : item));
+  };
 
   return (
     <>
@@ -182,10 +261,15 @@ export default function RecipePage() {
                 </div>
                 <div className={styles.container__details__container__icons}>
                   <IconActive
-                    handleClick={() => setAddMarkBook((prev) => !prev)}
+                    handleClick={() => clickMarkBook()}
                     svg={<Bookmark color={'rgba(255, 167, 86, 1)'} />}
                   />
-                  <IconActive svg={<ShareIcon />} />
+                  <IconActive handleClick={() => handleShare()} svg={<ShareIcon />} />
+                  <p
+                    style={{ opacity: copied ? 1 : 0, transition: 'opacity 0.3s ease-in-out' }}
+                    className={styles.container__details__container__icons__text}>
+                    Ссылка скопирована в буфер обмена
+                  </p>
                 </div>
               </div>
               <div className={styles.container__details__parameters}>
@@ -270,7 +354,10 @@ export default function RecipePage() {
               <div className={styles.container__details__metrics}>
                 <div className={styles.container__details__metrics__container}>
                   <div className={styles.container__details__metrics__container__like}>
-                    <IconActive svg={<LikeIcon color="rgba(103, 187, 90, 1)" />} />
+                    <IconActive
+                      handleClick={(e) => clickLike(e)}
+                      svg={<LikeIcon active={isLiked} color="rgba(103, 187, 90, 1)" />}
+                    />
                     <p>{`${recipes.likes} понравилось`}</p>
                   </div>
                   <div className={styles.container__details__metrics__container__eye}>
@@ -319,51 +406,31 @@ export default function RecipePage() {
                     className={styles.recipePage__recipe__description__feedback__container__stars}>
                     <IconActive
                       handleClick={() => {
-                        if (stars == 1) {
-                          setStars(0);
-                        } else {
-                          setStars(1);
-                        }
+                        clickStar(1);
                       }}
                       svg={<StarIcon classPath={styles.stars} active={stars > 0} />}
                     />
                     <IconActive
                       handleClick={() => {
-                        if (stars == 2) {
-                          setStars(0);
-                        } else {
-                          setStars(2);
-                        }
+                        clickStar(2);
                       }}
                       svg={<StarIcon classPath={styles.stars} active={stars > 1} />}
                     />
                     <IconActive
                       handleClick={() => {
-                        if (stars == 3) {
-                          setStars(0);
-                        } else {
-                          setStars(3);
-                        }
+                        clickStar(3);
                       }}
                       svg={<StarIcon classPath={styles.stars} active={stars > 2} />}
                     />
                     <IconActive
                       handleClick={() => {
-                        if (stars == 4) {
-                          setStars(0);
-                        } else {
-                          setStars(4);
-                        }
+                        clickStar(4);
                       }}
                       svg={<StarIcon classPath={styles.stars} active={stars > 3} />}
                     />
                     <IconActive
                       handleClick={() => {
-                        if (stars == 5) {
-                          setStars(0);
-                        } else {
-                          setStars(5);
-                        }
+                        clickStar(5);
                       }}
                       svg={<StarIcon classPath={styles.stars} active={stars > 4} />}
                     />
@@ -373,7 +440,7 @@ export default function RecipePage() {
                   <div
                     className={styles.recipePage__recipe__description__feedback__list__favourites}>
                     <IconActive
-                      handleClick={() => setAddMarkBook((prev) => !prev)}
+                      handleClick={() => clickMarkBook()}
                       svg={<Bookmark color={'rgba(247, 147, 30, 1)'} />}
                     />
                     <span>добавить в кулинарную книгу</span>

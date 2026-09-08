@@ -1,7 +1,6 @@
 import { DefaultButton } from '../../buttons/defaultButton';
 import { IconActive } from '../../iconActive';
 import styles from './ProfileEditor.module.css';
-import users from '@/data/users.json';
 import { Input } from '@/shared/ui/input';
 import { AsteriskIcon, CalendarIcon } from '@/shared/ui/icons';
 import { useState, useRef, useEffect } from 'react';
@@ -10,7 +9,10 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { format } from 'date-fns';
 import { ru } from 'date-fns/locale/ru';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout, updateUser } from '@/store/userSlice';
+import type { User } from '@/types/users';
 
 type FileState = {
   fileImage: File | null;
@@ -45,11 +47,14 @@ export default function ProfileEditor() {
     nameResult: false,
   });
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const calendarRef = useRef<HTMLDivElement>(null);
   const today = new Date();
-  const user = users[0];
+  const user = useSelector((state: any) => state.user.userData);
   const options = [
     { value: 'none', name: 'Выберите пол' },
     { value: 'male', name: 'Мужской' },
@@ -57,24 +62,75 @@ export default function ProfileEditor() {
   ];
 
   useEffect(() => {
-    if (user?.name) {
-      setPasswordVerificationResult((prev) => ({
-        ...prev,
-        name: user.name,
-      }));
-      setGenderVerificationResult((prev) => ({ ...prev, oldGender: user.gender }));
-      setBirthdayVerificationResult((prev) => ({ ...prev, oldDate: user.birthday }));
-      const avatarUser =
-        user.image !== ''
-          ? user.image
-          : user.gender !== 'none'
-            ? user.gender === 'female'
-              ? 'src/images/imageUsers/defaultWoman.jpg'
-              : 'src/images/imageUsers/defaultMan.jpg'
-            : 'src/images/imageUsers/Anonim.jpg';
-      setPreviewUrl(avatarUser);
+    if (!user?.name) return;
+
+    setNameVerificationResult({
+      name: user.name,
+      nameResult: false,
+    });
+
+    setGenderVerificationResult({
+      oldGender: user.gender,
+      nextGender: '',
+    });
+
+    setBirthdayVerificationResult({
+      oldDate: user.birthday,
+      nextDate: null,
+    });
+
+    setPasswordVerificationResult({
+      password1: false,
+      text1: '',
+      password2: false,
+      text2: '',
+    });
+
+    setSelectedFile({
+      fileImage: null,
+      preview: '',
+    });
+
+    const avatarUser =
+      user.image !== ''
+        ? user.image
+        : user.gender !== 'none'
+          ? user.gender === 'female'
+            ? '/images/imageUsers/defaultWoman.jpg'
+            : '/images/imageUsers/defaultMan.jpg'
+          : '/images/imageUsers/Anonim.jpg';
+
+    setPreviewUrl(avatarUser);
+  }, [user]);
+
+  const handleSave = () => {
+    const updateData: Partial<User> & { id: number } = {
+      id: user.id,
+    };
+
+    if (detectedResultName) {
+      updateData.name = nameVerificationResult.name;
     }
-  }, []);
+
+    if (detectedGender) {
+      updateData.gender = genderVerificationResult.nextGender;
+    }
+
+    if (detectedBirthday) {
+      updateData.birthday = birthdayVerificationResult.nextDate;
+    }
+
+    if (detectedResultPassword) {
+      updateData.password = passwordVerificationResult.text1;
+    }
+
+    dispatch(
+      updateUser({
+        userData: updateData,
+        image: selectedFile.fileImage,
+      }),
+    );
+  };
 
   const genderDefault = options.find((opt) => opt.value === user.gender) || options[0];
 
@@ -167,7 +223,7 @@ export default function ProfileEditor() {
             loading="lazy"
             className={styles.profileEditor__editorImage__image}
             alt="Аватар пользователя"
-            src={selectedFile.preview ? selectedFile.preview : previewUrl ? previewUrl : ''}
+            src={selectedFile.preview || previewUrl || undefined}
           />
           <div className={styles.profileEditor__editorImage__container}>
             <label htmlFor="upload-image">
@@ -242,6 +298,7 @@ export default function ProfileEditor() {
                   ref={calendarRef}
                   className={styles.profileEditor__container__calendar__wrapper}>
                   <input
+                    readOnly={true}
                     id="birthday"
                     value={
                       birthdayVerificationResult.nextDate
@@ -284,6 +341,7 @@ export default function ProfileEditor() {
           className={styles.profileEditor__container__select}
           label="Ваш Email"
           classInput={styles.profileEditor__container__select__classInput}
+          readOnly={true}
           disabled={true}
           value={user.mail}
           type="text"
@@ -325,11 +383,19 @@ export default function ProfileEditor() {
         </div>
         <div className={styles.profileEditor__buttons}>
           <DefaultButton
+            handleClick={() => handleSave()}
             disabled={result}
             className={styles.profileEditor__buttons__save}
             text="Сохранить изменения"
           />
-          <DefaultButton className={styles.profileEditor__buttons__logout} text="Выйти" />
+          <DefaultButton
+            handleClick={() => {
+              dispatch(logout());
+              navigate('/');
+            }}
+            className={styles.profileEditor__buttons__logout}
+            text="Выйти"
+          />
         </div>
       </form>
     </div>

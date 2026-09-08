@@ -3,7 +3,6 @@ import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 import path from 'path';
 
-// https://vite.dev/config/
 export default defineConfig({
   server: {
     hmr: { overlay: true },

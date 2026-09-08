@@ -1,12 +1,26 @@
 import styles from './DirectorySectionPage.module.css';
-import directorySection from '@/data/directorySection.json';
 import { DirectorySectionItem } from '@/shared/ui/widgets/DirectorySectionItem';
 import { Mailing } from '@/shared/ui/widgets/Mailing';
 import { useParams, Link } from 'react-router-dom';
 import { NotFoundPage } from '@/shared/ui/pages/NotFoundPage';
+import { useEffect, useState } from 'react';
+import type { DirectorySectionData } from '@/types/directorySection';
 
 export default function DirectorySectionPage() {
+  const [directorySection, setDirectorySection] = useState<DirectorySectionData[]>([]);
   const { sectionName } = useParams<{ sectionName: string | undefined }>();
+
+  useEffect(() => {
+    const loadData = async () => {
+      const res = await fetch('/api/directorySection');
+      if (!res.ok) {
+        throw new Error('Failed to fetch directorySection');
+      }
+      const data = await res.json();
+      setDirectorySection(data);
+    };
+    loadData();
+  }, []);
 
   const currentSection = sectionName
     ? directorySection.filter((section) => section.id === sectionName)

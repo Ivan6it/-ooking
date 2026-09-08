@@ -2,12 +2,15 @@ import { IconActive } from '../../iconActive';
 import { VKIcon, MailIcon, IconOKey, CrossIcon, EyeIcon } from '@/shared/ui/icons';
 import styles from './AuthorizationAndRegistration.module.css';
 import { Input } from '../../input';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { DefaultButton } from '../../buttons/defaultButton';
+import { useDispatch, useSelector } from 'react-redux';
+import { closeAuthModal, loginUser, registerUser } from '@/store/userSlice';
+import type { RootState, AppDispatch } from '@/store';
 
 export function AuthorizationAndRegistration() {
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [mail, setMail] = useState('');
   const [password, setPassword] = useState('');
   const [modal, setModal] = useState('reg');
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -16,6 +19,55 @@ export function AuthorizationAndRegistration() {
   const [passwordError, setPasswordError] = useState({ text: '', active: false });
   const [isTouched, setIsTouched] = useState(false);
   const [agreement, setAgreement] = useState(false);
+
+  const dispatch = useDispatch<AppDispatch>();
+  const userState = useSelector((state: RootState) => state.user);
+  const isLoading = userState.loading;
+  const errorMessage = userState.error;
+  const isOpen = userState.isAuthModalOpen;
+
+  const hasData = Object.keys(userState.userData).length > 0;
+
+  const clearForm = () => {
+    setPasswordError({ text: '', active: false });
+    setEmailError({ text: '', active: false });
+    setNameError({ text: '', active: false });
+    setName('');
+    setMail('');
+    setPasswordVisible(false);
+    setPassword('');
+  };
+
+  useEffect(() => {
+    if (!isOpen) {
+      clearForm();
+      setAgreement(false);
+      setModal('reg');
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (hasData && isOpen) {
+      clearForm();
+      dispatch(closeAuthModal());
+    }
+  }, [hasData, isOpen, dispatch]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
+    document.body.style.overflow = 'hidden';
+    document.body.style.marginRight = `${scrollBarWidth}px`;
+    document.body.classList.add('no-scroll');
+
+    return () => {
+      document.body.classList.remove('no-scroll');
+      document.body.style.overflow = '';
+      document.body.style.marginRight = '';
+    };
+  }, [isOpen]);
+
+  if (!isOpen) return null;
 
   function validateFormFieldsName(value: string): string {
     const namePattern = /^[^0-9_@!]+$/;
@@ -51,7 +103,7 @@ export function AuthorizationAndRegistration() {
 
   function handleBlurEmail() {
     setIsTouched(true);
-    setEmailError({ text: validateFormFieldsEmail(email), active: true });
+    setEmailError({ text: validateFormFieldsEmail(mail), active: true });
   }
 
   function handleBlurPassword() {
@@ -62,7 +114,7 @@ export function AuthorizationAndRegistration() {
   const isFormValidAuth = () => {
     return (
       password.trim().length > 0 &&
-      email.trim().length > 0 &&
+      mail.trim().length > 0 &&
       !passwordError.text &&
       !emailError.text &&
       emailError.active &&
@@ -74,7 +126,7 @@ export function AuthorizationAndRegistration() {
     return (
       password.trim().length > 0 &&
       name.trim().length > 0 &&
-      email.trim().length > 0 &&
+      mail.trim().length > 0 &&
       !passwordError.text &&
       !nameError.text &&
       !emailError.text &&
@@ -90,21 +142,11 @@ export function AuthorizationAndRegistration() {
   };
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
+    setMail(e.target.value);
   };
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
-  };
-
-  const clearForm = () => {
-    setPasswordError({ text: '', active: false });
-    setEmailError({ text: '', active: false });
-    setNameError({ text: '', active: false });
-    setName('');
-    setEmail('');
-    setPasswordVisible(false);
-    setPassword('');
   };
 
   const selectAuth = () => {
@@ -117,13 +159,21 @@ export function AuthorizationAndRegistration() {
     setModal('reg');
   };
 
+  function handleSubmitRegister() {
+    dispatch(registerUser({ name, mail, password }));
+  }
+
+  function handleSubmitLogin() {
+    dispatch(loginUser({ mail, password }));
+  }
+
   return (
     <div className={styles.authorizationAndRegistration__overlay}>
       <div className={styles.authorizationAndRegistration}>
         <img
           loading="lazy"
           className={styles.authorizationAndRegistration__img}
-          src={'src/images/regAndAuth.jpg'}
+          src={'/images/regAndAuth.jpg'}
         />
         {modal === 'reg' && (
           <div className={styles.authorizationAndRegistration__form}>
@@ -161,7 +211,7 @@ export function AuthorizationAndRegistration() {
                 classInput={`${styles.authorizationAndRegistration__form__details__input} ${emailError.active ? (emailError.text ? styles.error__input : styles.valid__input) : ''}`}
                 placeholder="Ваш Email"
                 onChange={handleEmailChange}
-                value={email}
+                value={mail}
                 type="email"
                 id="email"
                 handleBlur={handleBlurEmail}
@@ -184,6 +234,7 @@ export function AuthorizationAndRegistration() {
                 }
               />
               <DefaultButton
+                handleClick={() => handleSubmitRegister()}
                 disabled={!isFormValidReg()}
                 className={styles.authorizationAndRegistration__form__details__button}
                 text="Создать аккаунт"
@@ -223,7 +274,7 @@ export function AuthorizationAndRegistration() {
                 classInput={`${styles.authorizationAndRegistration__form__details__input} ${emailError.active ? (emailError.text ? styles.error__input : styles.valid__input) : ''}`}
                 placeholder="Ваш Email"
                 onChange={handleEmailChange}
-                value={email}
+                value={mail}
                 type="email"
                 id="email"
                 handleBlur={handleBlurEmail}
@@ -256,7 +307,8 @@ export function AuthorizationAndRegistration() {
                 </a>
               </div>
               <DefaultButton
-                disabled={!isFormValidAuth()}
+                handleClick={() => handleSubmitLogin()}
+                disabled={!isFormValidAuth() || isLoading}
                 className={styles.authorizationAndRegistration__form__details__button__entrance}
                 text="Войти"
               />
@@ -289,7 +341,14 @@ export function AuthorizationAndRegistration() {
             </div>
           </div>
         )}
-        <IconActive className={styles.authorizationAndRegistration__cross} svg={<CrossIcon />} />
+        <IconActive
+          handleClick={() => {
+            dispatch(closeAuthModal());
+            clearForm();
+          }}
+          className={styles.authorizationAndRegistration__cross}
+          svg={<CrossIcon />}
+        />
       </div>
     </div>
   );

@@ -1,9 +1,12 @@
 import { DefaultButton } from '@/shared/ui/buttons/defaultButton';
 import styles from './LikeSection.module.css';
-import foods from '@/data/foods.json';
 import { SectionCards } from '@/shared/ui/widgets/SectionCards';
+import type { FoodsState } from '@/store/foodsListSlice';
+import type { RootState } from '@/store';
+import { useSelector } from 'react-redux';
 
 export function LikeSection() {
+  const { foods }: FoodsState = useSelector<RootState, FoodsState>((state) => state.foodsList);
   //это затычка, когда сюда попадут реальные данные, надо будет контролировать потоки
   const step = true;
   return (

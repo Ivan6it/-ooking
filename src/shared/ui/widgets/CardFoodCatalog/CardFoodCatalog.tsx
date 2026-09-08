@@ -3,7 +3,10 @@ import { Bookmark, LikeIcon } from '@/shared/ui/icons';
 import styles from './CardFoodCatalog.module.css';
 import { useState } from 'react';
 import { AddRecipeInBookModal } from '@/shared/ui/widgets/AddRecipeInBookModal';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { openAuthModal, updateUser } from '@/store/userSlice';
+import type { AppDispatch } from '@/store';
 
 type CardFoodCatalogProps = {
   name: string;
@@ -23,11 +26,44 @@ export function CardFoodCatalog({
   name,
 }: CardFoodCatalogProps) {
   const [addMarkBook, setAddMarkBook] = useState(false);
+
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
+
+  const userState = useSelector((state: any) => state.user.userData.id);
+  const hasData = !!userState;
+
+  const isLikedData = useSelector((state: any) => state.user.userData.liked);
+  const isLiked = isLikedData.find((i: number) => i === id);
+  function clickLike(e: React.MouseEvent) {
+    e.stopPropagation();
+    if (!hasData) {
+      dispatch(openAuthModal());
+    } else {
+      const newLiked = isLiked ? isLikedData.filter((i: number) => i !== id) : [...isLikedData, id];
+      dispatch(updateUser({ userData: { id: userState, liked: newLiked } }));
+    }
+  }
+
+  function clickMarkBook(e: React.MouseEvent) {
+    e.stopPropagation();
+    if (!hasData) {
+      dispatch(openAuthModal());
+    } else {
+      // Надо сделать запрос на сервер и добавить в избранное
+    }
+  }
+
+  const handleCardClick = () => {
+    navigate(`/catalog/${id}`);
+  };
+
   return (
-    <Link
-      style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}
-      to={`/catalog/${id}`}>
-      <article className={styles.cardFood}>
+    <>
+      <article
+        onClick={handleCardClick}
+        className={styles.cardFood}
+        style={{ pointerEvents: 'auto' }}>
         <div className={styles.cardFood__cardBlock}>
           <div className={styles.cardFood__cardBlock__overlay}></div>
           <img
@@ -37,7 +73,7 @@ export function CardFoodCatalog({
             src={img}></img>
           <div className={styles.cardFood__cardBlock__bookMark}>
             <IconActive
-              handleClick={() => setAddMarkBook((prev) => !prev)}
+              handleClick={(e) => clickMarkBook(e)}
               className={styles.iconActive}
               svg={<Bookmark color="rgba(255, 255, 255, 1)" />}
             />
@@ -45,7 +81,8 @@ export function CardFoodCatalog({
           <div className={styles.cardFood__cardBlock__like}>
             <IconActive
               className={styles.iconActive}
-              svg={<LikeIcon color="rgba(255, 255, 255, 1)" />}
+              handleClick={(e) => clickLike(e)}
+              svg={<LikeIcon active={isLiked} color="rgba(255, 255, 255, 1)" />}
             />
             <span>{quantityLike}</span>
           </div>
@@ -63,6 +100,6 @@ export function CardFoodCatalog({
           closeModal={() => setAddMarkBook((prev) => !prev)}
         />
       )}
-    </Link>
+    </>
   );
 }

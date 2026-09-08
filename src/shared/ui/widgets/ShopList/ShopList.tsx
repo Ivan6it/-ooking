@@ -2,6 +2,8 @@ import styles from './ShopList.module.css';
 import { RadioIcon } from '@/shared/ui/icons';
 import { useState } from 'react';
 import { DefaultButton } from '@/shared/ui/buttons/defaultButton';
+import { useSelector, useDispatch } from 'react-redux';
+import { openAuthModal } from '@/store/userSlice';
 
 type Product = {
   step: number[];
@@ -26,6 +28,26 @@ export function ShopList({
   castomActive,
 }: ShopListProps) {
   const [listItems, setListItems] = useState<[string, string][]>([]);
+
+  const userState = useSelector((state: any) => state.user.userData.id);
+  const hasData = !!userState;
+  const dispatch = useDispatch();
+
+  function clickAdd() {
+    if (!hasData) {
+      dispatch(openAuthModal());
+    } else {
+      // Запрос на сервер
+    }
+  }
+
+  function clickAddAll() {
+    if (!hasData) {
+      dispatch(openAuthModal());
+    } else {
+      // Запрос на сервер
+    }
+  }
 
   const items = listItems.map((i) => i[0]);
   function handleClickItem(name: [string, string]) {
@@ -63,8 +85,16 @@ export function ShopList({
       </ul>
       {onButton && (
         <div className={styles.buttons}>
-          <DefaultButton className={styles.button__add} text="Добавить в шоппинг-лист" />
-          <DefaultButton className={styles.button__addAll} text="Добавить все" />
+          <DefaultButton
+            handleClick={() => clickAdd()}
+            className={styles.button__add}
+            text="Добавить в шоппинг-лист"
+          />
+          <DefaultButton
+            handleClick={() => clickAddAll()}
+            className={styles.button__addAll}
+            text="Добавить все"
+          />
         </div>
       )}
     </>
