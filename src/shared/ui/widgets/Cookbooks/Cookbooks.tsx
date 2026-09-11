@@ -1,9 +1,10 @@
 import styles from './Cookbooks.module.css';
-import users from '@/data/users.json';
 import { CookbooksItem } from '@/shared/ui/widgets/CookbooksItem';
 import { IconActive } from '@/shared/ui/iconActive';
 import { PlusEllipse } from '@/shared/ui/icons';
 import type { Food } from '@/types/foods';
+import type { Cookbook } from '@/types/users';
+import { useSelector } from 'react-redux';
 
 type CookbooksProps = {
   handleClick?: (recipes: Food[], name: string) => void;
@@ -11,10 +12,10 @@ type CookbooksProps = {
 };
 
 export function Cookbooks({ handleClick, createBook }: CookbooksProps) {
-  const user = users[0];
+  const user = useSelector((state: any) => state.user.userData);
   return (
     <div className={styles.cookbooks}>
-      {user.cookbooks.map((item, index) => (
+      {user.cookbooks.map((item: Cookbook, index: number) => (
         <CookbooksItem key={index} handleClick={handleClick} data={item} />
       ))}
       <IconActive

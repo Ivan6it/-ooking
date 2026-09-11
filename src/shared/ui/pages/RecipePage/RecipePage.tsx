@@ -18,7 +18,7 @@ import { IconActive } from '@/shared/ui/iconActive';
 import { TagInTheRecipe } from '@/shared/ui/tagInTheRecipe';
 import { AdditionalIngredientsItem } from '@/shared/ui/AdditionalIngredientsItem';
 import { DefaultButton } from '@/shared/ui/buttons/defaultButton';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { ShopList } from '@/shared/ui/widgets/ShopList';
 import { IconLink } from '../../iconLinks/iconLink';
 import { SectionCards } from '@/shared/ui/widgets/SectionCards';
@@ -30,6 +30,7 @@ import { NotFoundPage } from '../NotFoundPage';
 import type { FoodsState } from '@/store/foodsListSlice';
 import type { RootState, AppDispatch } from '@/store';
 import { useSelector, useDispatch } from 'react-redux';
+import { updateFood } from '@/store/foodsListSlice';
 import { openAuthModal, updateUser } from '@/store/userSlice';
 
 type JsonIngredient = {
@@ -121,6 +122,9 @@ export default function RecipePage() {
         ? isLikedData.filter((i: number) => i !== recipes.id)
         : [...isLikedData, recipes.id];
       dispatch(updateUser({ userData: { id: userState, liked: newLiked } }));
+      dispatch(
+        updateFood({ id: recipes.id, likes: isLiked ? recipes.likes - 1 : recipes.likes + 1 }),
+      );
     }
   }
 

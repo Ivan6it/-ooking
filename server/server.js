@@ -11,7 +11,6 @@ const __dirname = path.dirname(__filename);
 
 const dataDir = path.join(__dirname, '../src/data');
 
-// Какие API-маршруты соответствуют каким JSON-файлам
 const routes = {
   '/api/additionalIngredients': 'additionalIngredients.json',
   '/api/directorySection': 'directorySection.json',
@@ -50,8 +49,10 @@ async function writeJson(fileName, data) {
 const server = http.createServer(async (req, res) => {
   const fileName = routes[req.url];
 
-  // Если такого API-маршрута нет
-  if (!fileName) {
+  const isLikeRoute =
+    req.method === 'PUT' && req.url.startsWith('/api/foods/') && req.url.endsWith('/like');
+
+  if (!fileName && !isLikeRoute) {
     sendJson(res, 404, {
       error: 'Not found',
     });
@@ -64,15 +65,21 @@ const server = http.createServer(async (req, res) => {
       const token = req.headers.authorization?.split(' ')[1];
 
       if (!token) {
-        return sendJson(res, 401, { error: 'No token provided' });
+        return sendJson(res, 401, {
+          error: 'No token provided',
+        });
       }
 
       const usersList = await readJson('users.json');
 
-      const currentUser = usersList.find((u) => u.mail === token || u.id.toString() === token);
+      const currentUser = usersList.find(
+        (user) => user.mail === token || user.id.toString() === token,
+      );
 
       if (!currentUser) {
-        return sendJson(res, 401, { error: 'User not found' });
+        return sendJson(res, 401, {
+          error: 'User not found',
+        });
       }
 
       const { password, ...safeUser } = currentUser;
@@ -82,13 +89,86 @@ const server = http.createServer(async (req, res) => {
       });
     } catch (error) {
       console.error(error);
+
       return sendJson(res, 500, {
         error: 'Server error in /me',
       });
     }
   }
 
-  // GET
+  if (isLikeRoute) {
+    try {
+      const token = req.headers.authorization?.split(' ')[1];
+
+      if (!token) {
+        return sendJson(res, 401, {
+          error: 'No token provided',
+        });
+      }
+
+      const recipeId = Number(req.url.split('/')[3]);
+
+      if (!recipeId) {
+        return sendJson(res, 400, {
+          error: 'Invalid recipe id',
+        });
+      }
+
+      const usersList = await readJson('users.json');
+      const foodsList = await readJson('foods.json');
+
+      const userIndex = usersList.findIndex(
+        (user) => user.mail === token || user.id.toString() === token,
+      );
+
+      if (userIndex === -1) {
+        return sendJson(res, 401, {
+          error: 'User not found',
+        });
+      }
+
+      const recipeIndex = foodsList.findIndex((recipe) => recipe.id === recipeId);
+
+      if (recipeIndex === -1) {
+        return sendJson(res, 404, {
+          error: 'Recipe not found',
+        });
+      }
+
+      const user = usersList[userIndex];
+      const recipe = foodsList[recipeIndex];
+
+      if (!Array.isArray(user.liked)) {
+        user.liked = [];
+      }
+
+      const likedIndex = user.liked.indexOf(recipeId);
+
+      if (likedIndex === -1) {
+        user.liked.push(recipeId);
+        recipe.likes += 1;
+      } else {
+        user.liked.splice(likedIndex, 1);
+        recipe.likes = Math.max(0, recipe.likes - 1);
+      }
+
+      await writeJson('users.json', usersList);
+      await writeJson('foods.json', foodsList);
+
+      return sendJson(res, 200, {
+        liked: likedIndex === -1,
+
+        likes: recipe.likes,
+      });
+    } catch (error) {
+      console.error(error);
+
+      return sendJson(res, 500, {
+        error: 'Failed to update like',
+      });
+    }
+  }
+
   if (req.method === 'GET') {
     try {
       const data = await readJson(fileName);
@@ -105,11 +185,53 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  // PUT
+  if (req.method === 'PUT' && req.url === '/api/foods') {
+    let body = '';
+
+    req.on('data', (chunk) => {
+      body += chunk;
+    });
+
+    req.on('end', async () => {
+      try {
+        const updateData = JSON.parse(body);
+
+        const foodsList = await readJson('foods.json');
+
+        const foodIndex = foodsList.findIndex((food) => food.id === updateData.id);
+
+        if (foodIndex === -1) {
+          return sendJson(res, 404, {
+            error: 'Recipe not found',
+          });
+        }
+
+        foodsList[foodIndex] = {
+          ...foodsList[foodIndex],
+          ...updateData,
+        };
+
+        await writeJson('foods.json', foodsList);
+
+        sendJson(res, 200, {
+          success: true,
+          food: foodsList[foodIndex],
+        });
+      } catch (error) {
+        console.error(error);
+
+        sendJson(res, 500, {
+          error: 'Food update failed',
+        });
+      }
+    });
+
+    return;
+  }
+
   if (req.method === 'PUT' && req.url === '/api/users') {
     const contentType = req.headers['content-type'] || '';
 
-    // Обновление обычных данных пользователя
     if (contentType.includes('application/json')) {
       let body = '';
 
@@ -122,10 +244,12 @@ const server = http.createServer(async (req, res) => {
           const updateData = JSON.parse(body);
           const usersList = await readJson(fileName);
 
-          const userIndex = usersList.findIndex((u) => u.id === updateData.id);
+          const userIndex = usersList.findIndex((user) => user.id === updateData.id);
 
           if (userIndex === -1) {
-            return sendJson(res, 404, { error: 'User not found' });
+            return sendJson(res, 404, {
+              error: 'User not found',
+            });
           }
 
           usersList[userIndex] = {
@@ -153,7 +277,6 @@ const server = http.createServer(async (req, res) => {
       return;
     }
 
-    // Обновление пользователя вместе с изображением
     if (contentType.includes('multipart/form-data')) {
       const busboy = Busboy({
         headers: req.headers,
@@ -268,17 +391,21 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  // POST
   if (req.method === 'POST') {
     let body = '';
-    req.on('data', (chunk) => (body += chunk));
+
+    req.on('data', (chunk) => {
+      body += chunk;
+    });
+
     req.on('end', async () => {
       try {
         const data = JSON.parse(body);
+
         if (req.url === '/api/auth/register') {
           const usersList = await readJson('users.json');
 
-          const exists = usersList.find((u) => u.mail === data.mail);
+          const exists = usersList.find((user) => user.mail === data.mail);
 
           if (exists) {
             return sendJson(res, 409, {
@@ -311,24 +438,39 @@ const server = http.createServer(async (req, res) => {
             user: safeUser,
           });
         }
+
         if (req.url === '/api/auth/login') {
           const usersList = await readJson('users.json');
-          const user = usersList.find((u) => u.mail === data.mail && u.password === data.password);
+
+          const user = usersList.find(
+            (user) => user.mail === data.mail && user.password === data.password,
+          );
+
           if (!user) {
-            return sendJson(res, 401, { error: 'Invalid credentials' });
+            return sendJson(res, 401, {
+              error: 'Invalid credentials',
+            });
           }
+
           const { password, ...safeUser } = user;
-          sendJson(res, 200, { token: data.mail, user: safeUser });
+
+          sendJson(res, 200, {
+            token: data.mail,
+            user: safeUser,
+          });
         }
       } catch (error) {
         console.error(error);
-        sendJson(res, 500, { error: 'Server error' });
+
+        sendJson(res, 500, {
+          error: 'Server error',
+        });
       }
     });
+
     return;
   }
 
-  // Метод не поддерживается
   sendJson(res, 405, {
     error: 'Method not allowed',
   });

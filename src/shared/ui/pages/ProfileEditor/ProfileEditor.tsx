@@ -13,6 +13,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout, updateUser } from '@/store/userSlice';
 import type { User } from '@/types/users';
+import type { AppDispatch } from '@/store';
 
 type FileState = {
   fileImage: File | null;
@@ -47,7 +48,7 @@ export default function ProfileEditor() {
     nameResult: false,
   });
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -55,6 +56,7 @@ export default function ProfileEditor() {
   const calendarRef = useRef<HTMLDivElement>(null);
   const today = new Date();
   const user = useSelector((state: any) => state.user.userData);
+
   const options = [
     { value: 'none', name: 'Выберите пол' },
     { value: 'male', name: 'Мужской' },

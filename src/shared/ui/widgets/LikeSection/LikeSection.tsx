@@ -4,15 +4,20 @@ import { SectionCards } from '@/shared/ui/widgets/SectionCards';
 import type { FoodsState } from '@/store/foodsListSlice';
 import type { RootState } from '@/store';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 
 export function LikeSection() {
   const { foods }: FoodsState = useSelector<RootState, FoodsState>((state) => state.foodsList);
-  //это затычка, когда сюда попадут реальные данные, надо будет контролировать потоки
-  const step = true;
+  const userLiked = useSelector((state: any) => state.user.userData.liked);
+  const visibleRecipes = foods.filter((item) => userLiked.find((i: number) => i === item.id));
+  const navigate = useNavigate();
+
   return (
     <div>
-      {!step && <SectionCards foods={foods} className={styles.likeSection} ogrinicator={true} />}
-      {step && (
+      {visibleRecipes.length > 0 && (
+        <SectionCards foods={visibleRecipes} className={styles.likeSection} ogrinicator={true} />
+      )}
+      {visibleRecipes.length === 0 && (
         <div className={styles.likeSection__notItem}>
           <img
             loading="lazy"
@@ -28,6 +33,7 @@ export function LikeSection() {
             </p>
           </div>
           <DefaultButton
+            handleClick={() => navigate('/catalog')}
             className={styles.likeSection__notItem__button}
             text="Посмотреть рецепты"
           />

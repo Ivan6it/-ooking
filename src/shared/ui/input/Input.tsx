@@ -31,6 +31,7 @@ type InputProps = {
   userName?: string;
   classSvg?: string;
   readOnly?: boolean;
+  classError?: string;
 };
 
 export function Input({
@@ -55,6 +56,7 @@ export function Input({
   userName = '',
   classSvg,
   readOnly = false,
+  classError = '',
 }: InputProps) {
   const [passwordError, setPasswordError] = useState({ text: '', active: false });
   const [name, setName] = useState('');
@@ -164,7 +166,7 @@ export function Input({
         <div className={styles.text__error}>{passwordError.text}</div>
       )}
 
-      {error && <div className={styles.text__error}>{error}</div>}
+      {error && <div className={`${styles.text__error} ${classError}`}>{error}</div>}
     </div>
   );
 }

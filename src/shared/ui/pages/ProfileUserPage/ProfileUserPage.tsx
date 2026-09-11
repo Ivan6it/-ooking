@@ -26,15 +26,8 @@ export default function ProfileUserPage() {
     buyingredients: number[] | [];
     purchasedingredients: number[] | [];
   } | null>(null);
-  const userState = useSelector((state: any) => state.user);
-
-  if (userState.loading) {
-    return <div>Загрузка...</div>;
-  }
-  if (!userState.userData || !userState.userData.id) {
-    return null;
-  }
-  const users = userState.userData;
+  const users = useSelector((state: any) => state.user.userData);
+  const foods = useSelector((state: any) => state.foodsList.foods);
 
   function createBookFunction() {
     setCreateBook((prev) => !prev);
@@ -57,12 +50,16 @@ export default function ProfileUserPage() {
   }
 
   function selectBook(recipes: Food[], name: string) {
-    if (recipes.length === 0) {
-      setVisibleBook({ name: name, recipesList: recipes, visible: true });
-    } else {
-      setVisibleBook({ name: name, recipesList: recipes, visible: true });
-    }
+    setVisibleBook({ name: name, recipesList: recipes, visible: true });
   }
+
+  const cookbook = visibleBook
+    ? users.cookbooks.find((item: any) => item.name === visibleBook.name)
+    : null;
+
+  const catalog = cookbook
+    ? foods.filter((item: Food) => cookbook.recipes.some((id: number) => id === item.id))
+    : [];
 
   return (
     <div className={styles.profileUserPage}>
@@ -127,13 +124,9 @@ export default function ProfileUserPage() {
           )}
         </>
       )}
-      {visibleBook !== null && visibleBook.recipesList.length > 0 && (
+      {visibleBook !== null && catalog.length > 0 && (
         <>
-          <SectionCards
-            ogrinicator={true}
-            heading={visibleBook.name}
-            foods={visibleBook.recipesList}
-          />
+          <SectionCards ogrinicator={true} heading={visibleBook.name} foods={catalog} />
           <DefaultButton
             handleClick={() => setVisibleBook(null)}
             className={styles.profileUserPage__sectionCards__button}
@@ -142,7 +135,7 @@ export default function ProfileUserPage() {
         </>
       )}
       {shopList !== null && <ShoppingListItem handleBack={handleBack} data={shopList} />}
-      {visibleBook !== null && visibleBook.recipesList.length === 0 && (
+      {visibleBook !== null && catalog.length === 0 && (
         <div className={styles.profileUserPage__sectionCards__empty}>
           <span className={styles.profileUserPage__sectionCards__empty__text}>
             Тут пока пусто

@@ -162,6 +162,49 @@
     "image": "/images/imageUsers/Anonim.jpg",
     "gender": "none",
     "birthday": null,
+    "liked": [
+      10,
+      7,
+      5
+    ],
+    "cookbooks": [
+      {
+        "name": "авыафы",
+        "recipes": [],
+        "id": 1789070906064
+      },
+      {
+        "name": "ssdsajhgbhjjk",
+        "recipes": [],
+        "id": 1789072425813
+      },
+      {
+        "name": "fdgdfsgsdfgs",
+        "recipes": [],
+        "id": 1789072428463
+      },
+      {
+        "name": "Рапира",
+        "recipes": [],
+        "id": 1789075440899
+      },
+      {
+        "name": "ввв",
+        "recipes": [],
+        "id": 1789082191013
+      }
+    ],
+    "shoppinglist": []
+  },
+  {
+    "id": 1789083005692,
+    "name": "Иван",
+    "mail": "rzv124d53@mail.ru",
+    "password": "dsdsa12",
+    "surname": "",
+    "image": "/images/imageUsers/Anonim.jpg",
+    "gender": "female",
+    "birthday": "2026-09-01T21:00:00.000Z",
     "liked": [],
     "cookbooks": [],
     "shoppinglist": []

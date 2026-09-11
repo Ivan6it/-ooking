@@ -117,6 +117,17 @@
   right: 2.36vw;
 }
 
+.createBook__error {
+  position: absolute;
+  top: 100%;
+  background-color: #fdd;
+  padding: 10px;
+  border-radius: 5px;
+  width: 100%;
+  font-size: 20px;
+  font-weight: 700;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;

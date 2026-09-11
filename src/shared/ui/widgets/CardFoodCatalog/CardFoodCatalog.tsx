@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { openAuthModal, updateUser } from '@/store/userSlice';
 import type { AppDispatch } from '@/store';
+import { updateFood } from '@/store/foodsListSlice';
 
 type CardFoodCatalogProps = {
   name: string;
@@ -33,8 +34,13 @@ export function CardFoodCatalog({
   const userState = useSelector((state: any) => state.user.userData.id);
   const hasData = !!userState;
 
+  const favorites = useSelector((state: any) => state.user.userData.cookbooks);
+  const recipeFavorites = favorites
+    ? favorites.find((item: any) => item.recipes.find((i: number) => i === id))
+    : '';
+
   const isLikedData = useSelector((state: any) => state.user.userData.liked);
-  const isLiked = isLikedData.find((i: number) => i === id);
+  const isLiked = isLikedData ? isLikedData.find((i: number) => i === id) : '';
   function clickLike(e: React.MouseEvent) {
     e.stopPropagation();
     if (!hasData) {
@@ -42,7 +48,23 @@ export function CardFoodCatalog({
     } else {
       const newLiked = isLiked ? isLikedData.filter((i: number) => i !== id) : [...isLikedData, id];
       dispatch(updateUser({ userData: { id: userState, liked: newLiked } }));
+      dispatch(updateFood({ id: id, likes: isLiked ? quantityLike - 1 : quantityLike + 1 }));
     }
+  }
+
+  function removeFavorite() {
+    const newCookbook = favorites.map((item: any) => ({
+      ...item,
+      recipes: item.recipes.filter((i: number) => i !== id),
+    }));
+    dispatch(
+      updateUser({
+        userData: {
+          id: userState,
+          cookbooks: newCookbook,
+        },
+      }),
+    );
   }
 
   function clickMarkBook(e: React.MouseEvent) {
@@ -50,7 +72,7 @@ export function CardFoodCatalog({
     if (!hasData) {
       dispatch(openAuthModal());
     } else {
-      // Надо сделать запрос на сервер и добавить в избранное
+      recipeFavorites ? removeFavorite() : setAddMarkBook(true);
     }
   }
 
@@ -75,7 +97,7 @@ export function CardFoodCatalog({
             <IconActive
               handleClick={(e) => clickMarkBook(e)}
               className={styles.iconActive}
-              svg={<Bookmark color="rgba(255, 255, 255, 1)" />}
+              svg={<Bookmark active={recipeFavorites} color="rgba(255, 255, 255, 1)" />}
             />
           </div>
           <div className={styles.cardFood__cardBlock__like}>
@@ -94,6 +116,7 @@ export function CardFoodCatalog({
       </article>
       {addMarkBook && (
         <AddRecipeInBookModal
+          idRecipe={id}
           imgAlt={imgAlt}
           img={img}
           name={name}
