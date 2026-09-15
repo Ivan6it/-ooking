@@ -33,9 +33,9 @@ export function RadioIcon({
           <circle cx="12" cy="12" r="12" fill={color} />
           <path
             fill="#fff"
-            fill-rule="evenodd"
+            fillRule="evenodd"
             d="M7.277 10.615 6 12.138l5.33 4.472 7.668-9.137L13.668 3h-.001l3.807 3.195-6.39 7.615z"
-            clip-rule="evenodd"
+            clipRule="evenodd"
           />
         </svg>
       )}

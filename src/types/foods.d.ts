@@ -1,5 +1,6 @@
 export interface Food {
   id: number;
+  date: number;
   name: string;
   image: string;
   imgAlt: string;
@@ -20,7 +21,7 @@ export interface Food {
     date: number;
     user: { id: number };
     comment: string;
-    answers?: Array<{ date: number; user: { id: number }; comment: string }>;
+    answers?: Array<{ date: number; user: { id: number }; comment: string; replyTo?: number }>;
   }>;
   ingredients: Array<{
     step: number[];

@@ -5,9 +5,13 @@ import styles from './HomePage.module.css';
 import type { FoodsState } from '@/store/foodsListSlice';
 import type { RootState } from '@/store';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 
 export default function HomePage() {
   const { foods }: FoodsState = useSelector<RootState, FoodsState>((state) => state.foodsList);
+  const dateFoods = foods.toSorted((a, b) => b.date - a.date).slice(0, 8);
+  const likeFoods = foods.toSorted((a, b) => b.likes - a.likes).slice(0, 8);
+  const navigate = useNavigate();
   return (
     <div className={styles.homePage}>
       <RecipeBuilder />
@@ -17,9 +21,21 @@ export default function HomePage() {
         инструкциями, но и секретами, которые помогут раскрыть потенциал каждого ингредиента. Пусть
         готовка приносит вам радость, а блюда радуют близких!
       </p>
-      <SectionCards foods={foods} heading="Новые рецепты" />
-      <SectionCards foods={foods} heading="Популярные рецепты" />
-      <SectionCards foods={foods} heading="Каталог рецептов" />
+      <SectionCards
+        clickMore={() => navigate('/catalog')}
+        foods={dateFoods}
+        heading="Новые рецепты"
+      />
+      <SectionCards
+        clickMore={() => navigate('/catalog')}
+        foods={likeFoods}
+        heading="Популярные рецепты"
+      />
+      <SectionCards
+        clickMore={() => navigate('/catalog')}
+        foods={foods.slice(0, 8)}
+        heading="Каталог рецептов"
+      />
       <Mailing />
     </div>
   );

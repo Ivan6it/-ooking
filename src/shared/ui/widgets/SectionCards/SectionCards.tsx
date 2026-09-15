@@ -9,6 +9,7 @@ type SectionCardsProps = {
   classNameHeading?: string;
   className?: string;
   foods: Food[];
+  clickMore?(): void;
 };
 
 export function SectionCards({
@@ -17,6 +18,7 @@ export function SectionCards({
   classNameHeading,
   className,
   foods,
+  clickMore,
 }: SectionCardsProps) {
   return (
     <div className={`${styles.sectionCards} ${className}`}>
@@ -37,7 +39,11 @@ export function SectionCards({
         ))}
       </div>
       {ogrinicator === false && (
-        <DefaultButton className={styles.sectionCards__button} text="Смотреть все рецепты" />
+        <DefaultButton
+          handleClick={() => clickMore!()}
+          className={styles.sectionCards__button}
+          text="Смотреть все рецепты"
+        />
       )}
       {ogrinicator === 'none' && (
         <DefaultButton className={styles.directorySectionItemPage__button} text="Загрузить еще" />

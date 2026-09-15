@@ -30,7 +30,12 @@ import { NotFoundPage } from '../NotFoundPage';
 import type { FoodsState } from '@/store/foodsListSlice';
 import type { RootState, AppDispatch } from '@/store';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateFood } from '@/store/foodsListSlice';
+import {
+  updateFood,
+  updateFoodViews,
+  updateFoodStars,
+  updateFoodComments,
+} from '@/store/foodsListSlice';
 import { openAuthModal, updateUser } from '@/store/userSlice';
 
 type JsonIngredient = {
@@ -49,24 +54,128 @@ type AdditionalIngredients = Record<string, AdditionalIngredientData>;
 export default function RecipePage() {
   const [isVisible, setIsVisible] = useState('none');
   const [copied, setCopied] = useState<boolean>(false);
-  const [stars, setStars] = useState(0);
   const [addMarkBook, setAddMarkBook] = useState(false);
   const [addIngrenients, setAddIngrerdients] = useState<AdditionalIngredients>();
   const { foods }: FoodsState = useSelector<RootState, FoodsState>((state) => state.foodsList);
+  const [comment, setComment] = useState('');
+  const [answer, setAnswer] = useState({ value: false, id: 0, name: '' });
 
   const idRecipe = useParams<{ recipeId: string | undefined }>();
   const recipes = foods.filter((x) => x.id == +idRecipe.recipeId!)[0];
   if (!recipes) {
     return <NotFoundPage />;
   }
-
   const userState = useSelector((state: any) => state.user.userData.id);
   const hasData = !!userState;
   const dispatch = useDispatch<AppDispatch>();
 
-  const isLikedData = useSelector((state: any) => state.user.userData.liked);
-  const isLiked = isLikedData.find((i: number) => i === recipes.id);
+  function setCommentText(e: React.ChangeEvent<HTMLTextAreaElement>) {
+    setComment(e.target.value);
+  }
 
+  useEffect(() => {
+    if (!recipes) return;
+    dispatch(
+      updateFoodViews({
+        id: recipes.id,
+        views: recipes.views + 1,
+      }),
+    );
+  }, [recipes?.id]);
+
+  const isLikedData = useSelector((state: any) => state.user.userData.liked);
+  const isLiked = isLikedData ? isLikedData.find((i: number) => i === recipes.id) : null;
+
+  const commentsRecipe = recipes.comments;
+
+  const stars = useSelector((state: any) => state.user.userData.stars);
+  const starValue = stars?.find((i: any) => i.id === recipes.id);
+
+  const favorites = useSelector((state: any) => state.user.userData.cookbooks);
+  const recipeFavorites = favorites
+    ? favorites.find((item: any) => item.recipes.find((i: number) => i === recipes.id))
+    : '';
+
+  function removeFavorite() {
+    const newCookbook = favorites.map((item: any) => ({
+      ...item,
+      recipes: item.recipes.filter((i: number) => i !== recipes.id),
+    }));
+    dispatch(
+      updateUser({
+        userData: {
+          id: userState,
+          cookbooks: newCookbook,
+        },
+      }),
+    );
+  }
+
+  function sendComment() {
+    if (comment.trim().length !== 0) {
+      if (answer.id !== 0 && !answer.value) {
+        const newComment = {
+          date: Date.now(),
+          user: { id: userState },
+          comment: comment,
+          replyTo: answer.id,
+        };
+        const comments = recipes.comments?.map((i: any) => {
+          if (i.date === answer.id) {
+            return { ...i, answers: [...(i.answers ?? []), newComment] };
+          }
+          return i;
+        });
+        dispatch(
+          updateFoodComments({
+            id: recipes.id,
+            comments: comments ?? [],
+          }),
+        );
+        setComment('');
+        setAnswer({ value: false, id: 0, name: '' });
+      } else if (answer.id !== 0 && answer.value) {
+        const newComment = {
+          date: Date.now(),
+          user: { id: userState },
+          comment: comment,
+          replyTo: answer.id,
+        };
+        const comments = recipes.comments?.map((i: any) => {
+          if (i.answers.some((item: any) => item.date === answer.id)) {
+            return { ...i, answers: [...(i.answers ?? []), newComment] };
+          }
+          return i;
+        });
+        dispatch(
+          updateFoodComments({
+            id: recipes.id,
+            comments: comments ?? [],
+          }),
+        );
+        setComment('');
+        setAnswer({ value: false, id: 0, name: '' });
+      } else {
+        const newComment = {
+          date: Date.now(),
+          user: { id: userState },
+          comment: comment,
+          answers: [],
+        };
+        dispatch(
+          updateFoodComments({
+            id: recipes.id,
+            comments: [newComment, ...(commentsRecipe ?? [])],
+          }),
+        );
+        setComment('');
+      }
+    }
+  }
+
+  function answerSelectUser(value: boolean, id: number, name: string) {
+    setAnswer({ value: value, id: id, name: name });
+  }
   // копирование ссылки
   const handleShare = async () => {
     try {
@@ -96,21 +205,157 @@ export default function RecipePage() {
     if (!hasData) {
       dispatch(openAuthModal());
     } else {
-      // сделать запрос на сервер
+      recipeFavorites ? removeFavorite() : setAddMarkBook(true);
     }
   }
 
   function clickStar(number: number) {
     if (!hasData) {
       dispatch(openAuthModal());
-    } else {
-      // сделать запрос на сервер
-      if (stars == number) {
-        setStars(0);
-      } else {
-        setStars(number);
-      }
+      return;
     }
+
+    const userRecipeStar = stars?.find((item: any) => item.id === recipes.id);
+
+    // 1. У пользователя вообще нет оценок
+    if (!stars || stars.length === 0) {
+      const newStars = recipes.stars.map((item: any) => {
+        const key = Object.keys(item)[0];
+
+        if (Number(key) === number) {
+          return { [key]: item[key] + 1 };
+        }
+
+        return item;
+      });
+
+      dispatch(
+        updateFoodStars({
+          id: recipes.id,
+          stars: newStars,
+        }),
+      );
+
+      dispatch(
+        updateUser({
+          userData: {
+            id: userState,
+            stars: [{ id: recipes.id, stars: number }],
+          },
+        }),
+      );
+
+      return;
+    }
+
+    // 2. У пользователя есть оценки, но текущего рецепта среди них нет
+    if (!userRecipeStar) {
+      const newStars = recipes.stars.map((item: any) => {
+        const key = Object.keys(item)[0];
+
+        if (Number(key) === number) {
+          return { [key]: item[key] + 1 };
+        }
+
+        return item;
+      });
+
+      dispatch(
+        updateFoodStars({
+          id: recipes.id,
+          stars: newStars,
+        }),
+      );
+
+      dispatch(
+        updateUser({
+          userData: {
+            id: userState,
+            stars: [
+              ...stars,
+              {
+                id: recipes.id,
+                stars: number,
+              },
+            ],
+          },
+        }),
+      );
+
+      return;
+    }
+
+    // 3. Оценка совпадает — убираем оценку
+    if (userRecipeStar.stars === number) {
+      const newStars = recipes.stars.map((item: any) => {
+        const key = Object.keys(item)[0];
+
+        if (Number(key) === number) {
+          return { [key]: item[key] - 1 };
+        }
+
+        return item;
+      });
+
+      dispatch(
+        updateFoodStars({
+          id: recipes.id,
+          stars: newStars,
+        }),
+      );
+
+      dispatch(
+        updateUser({
+          userData: {
+            id: userState,
+            stars: stars.filter((item: any) => item.id !== recipes.id),
+          },
+        }),
+      );
+      return;
+    }
+
+    // 4. Оценка другая — убираем старую и добавляем новую
+    const oldStar = userRecipeStar.stars;
+
+    const newStars = recipes.stars.map((item: any) => {
+      const key = Object.keys(item)[0];
+
+      if (Number(key) === oldStar) {
+        return { [key]: item[key] - 1 };
+      }
+
+      if (Number(key) === number) {
+        return { [key]: item[key] + 1 };
+      }
+
+      return item;
+    });
+
+    dispatch(
+      updateFoodStars({
+        id: recipes.id,
+        stars: newStars,
+      }),
+    );
+
+    dispatch(
+      updateUser({
+        userData: {
+          id: userState,
+          stars: stars.map((item: any) => {
+            if (item.id === recipes.id) {
+              return {
+                ...item,
+                stars: number,
+              };
+            }
+
+            return item;
+          }),
+        },
+      }),
+    );
   }
 
   function clickLike(e: React.MouseEvent) {
@@ -161,7 +406,11 @@ export default function RecipePage() {
     const [key, value] = Object.entries(obj)[0];
     return sum + Number(key) * value;
   }, 0);
-  const ratingValue = result / recipes.likes;
+  const usersCount = recipes.stars.reduce((sum, obj) => {
+    const value = Number(Object.values(obj)[0]);
+    return sum + value;
+  }, 0);
+  const ratingValue = result / usersCount;
   const dishes: string[] = [];
   recipes.inventory.forEach((item) => dishes.push(item.name));
 
@@ -239,7 +488,7 @@ export default function RecipePage() {
               </div>
             </div>
             <div>
-              <ShopList baseItem={recipes.ingredients as JsonIngredient[]} />
+              <ShopList id={recipes.id} baseItem={recipes.ingredients as JsonIngredient[]} />
             </div>
             <div className={styles.recipePage__recipe__imgEndShoplist__tags}>
               <h3>Теги:</h3>
@@ -266,7 +515,7 @@ export default function RecipePage() {
                 <div className={styles.container__details__container__icons}>
                   <IconActive
                     handleClick={() => clickMarkBook()}
-                    svg={<Bookmark color={'rgba(255, 167, 86, 1)'} />}
+                    svg={<Bookmark active={recipeFavorites} color={'rgba(255, 167, 86, 1)'} />}
                   />
                   <IconActive handleClick={() => handleShare()} svg={<ShareIcon />} />
                   <p
@@ -412,31 +661,31 @@ export default function RecipePage() {
                       handleClick={() => {
                         clickStar(1);
                       }}
-                      svg={<StarIcon classPath={styles.stars} active={stars > 0} />}
+                      svg={<StarIcon classPath={styles.stars} active={starValue?.stars > 0} />}
                     />
                     <IconActive
                       handleClick={() => {
                         clickStar(2);
                       }}
-                      svg={<StarIcon classPath={styles.stars} active={stars > 1} />}
+                      svg={<StarIcon classPath={styles.stars} active={starValue?.stars > 1} />}
                     />
                     <IconActive
                       handleClick={() => {
                         clickStar(3);
                       }}
-                      svg={<StarIcon classPath={styles.stars} active={stars > 2} />}
+                      svg={<StarIcon classPath={styles.stars} active={starValue?.stars > 2} />}
                     />
                     <IconActive
                       handleClick={() => {
                         clickStar(4);
                       }}
-                      svg={<StarIcon classPath={styles.stars} active={stars > 3} />}
+                      svg={<StarIcon classPath={styles.stars} active={starValue?.stars > 3} />}
                     />
                     <IconActive
                       handleClick={() => {
                         clickStar(5);
                       }}
-                      svg={<StarIcon classPath={styles.stars} active={stars > 4} />}
+                      svg={<StarIcon classPath={styles.stars} active={starValue?.stars > 4} />}
                     />
                   </div>
                 </div>
@@ -445,7 +694,7 @@ export default function RecipePage() {
                     className={styles.recipePage__recipe__description__feedback__list__favourites}>
                     <IconActive
                       handleClick={() => clickMarkBook()}
-                      svg={<Bookmark color={'rgba(247, 147, 30, 1)'} />}
+                      svg={<Bookmark active={recipeFavorites} color={'rgba(247, 147, 30, 1)'} />}
                     />
                     <span>добавить в кулинарную книгу</span>
                   </div>
@@ -478,12 +727,18 @@ export default function RecipePage() {
           </div>
         </div>
         <SectionCards
-          foods={foods}
+          foods={foods.slice(0, 8)}
           classNameHeading={styles.section__heading__text}
           ogrinicator={true}
           heading="Больше вкусных рецептов для вас"
         />
         <Comments
+          userAnswerName={answer.name}
+          answerSelectUser={answerSelectUser}
+          disabled={!hasData}
+          sendComment={sendComment}
+          commentText={comment}
+          setCommentText={setCommentText}
           comments={recipes.comments ? recipes.comments : []}
           className={styles.recipe__comments}
         />
@@ -491,6 +746,7 @@ export default function RecipePage() {
       </div>
       {addMarkBook && (
         <AddRecipeInBookModal
+          idRecipe={recipes.id}
           imgAlt={recipes.imgAlt}
           img={recipes.image}
           name={recipes.name}

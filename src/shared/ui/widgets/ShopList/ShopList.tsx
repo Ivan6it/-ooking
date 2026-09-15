@@ -3,7 +3,8 @@ import { RadioIcon } from '@/shared/ui/icons';
 import { useState } from 'react';
 import { DefaultButton } from '@/shared/ui/buttons/defaultButton';
 import { useSelector, useDispatch } from 'react-redux';
-import { openAuthModal } from '@/store/userSlice';
+import { openAuthModal, updateUser } from '@/store/userSlice';
+import type { AppDispatch } from '@/store';
 
 type Product = {
   step: number[];
@@ -17,6 +18,9 @@ type ShopListProps = {
   color?: string;
   active?: boolean;
   castomActive?: boolean;
+  id: number;
+  onIngredientClick?: (index: number) => void;
+  indexes?: number[];
 };
 
 export function ShopList({
@@ -26,18 +30,39 @@ export function ShopList({
   color = '#67bb5a',
   active = true,
   castomActive,
+  id,
+  onIngredientClick,
+  indexes,
 }: ShopListProps) {
-  const [listItems, setListItems] = useState<[string, string][]>([]);
+  const [listItems, setListItems] = useState<number[]>([]);
 
   const userState = useSelector((state: any) => state.user.userData.id);
+  const userShopList = useSelector((state: any) => state.user.userData.shoppinglist);
+  const beRecipeShopList = userShopList ? userShopList.some((i: any) => i.id === id) : null;
+
   const hasData = !!userState;
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   function clickAdd() {
     if (!hasData) {
       dispatch(openAuthModal());
     } else {
-      // Запрос на сервер
+      dispatch(
+        updateUser({
+          userData: {
+            id: userState,
+            shoppinglist: [
+              ...userShopList,
+              {
+                id: id,
+                buyingredients: listItems,
+                purchasedingredients: [],
+              },
+            ],
+          },
+        }),
+      );
+      setListItems([]);
     }
   }
 
@@ -45,36 +70,50 @@ export function ShopList({
     if (!hasData) {
       dispatch(openAuthModal());
     } else {
-      // Запрос на сервер
+      const allItems = baseItem.map((_, index) => index);
+      dispatch(
+        updateUser({
+          userData: {
+            id: userState,
+            shoppinglist: [
+              ...userShopList,
+              {
+                id: id,
+                buyingredients: allItems,
+                purchasedingredients: [],
+              },
+            ],
+          },
+        }),
+      );
     }
   }
 
-  const items = listItems.map((i) => i[0]);
-  function handleClickItem(name: [string, string]) {
-    if (listItems.length > 0) {
-      if (items.includes(name[0])) {
-        setListItems(listItems.filter((item) => item[0] !== name[0]));
-      } else {
-        setListItems([...listItems, name]);
-      }
+  function handleClickItem(index: number) {
+    const actualIndex = indexes ? indexes[index] : index;
+
+    if (onIngredientClick) {
+      onIngredientClick(actualIndex);
+      return;
+    }
+
+    if (listItems.includes(index)) {
+      setListItems(listItems.filter((item) => item !== index));
     } else {
-      setListItems([...listItems, name]);
+      setListItems([...listItems, index]);
     }
   }
   return (
     <>
       <ul className={styles.shopList__list}>
-        {baseItem.map((item) => {
+        {baseItem.map((item, index) => {
           const ingredient = Object.entries(item);
           return (
             <li
-              onClick={() => handleClickItem(ingredient[0] as [string, string])}
+              onClick={() => handleClickItem(index)}
               className={`${styles.shopList} ${className}`}
               key={ingredient[0][0]}>
-              <RadioIcon
-                color={color}
-                active={active ? items.includes(ingredient[0][0]) : castomActive}
-              />
+              <RadioIcon color={color} active={active ? listItems.includes(index) : castomActive} />
               <div className={styles.shopList__text}>
                 <span>{ingredient[0][0]}</span>
                 <span>{ingredient[0][1]}</span>
@@ -86,11 +125,13 @@ export function ShopList({
       {onButton && (
         <div className={styles.buttons}>
           <DefaultButton
+            disabled={beRecipeShopList || !hasData}
             handleClick={() => clickAdd()}
             className={styles.button__add}
             text="Добавить в шоппинг-лист"
           />
           <DefaultButton
+            disabled={beRecipeShopList || !hasData}
             handleClick={() => clickAddAll()}
             className={styles.button__addAll}
             text="Добавить все"

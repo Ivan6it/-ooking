@@ -27,8 +27,9 @@ type FilterData = {
 
 export function RecipeCatalogFiltering() {
   const [kitchensData, setKitchensData] = useState<FilterData | null>(null);
+  const [itemsValue, setItemsValues] = useState(16);
   const { foods }: FoodsState = useSelector<RootState, FoodsState>((state) => state.foodsList);
-
+  const visibleFoods = foods.slice(0, itemsValue);
   useEffect(() => {
     const loadData = async () => {
       const res = await fetch('/api/filters');
@@ -69,7 +70,7 @@ export function RecipeCatalogFiltering() {
       </div>
       <div className={styles.recipeCatalogFiltering__catalog}>
         <div className={styles.recipeCatalogFiltering__catalog__recipes}>
-          {foods.map((food, index) => (
+          {visibleFoods.map((food, index) => (
             <CardFoodCatalog
               key={index}
               id={food.id}
@@ -81,10 +82,13 @@ export function RecipeCatalogFiltering() {
             />
           ))}
         </div>
-        <DefaultButton
-          className={styles.recipeCatalogFiltering__catalog__button}
-          text="Загрузить еще"
-        />
+        {foods.length > itemsValue && (
+          <DefaultButton
+            handleClick={() => setItemsValues((prev) => prev + 6)}
+            className={styles.recipeCatalogFiltering__catalog__button}
+            text="Загрузить еще"
+          />
+        )}
       </div>
     </div>
   );

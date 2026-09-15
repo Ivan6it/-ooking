@@ -5,28 +5,130 @@ import { Comments } from '@/shared/ui/widgets/Comments';
 import { Mailing } from '@/shared/ui/widgets/Mailing';
 import { useParams, Link } from 'react-router-dom';
 import { NotFoundPage } from '../NotFoundPage';
-import { useSelector } from 'react-redux';
-import type { RootState } from '@/store';
+import { useSelector, useDispatch } from 'react-redux';
+import type { RootState, AppDispatch } from '@/store';
 import type { FoodsState } from '@/store/foodsListSlice';
-import type { DirectorySectionData } from '@/types/directorySection';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { updateDirectoryItemComments } from '@/store/directorySectionSlice';
 
 export default function DirectorySectionItemPage() {
-  const [directorySection, setDirectorySection] = useState<DirectorySectionData[]>([]);
   const { sectionName, itemId } = useParams();
   const { foods }: FoodsState = useSelector<RootState, FoodsState>((state) => state.foodsList);
+  const [comment, setComment] = useState('');
+  const [answer, setAnswer] = useState({
+    value: false,
+    id: 0,
+    name: '',
+  });
 
-  useEffect(() => {
-    const loadData = async () => {
-      const res = await fetch('/api/directorySection');
-      if (!res.ok) {
-        throw new Error('Failed to fetch directorySection');
+  const { directorySection } = useSelector((state: RootState) => state.directorySection);
+  const userState = useSelector((state: any) => state.user.userData.id);
+  const dispatch = useDispatch<AppDispatch>();
+
+  const hasData = !!userState;
+  function answerSelectUser(value: boolean, id: number, name: string) {
+    setAnswer({
+      value,
+      id,
+      name,
+    });
+  }
+
+  function setCommentText(e: React.ChangeEvent<HTMLTextAreaElement>) {
+    setComment(e.target.value);
+  }
+
+  function sendComment() {
+    if (comment.trim().length !== 0) {
+      if (answer.id !== 0 && !answer.value) {
+        const newComment = {
+          date: Date.now(),
+          user: {
+            id: userState,
+          },
+          comment: comment,
+          replyTo: answer.id,
+        };
+
+        const comments = currentSectionItem.comments?.map((i: any) => {
+          if (i.date === answer.id) {
+            return {
+              ...i,
+              answers: [...(i.answers ?? []), newComment],
+            };
+          }
+
+          return i;
+        });
+
+        dispatch(
+          updateDirectoryItemComments({
+            id: currentSectionItem.id,
+            comments: comments ?? [],
+          }),
+        );
+
+        setComment('');
+        setAnswer({
+          value: false,
+          id: 0,
+          name: '',
+        });
+      } else if (answer.id !== 0 && answer.value) {
+        const newComment = {
+          date: Date.now(),
+          user: {
+            id: userState,
+          },
+          comment: comment,
+          replyTo: answer.id,
+        };
+
+        const comments = currentSectionItem.comments?.map((i: any) => {
+          if (i.answers?.some((item: any) => item.date === answer.id)) {
+            return {
+              ...i,
+              answers: [...(i.answers ?? []), newComment],
+            };
+          }
+
+          return i;
+        });
+
+        dispatch(
+          updateDirectoryItemComments({
+            id: currentSectionItem.id,
+            comments: comments ?? [],
+          }),
+        );
+
+        setComment('');
+        setAnswer({
+          value: false,
+          id: 0,
+          name: '',
+        });
+      } else {
+        const newComment = {
+          date: Date.now(),
+          user: {
+            id: userState,
+          },
+          comment: comment,
+          answers: [],
+        };
+
+        dispatch(
+          updateDirectoryItemComments({
+            id: currentSectionItem.id,
+            comments: [newComment, ...(currentSectionItem.comments ?? [])],
+          }),
+        );
+
+        setComment('');
       }
-      const data = await res.json();
-      setDirectorySection(data);
-    };
-    loadData();
-  }, []);
+    }
+  }
 
   const currentSection = directorySection.filter((item) => item.id === sectionName)[0];
   const currentSectionItem = currentSection?.products?.filter((item) => item.id === itemId)[0];
@@ -109,8 +211,14 @@ export default function DirectorySectionItemPage() {
         heading={`Рецепты из ${getGenitive(currentSectionItem.name)}`}
       />
       <Comments
+        disabled={!hasData}
         className={styles.directorySectionItemPage__coments}
         comments={currentSectionItem.comments || []}
+        commentText={comment}
+        setCommentText={setCommentText}
+        sendComment={sendComment}
+        answerSelectUser={answerSelectUser}
+        userAnswerName={answer.name}
       />
       <Mailing />
     </div>

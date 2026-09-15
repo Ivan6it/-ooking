@@ -6,6 +6,7 @@ export interface Answer {
   date: number;
   user: User;
   comment?: string;
+  replyTo?: number;
 }
 
 export interface DirectoryComment {

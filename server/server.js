@@ -229,6 +229,60 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  if (req.method === 'PUT' && req.url === '/api/directorySection') {
+    let body = '';
+
+    req.on('data', (chunk) => {
+      body += chunk;
+    });
+
+    req.on('end', async () => {
+      try {
+        const updateData = JSON.parse(body);
+
+        const directorySection = await readJson('directorySection.json');
+
+        let updatedItem = null;
+
+        for (const section of directorySection) {
+          const itemIndex = section.products?.findIndex((product) => product.id === updateData.id);
+
+          if (itemIndex !== -1 && itemIndex !== undefined) {
+            section.products[itemIndex] = {
+              ...section.products[itemIndex],
+              comments: updateData.comments,
+            };
+
+            updatedItem = section.products[itemIndex];
+
+            break;
+          }
+        }
+
+        if (!updatedItem) {
+          return sendJson(res, 404, {
+            error: 'Directory item not found',
+          });
+        }
+
+        await writeJson('directorySection.json', directorySection);
+
+        sendJson(res, 200, {
+          success: true,
+          item: updatedItem,
+        });
+      } catch (error) {
+        console.error(error);
+
+        sendJson(res, 500, {
+          error: 'Directory section update failed',
+        });
+      }
+    });
+
+    return;
+  }
+
   if (req.method === 'PUT' && req.url === '/api/users') {
     const contentType = req.headers['content-type'] || '';
 

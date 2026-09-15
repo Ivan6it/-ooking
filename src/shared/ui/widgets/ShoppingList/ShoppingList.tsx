@@ -1,13 +1,13 @@
 import { DefaultButton } from '../../buttons/defaultButton';
 import styles from './ShoppingList.module.css';
 import { ArrowFilterIcon, ShoppingListIcon } from '@/shared/ui/icons';
-import users from '@/data/users.json';
 import { getIngredientCountText } from '@/shared/helpers/helpersFunction';
 import type { Food } from '@/types/foods';
 import { Link } from 'react-router-dom';
 import type { FoodsState } from '@/store/foodsListSlice';
-import type { RootState } from '@/store';
-import { useSelector } from 'react-redux';
+import type { RootState, AppDispatch } from '@/store';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateUser } from '@/store/userSlice';
 
 type ShoppingListProps = {
   handleclick: (
@@ -19,8 +19,21 @@ type ShoppingListProps = {
 
 export function ShoppingList({ handleclick }: ShoppingListProps) {
   const { foods }: FoodsState = useSelector<RootState, FoodsState>((state) => state.foodsList);
+  const user = useSelector((state: any) => state.user.userData);
+  const dispatch = useDispatch<AppDispatch>();
 
-  const user = users[0];
+  function deleteRecipeShopList(id: number) {
+    const newShopList = user.shoppinglist.filter((i: any) => i.id !== id);
+    dispatch(
+      updateUser({
+        userData: {
+          id: user.id,
+          shoppinglist: [...newShopList],
+        },
+      }),
+    );
+  }
+
   return (
     <>
       {user.shoppinglist.length === 0 ? (
@@ -37,7 +50,7 @@ export function ShoppingList({ handleclick }: ShoppingListProps) {
         </div>
       ) : (
         <ul className={styles.shoppingList__itemList}>
-          {user.shoppinglist.map((item, index) => {
+          {user.shoppinglist.map((item: any, index: number) => {
             const recipe = foods.find((i) => i.id === item.id);
             if (!recipe) return null;
             const numIngredients = user.shoppinglist[index].buyingredients
@@ -63,6 +76,13 @@ export function ShoppingList({ handleclick }: ShoppingListProps) {
                   <span className={styles.shoppingList__itemList__item__container__text}>
                     Купить: {numIngredients} {getIngredientCountText(numIngredients)}
                   </span>
+                </div>
+                <div onClick={(e) => e.stopPropagation()}>
+                  <DefaultButton
+                    handleClick={() => deleteRecipeShopList(recipe.id)}
+                    className={styles.shoppingList__itemList__item__button}
+                    text="Удалить"
+                  />
                 </div>
                 <ArrowFilterIcon size={30} className={styles.shoppingList__itemList__item__icon} />
               </li>

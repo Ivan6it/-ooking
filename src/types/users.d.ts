@@ -10,6 +10,11 @@ export interface Cookbook {
   id: string;
 }
 
+export interface Stars {
+  id: number;
+  stars: number;
+}
+
 export interface User {
   id: number;
   mail: string;
@@ -22,6 +27,7 @@ export interface User {
   liked: number[];
   cookbooks: Cookbook[];
   shoppinglist: Shoppinglist[];
+  stars: Stars[];
 }
 const users: User[];
 export default users;

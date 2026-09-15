@@ -16,16 +16,15 @@ import { useSelector } from 'react-redux';
 export default function ProfileUserPage() {
   const [createBook, setCreateBook] = useState(false);
   const [chapter, setChapter] = useState('cookbooks');
+
   const [visibleBook, setVisibleBook] = useState<{
     name: string;
     recipesList: Food[];
     visible: boolean;
   } | null>(null);
-  const [shopList, setShopList] = useState<{
-    recipe: Food;
-    buyingredients: number[] | [];
-    purchasedingredients: number[] | [];
-  } | null>(null);
+
+  const [shopListId, setShopListId] = useState<number | null>(null);
+
   const users = useSelector((state: any) => state.user.userData);
   const foods = useSelector((state: any) => state.foodsList.foods);
 
@@ -34,23 +33,19 @@ export default function ProfileUserPage() {
   }
 
   function handleBack() {
-    setShopList(null);
+    setShopListId(null);
   }
 
-  function selectShoppinglist(
-    recipe: Food,
-    buyingredients: number[] | [],
-    purchasedingredients: number[] | [],
-  ) {
-    setShopList({
-      recipe: recipe,
-      buyingredients: buyingredients,
-      purchasedingredients: purchasedingredients,
-    });
+  function selectShoppinglist(recipe: Food) {
+    setShopListId(recipe.id);
   }
 
   function selectBook(recipes: Food[], name: string) {
-    setVisibleBook({ name: name, recipesList: recipes, visible: true });
+    setVisibleBook({
+      name: name,
+      recipesList: recipes,
+      visible: true,
+    });
   }
 
   const cookbook = visibleBook
@@ -61,12 +56,25 @@ export default function ProfileUserPage() {
     ? foods.filter((item: Food) => cookbook.recipes.some((id: number) => id === item.id))
     : [];
 
+  const shopList =
+    shopListId !== null ? users.shoppinglist.find((item: any) => item.id === shopListId) : null;
+
+  const shopListData =
+    shopList && foods.length > 0
+      ? {
+          recipe: foods.find((item: Food) => item.id === shopList.id),
+          buyingredients: shopList.buyingredients,
+          purchasedingredients: shopList.purchasedingredients,
+        }
+      : null;
+
   return (
     <div className={styles.profileUserPage}>
       <Link to={'/profile/setting'} className={styles.profileUserPage__settingButton}>
         <GearIcon className={styles.profileUserPage__settingButton__svg} />
         <span>Настройки</span>
       </Link>
+
       <div className={styles.profileUserPage__profile}>
         <div className={styles.profileUserPage__profile__container}>
           <img
@@ -74,59 +82,78 @@ export default function ProfileUserPage() {
             className={styles.profileUserPage__profile__container__img}
             src={users.image}
           />
+
           <Link to={'/profile/setting'}>
             <div className={styles.profileUserPage__profile__container__svg}>
               <PencilIcon className={styles.profileUserPage__profile__container__svg__setting} />
             </div>
           </Link>
         </div>
+
         <div className={styles.profileUserPage__profile__info}>
           <span className={styles.profileUserPage__profile__info__name}>{users.name}</span>
           <span>Член сообщества</span>
         </div>
       </div>
+
       {visibleBook === null && (
         <>
           <div className={styles.profileUserPage__buttons}>
             <IconActive
               handleClick={() => {
+                handleBack();
                 setChapter('cookbooks');
               }}
-              className={`${styles.profileUserPage__buttons__button} ${chapter === 'cookbooks' ? styles.active : ''}`}
+              className={`${styles.profileUserPage__buttons__button} ${
+                chapter === 'cookbooks' ? styles.active : ''
+              }`}
               svg={<Bookmark active={true} color={'rgba(247, 147, 30, 1)'} />}
               text="Кулинарные книги"
             />
+
             <IconActive
               handleClick={() => {
+                handleBack();
                 setChapter('shoppingList');
               }}
-              className={`${styles.profileUserPage__buttons__button} ${chapter === 'shoppingList' ? styles.active : ''}`}
+              className={`${styles.profileUserPage__buttons__button} ${
+                chapter === 'shoppingList' ? styles.active : ''
+              }`}
               svg={<TaskIcon />}
               text="Список покупок"
             />
+
             <IconActive
               handleClick={() => {
+                handleBack();
                 setChapter('like');
               }}
-              className={`${styles.profileUserPage__buttons__button} ${chapter === 'like' ? styles.active : ''}`}
+              className={`${styles.profileUserPage__buttons__button} ${
+                chapter === 'like' ? styles.active : ''
+              }`}
               svg={<LikeIcon active={true} color={'rgba(247, 147, 30, 1)'} />}
               text="Нравится"
             />
           </div>
+
           <div className={styles.profileUserPage__line}></div>
 
           {chapter === 'like' && <LikeSection />}
+
           {chapter === 'cookbooks' && (
             <Cookbooks createBook={createBookFunction} handleClick={selectBook} />
           )}
-          {chapter === 'shoppingList' && shopList === null && (
+
+          {chapter === 'shoppingList' && shopListId === null && (
             <ShoppingList handleclick={selectShoppinglist} />
           )}
         </>
       )}
+
       {visibleBook !== null && catalog.length > 0 && (
         <>
           <SectionCards ogrinicator={true} heading={visibleBook.name} foods={catalog} />
+
           <DefaultButton
             handleClick={() => setVisibleBook(null)}
             className={styles.profileUserPage__sectionCards__button}
@@ -134,20 +161,22 @@ export default function ProfileUserPage() {
           />
         </>
       )}
-      {shopList !== null && <ShoppingListItem handleBack={handleBack} data={shopList} />}
+
+      {shopListData?.recipe && <ShoppingListItem handleBack={handleBack} data={shopListData} />}
+
       {visibleBook !== null && catalog.length === 0 && (
         <div className={styles.profileUserPage__sectionCards__empty}>
           <span className={styles.profileUserPage__sectionCards__empty__text}>
-            Тут пока пусто
-            <br />
-            Пора добавить что-то
+            Тут пока пусто Пора добавить что-то
           </span>
+
           <Link style={{ width: '100%' }} to={'/catalog'}>
             <DefaultButton
               className={styles.profileUserPage__sectionCards__empty__button}
               text="В каталог"
             />
           </Link>
+
           <DefaultButton
             handleClick={() => setVisibleBook(null)}
             className={styles.profileUserPage__sectionCards__empty__button}
@@ -155,6 +184,7 @@ export default function ProfileUserPage() {
           />
         </div>
       )}
+
       {createBook && <CreateBook closeModal={createBookFunction} />}
     </div>
   );

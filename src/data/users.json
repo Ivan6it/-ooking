@@ -206,6 +206,20 @@
     "gender": "female",
     "birthday": "2026-09-01T21:00:00.000Z",
     "liked": [],
+    "stars": [],
+    "cookbooks": [],
+    "shoppinglist": []
+  },
+  {
+    "id": 1789411232348,
+    "name": "fgdsfasd",
+    "mail": "rzv12453232133213@mail.ru",
+    "password": "dsadsadaG123",
+    "surname": "",
+    "image": "/images/imageUsers/Anonim.jpg",
+    "gender": "none",
+    "birthday": null,
+    "liked": [],
     "cookbooks": [],
     "shoppinglist": []
   }

@@ -114,3 +114,10 @@
   transform: translate(-50%, calc(-50% - 2.08vw)) rotate(90deg);
   right: 0;
 }
+
+.shoppingList__itemList__item__button {
+  position: absolute;
+  right: 0;
+  padding: 10px 20px;
+  z-index: 2;
+}
