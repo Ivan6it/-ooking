@@ -391,6 +391,7 @@
   border-radius: 5px;
   border: 1px solid rgba(74, 216, 134, 0.38);
   min-width: 39.16vw;
+  z-index: 1;
 }
 
 .arrow__modal {

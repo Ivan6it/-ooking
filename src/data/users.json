@@ -221,6 +221,7 @@
     "birthday": null,
     "liked": [],
     "cookbooks": [],
-    "shoppinglist": []
+    "shoppinglist": [],
+    "stars": []
   }
 ]

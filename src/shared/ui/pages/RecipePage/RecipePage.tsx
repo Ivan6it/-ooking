@@ -18,7 +18,7 @@ import { IconActive } from '@/shared/ui/iconActive';
 import { TagInTheRecipe } from '@/shared/ui/tagInTheRecipe';
 import { AdditionalIngredientsItem } from '@/shared/ui/AdditionalIngredientsItem';
 import { DefaultButton } from '@/shared/ui/buttons/defaultButton';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { ShopList } from '@/shared/ui/widgets/ShopList';
 import { IconLink } from '../../iconLinks/iconLink';
 import { SectionCards } from '@/shared/ui/widgets/SectionCards';
@@ -72,6 +72,22 @@ export default function RecipePage() {
   function setCommentText(e: React.ChangeEvent<HTMLTextAreaElement>) {
     setComment(e.target.value);
   }
+
+  const popupRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (popupRef.current && !popupRef.current.contains(event.target as Node)) {
+        setIsVisible('none');
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   useEffect(() => {
     if (!recipes) return;
@@ -457,6 +473,7 @@ export default function RecipePage() {
                       <AdditionalIngredientsItem text={item} onClick={() => handleClickIng(item)} />
                       {isVisible === item && (
                         <div
+                          ref={popupRef}
                           className={
                             styles.recipePage__recipe__imgEndShoplist__ingredients__text__addIng__modal
                           }>

@@ -27,7 +27,7 @@ type FilterData = {
 
 export function RecipeCatalogFiltering() {
   const [kitchensData, setKitchensData] = useState<FilterData | null>(null);
-  const [itemsValue, setItemsValues] = useState(16);
+  const [itemsValue, setItemsValues] = useState(15);
   const { foods }: FoodsState = useSelector<RootState, FoodsState>((state) => state.foodsList);
   const visibleFoods = foods.slice(0, itemsValue);
   useEffect(() => {
