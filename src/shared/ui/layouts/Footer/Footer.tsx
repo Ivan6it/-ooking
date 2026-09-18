@@ -4,9 +4,50 @@ import { IconLink } from '../../iconLinks/iconLink';
 import { DefaultButton } from '@/shared/ui/buttons/defaultButton';
 import { ButtonLink } from '@/shared/ui/buttonLinks';
 import { useState } from 'react';
+import { Input } from '@/shared/ui/input';
+import { useDispatch, useSelector } from 'react-redux';
+import type { AppDispatch } from '@/store';
+import { updateUser } from '@/store/userSlice';
 
 export function Footer() {
   const [email, setEmail] = useState('');
+  const [errorMail, setErrorMail] = useState('');
+
+  const dispatch = useDispatch<AppDispatch>();
+  const userData = useSelector((state: any) => state.user.userData);
+  function validateFormFieldsEmail(value: string): boolean {
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    if (!emailPattern.test(value)) {
+      setErrorMail('Некорректный адрес электронной почты');
+      return false;
+    }
+
+    return true;
+  }
+
+  function submitEvent() {
+    setErrorMail('');
+
+    if (email.trim().length === 0) {
+      setErrorMail('Введите почту');
+      return;
+    }
+
+    if (!validateFormFieldsEmail(email)) {
+      return;
+    }
+
+    dispatch(
+      updateUser({
+        userData: {
+          id: userData.id,
+          agreement: true,
+        },
+      }),
+    );
+  }
+
   return (
     <footer className={styles.footer}>
       <div className={styles.footer__logo}>
@@ -40,20 +81,24 @@ export function Footer() {
             />
           </div>
         </div>
-        <form className={styles.footer__nav__form}>
-          <p className={styles.footer__nav__form__text}>Подпишитесь на рассылку:</p>
-          <input
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-            type="email"
-            placeholder="Ваш Email"
-          />
-          <DefaultButton
-            className={styles.settingButton}
-            handleClick={() => {}}
-            text="Подписаться"
-          />
-        </form>
+        {!userData.agreement && (
+          <form className={styles.footer__nav__form}>
+            <p className={styles.footer__nav__form__text}>Подпишитесь на рассылку:</p>
+            <Input
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+              type="email"
+              placeholder="Ваш Email"
+              error={errorMail}
+            />
+            <DefaultButton
+              disabled={userData.id === undefined}
+              className={styles.settingButton}
+              text="Подписаться"
+              handleClick={() => submitEvent()}
+            />
+          </form>
+        )}
       </div>
       <div className={styles.footer__separator}></div>
       <nav className={styles.footer__menu}>

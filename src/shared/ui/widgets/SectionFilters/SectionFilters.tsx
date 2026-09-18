@@ -6,15 +6,29 @@ import { ArrowFilterIcon } from '../../icons';
 import { IconActive } from '../../iconActive';
 import type { Filters } from '@/types/filters';
 
-export function SectionFilters({ filtersGroup }: Filters) {
+type SectionFiltersProps = {
+  filtersGroup: Filters['filtersGroup'];
+  setFiltersRecipes(value: any): void;
+  recipesFiltered(): void;
+};
+
+export function SectionFilters({
+  filtersGroup,
+  setFiltersRecipes,
+  recipesFiltered,
+}: SectionFiltersProps) {
   const [selectedValues, setSelectedValues] = useState<Record<string, string>>({});
   const [showAllFilters, setShowAllFilters] = useState<Record<string, boolean>>({});
   const [collapsedFieldsets, setCollapsedFieldsets] = useState<Record<string, boolean>>({});
 
-  const handleRadioChange = (groupName: string, value: string) => {
+  const handleRadioChange = (groupName: string, value: string, id: string) => {
     setSelectedValues((prev) => ({
       ...prev,
       [groupName]: value,
+    }));
+    setFiltersRecipes((prev: any) => ({
+      ...prev,
+      [groupName]: id,
     }));
   };
   const handleToggleAll = (groupName: string) => {
@@ -75,7 +89,7 @@ export function SectionFilters({ filtersGroup }: Filters) {
                         value={filter.name}
                         label={filter.name}
                         checked={(selectedValues[filters.title] || '') === filter.name}
-                        onChange={() => handleRadioChange(filters.title, filter.name)}
+                        onChange={() => handleRadioChange(filters.title, filter.name, filter.id)}
                       />
                     </div>
                   );
@@ -97,6 +111,7 @@ export function SectionFilters({ filtersGroup }: Filters) {
           disabled={hasNoSelections}
           className={styles.sectionFilters__form__button}
           text={'Применить'}
+          handleClick={() => recipesFiltered()}
         />
       </form>
     </div>

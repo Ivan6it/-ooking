@@ -9,6 +9,7 @@
     "gender": "male",
     "birthday": 1785877200000,
     "liked": [],
+    "agreement": false,
     "cookbooks": [
       {
         "name": "супы",
@@ -108,6 +109,7 @@
     "gender": "female",
     "birthday": 1785877200000,
     "liked": [],
+    "agreement": false,
     "cookbooks": [
       {
         "name": "супы",
@@ -167,6 +169,7 @@
       7,
       5
     ],
+    "agreement": false,
     "cookbooks": [
       {
         "name": "авыафы",
@@ -206,6 +209,7 @@
     "gender": "female",
     "birthday": "2026-09-01T21:00:00.000Z",
     "liked": [],
+    "agreement": false,
     "stars": [],
     "cookbooks": [],
     "shoppinglist": []
@@ -220,8 +224,169 @@
     "gender": "none",
     "birthday": null,
     "liked": [],
+    "agreement": false,
     "cookbooks": [],
     "shoppinglist": [],
     "stars": []
+  },
+  {
+    "id": 1789739690955,
+    "name": "Иван",
+    "mail": "rzv124dsd53@mail.ru",
+    "password": "dsadasD321",
+    "surname": "",
+    "image": "/images/imageUsers/Anonim.jpg",
+    "gender": "none",
+    "birthday": null,
+    "liked": [],
+    "agreement": false,
+    "cookbooks": [],
+    "shoppinglist": []
+  },
+  {
+    "id": 1789739733482,
+    "name": "Иван",
+    "mail": "rzv12dsdsd453@mail.ru",
+    "password": "dsadaD321",
+    "surname": "",
+    "image": "/images/imageUsers/Anonim.jpg",
+    "gender": "none",
+    "birthday": null,
+    "liked": [],
+    "agreement": false,
+    "cookbooks": [],
+    "shoppinglist": []
+  },
+  {
+    "id": 1789739793190,
+    "name": "Иван",
+    "mail": "rzv1dsdsad23@yandex.ru",
+    "password": "dsadasD321",
+    "surname": "",
+    "image": "/images/imageUsers/Anonim.jpg",
+    "gender": "none",
+    "birthday": null,
+    "liked": [],
+    "agreement": false,
+    "cookbooks": [],
+    "shoppinglist": []
+  },
+  {
+    "id": 1789740694135,
+    "name": "ds",
+    "mail": "rzv12dsds3@yandex.ru",
+    "password": "dsadas213",
+    "surname": "",
+    "image": "/images/imageUsers/Anonim.jpg",
+    "gender": "none",
+    "birthday": null,
+    "liked": [],
+    "agreement": false,
+    "cookbooks": [],
+    "shoppinglist": []
+  },
+  {
+    "id": 1789741168415,
+    "name": "dsadasd",
+    "mail": "rzv124dsdsa53@mail.ru",
+    "password": "dasda321",
+    "surname": "",
+    "image": "/images/imageUsers/Anonim.jpg",
+    "gender": "none",
+    "birthday": null,
+    "liked": [],
+    "agreement": false,
+    "cookbooks": [],
+    "shoppinglist": []
+  },
+  {
+    "id": 1789741255627,
+    "name": "Иван",
+    "mail": "rzv12dsadsadas3@yandex.ru",
+    "password": "ddasd312",
+    "surname": "",
+    "image": "/images/imageUsers/Anonim.jpg",
+    "gender": "none",
+    "birthday": null,
+    "liked": [],
+    "agreement": false,
+    "cookbooks": [],
+    "shoppinglist": []
+  },
+  {
+    "id": 1789741323102,
+    "name": "ddsa",
+    "mail": "rzv124dsadas53@mail.ru",
+    "password": "dasdas321",
+    "surname": "",
+    "image": "/images/imageUsers/Anonim.jpg",
+    "gender": "none",
+    "birthday": null,
+    "liked": [],
+    "agreement": true,
+    "cookbooks": [],
+    "shoppinglist": []
+  },
+  {
+    "id": 1789744440246,
+    "name": "dsa",
+    "mail": "rzv12dasdasdas453@mail.ru",
+    "password": "dsada4132",
+    "surname": "",
+    "image": "/images/imageUsers/Anonim.jpg",
+    "gender": "none",
+    "birthday": null,
+    "liked": [],
+    "agreement": false,
+    "cookbooks": [],
+    "shoppinglist": []
+  },
+  {
+    "id": 1789744597952,
+    "name": "Иван",
+    "mail": "rzv12dsadas3@yandex.ru",
+    "password": "dsadas3213",
+    "surname": "",
+    "image": "/images/imageUsers/Anonim.jpg",
+    "gender": "none",
+    "birthday": null,
+    "liked": [],
+    "agreement": true,
+    "cookbooks": [],
+    "shoppinglist": []
+  },
+  {
+    "id": 1789747975289,
+    "name": "Иван",
+    "mail": "rzv1245dsadsadsad3@mail.ru",
+    "password": "dsadas3213",
+    "surname": "",
+    "image": "/images/imageUsers/Anonim.jpg",
+    "gender": "none",
+    "birthday": null,
+    "liked": [],
+    "agreement": false,
+    "cookbooks": [],
+    "shoppinglist": []
+  },
+  {
+    "id": 1789748010033,
+    "name": "Иван",
+    "mail": "rzv123dsadsadas@yandex.ru",
+    "password": "dsadasd321",
+    "surname": "",
+    "image": "/images/imageUsers/Anonim.jpg",
+    "gender": "none",
+    "birthday": null,
+    "liked": [],
+    "agreement": true,
+    "cookbooks": [],
+    "shoppinglist": [],
+    "stars": [
+      {
+        "id": 30,
+        "stars": 4
+      }
+    ]
   }
 ]

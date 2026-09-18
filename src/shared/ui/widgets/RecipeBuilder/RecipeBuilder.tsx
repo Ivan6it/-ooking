@@ -16,12 +16,20 @@ import {
 import { SearchBar } from '../../SearchBar';
 import { IconActive } from '../../iconActive';
 import { DefaultButton } from '../../buttons/defaultButton';
+import { useSelector } from 'react-redux';
+import type { FoodsState } from '@/store/foodsListSlice';
+import type { RootState } from '@/store';
+import type { Food } from '@/types/foods';
 
 interface Ingredient {
   name: string;
 }
 
-export function RecipeBuilder() {
+type RecipeBuilderProps = {
+  setGenerateRecipes(value: Food[] | null): void;
+};
+
+export function RecipeBuilder({ setGenerateRecipes }: RecipeBuilderProps) {
   const [ingredientsData, setIngredientsData] = useState<Ingredient[]>([]);
   const [ingredients, setIngredients] = useState<string[]>([]);
   const [productsInStock, setProductsInStock] = useState<string[]>([]);
@@ -30,8 +38,8 @@ export function RecipeBuilder() {
   const [additionalIngredients, setAdditionalIngredients] = useState<null | number>(null);
   const [deleteIngredients, setDeleteIngredients] = useState<string[]>([]);
   const [visibleHint, setVisibleHint] = useState(false);
-  const [timer, setTimer] = useState(0);
-
+  const [timer, setTimer] = useState(12.5);
+  const { foods }: FoodsState = useSelector<RootState, FoodsState>((state) => state.foodsList);
   useEffect(() => {
     const loadData = async () => {
       const res = await fetch('/api/ingredients');
@@ -45,23 +53,54 @@ export function RecipeBuilder() {
   }, []);
 
   const handleRangeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = Number(e.target.value);
-    setTimer(newValue);
-    e.target.style.setProperty('--fill', `${(newValue / 100) * 100}%`);
+    setTimer(Number(e.target.value));
   };
+
+  useEffect(() => {
+    const input = document.querySelector('input[type="range"]') as HTMLInputElement | null;
+
+    if (!input) return;
+
+    function shift(time: number, width: number) {
+      if (time === 37.5) {
+        return (width * 4) / 100;
+      } else if (time === 12.5) {
+        return (width * 11) / 100;
+      } else if (time === 62.5) {
+        return -(width * 4) / 100;
+      } else {
+        return -(width * 11) / 100;
+      }
+    }
+
+    const update = () => {
+      const width = input.getBoundingClientRect().width;
+
+      input.style.setProperty('--fill', `${timer}%`);
+      input.style.setProperty('--shift', `${shift(timer, width)}px`);
+    };
+
+    update();
+
+    const observer = new ResizeObserver(update);
+    observer.observe(input);
+
+    return () => observer.disconnect();
+  }, [timer]);
+
   const timeRanges = [
-    { label: 'ДО 20\nМИНУТ', min: 0, max: 20 },
-    { label: 'ДО 30\nМИНУТ', min: 20, max: 34 },
-    { label: 'ДО 60\nМИНУТ', min: 35, max: 67 },
-    { label: 'БОЛЕЕ 1\nЧАСА', min: 68, max: 100 },
+    { label: 'ДО 20\nМИНУТ', min: 0, max: 30 },
+    { label: 'ДО 30\nМИНУТ', min: 31, max: 40 },
+    { label: 'ДО 60\nМИНУТ', min: 41, max: 65 },
+    { label: 'БОЛЕЕ 1\nЧАСА', min: 66, max: 100 },
   ];
   const products = [
-    { svg: MilkIcon, text: 'Молоко' },
-    { svg: EggIcon, text: 'Яйца' },
-    { svg: OnionIcon, text: 'Лук' },
-    { svg: PorkIcon, text: 'Свинина' },
-    { svg: FishIcon, text: 'Рыба' },
-    { svg: WineIcon, text: 'Алкоголь' },
+    { svg: MilkIcon, text: 'Молоко', id: 'containsMilk' },
+    { svg: EggIcon, text: 'Яйца', id: 'containsEgg' },
+    { svg: OnionIcon, text: 'Лук', id: 'containsOnion' },
+    { svg: PorkIcon, text: 'Свинина', id: 'containsPork' },
+    { svg: FishIcon, text: 'Рыба', id: 'containsSeafood' },
+    { svg: WineIcon, text: 'Алкоголь', id: 'containsAlcohol' },
   ];
   const activeIndex = timeRanges.findIndex((range) => timer >= range.min && timer < range.max);
   const ingredientsList = ingredientsData?.filter((item) => !productsInStock.includes(item.name));
@@ -85,6 +124,67 @@ export function RecipeBuilder() {
   function clearSearch() {
     setIngredients([]);
     setProductsInStockText('');
+  }
+
+  function createRecipes() {
+    setGenerateRecipes(null);
+    const recipes = [...foods];
+    const recipesFilter =
+      deleteIngredients.length > 0
+        ? recipes.filter((item) => !item.productTags.some((i) => deleteIngredients.includes(i)))
+        : recipes;
+    const time =
+      timer === 12.5 ? 'low' : timer === 37.5 ? 'normal' : timer === 62.5 ? 'medium' : 'hard';
+    const recipesFilterTime = recipesFilter.filter((item) => {
+      if (time === 'low') {
+        return item.prepTime <= 20;
+      } else if (time === 'normal') {
+        return item.prepTime <= 30;
+      } else if (time === 'medium') {
+        return item.prepTime <= 60;
+      } else {
+        return item.prepTime > 61;
+      }
+    });
+    const recipesFilterAdditional =
+      additionalIngredients !== null
+        ? recipesFilterTime.filter(
+            (item) => item.additionalIngredients.length <= additionalIngredients,
+          )
+        : recipesFilterTime;
+    const recipesFilterProducts =
+      productsInStock.length > 0
+        ? recipesFilterAdditional.map((item) => {
+            let score = 0;
+            item.ingredients.some((i) => {
+              if (productsInStock.includes(Object.keys(i)[0])) {
+                score++;
+              }
+            });
+            if (score > 0) {
+              return [item, score];
+            }
+          })
+        : recipesFilterAdditional;
+    const scoreListRecipes = recipesFilterProducts.filter((i) => i !== undefined);
+    const preResult = scoreListRecipes.sort((a, b) => {
+      const arrA = a as unknown as [Food, number];
+      const arrB = b as unknown as [Food, number];
+      return arrB[1] - arrA[1];
+    });
+    const result = preResult.map((item) => (item as [Food, number])[0]);
+    setGenerateRecipes(result);
+  }
+
+  function handleReset() {
+    setGenerateRecipes(null);
+    setDeleteIngredients([]);
+    setTimer(12.5);
+    setAdditionalIngredients(null);
+    setIngredients([]);
+    setProductsInStockText('');
+    setProductsInStock([]);
+    setProductsInStockInputVisible(false);
   }
 
   return (
@@ -153,6 +253,9 @@ export function RecipeBuilder() {
                   ))}
                 </ul>
               )}
+              {productsInStockText.trim().length > 0 && ingredients.length === 0 && (
+                <p className={styles.header__nav__search__notSearch}>Ничего не найдено</p>
+              )}
             </div>
           )}
         </div>
@@ -160,12 +263,12 @@ export function RecipeBuilder() {
           <h2 className={styles.recipeBuilder__timer__heading}>Время приготовления:</h2>
           <input
             type="range"
-            min="0"
-            max="100"
-            step="33.33"
+            min="12.5"
+            max="87.5"
+            step="25"
             value={timer}
             onChange={handleRangeChange}
-            style={{ '--fill': `${(timer / 100) * 100}%` } as React.CSSProperties}
+            style={{ '--fill': `${timer}%` } as React.CSSProperties}
           />
           <div className={styles.recipeBuilder__timer__points}>
             {timeRanges.map((range, index) => (
@@ -256,19 +359,19 @@ export function RecipeBuilder() {
                 key={index}
                 handleClick={() => {
                   if (deleteIngredients.length > 0) {
-                    if (deleteIngredients.includes(item.text)) {
-                      setDeleteIngredients((prev) => prev.filter((i) => i !== item.text));
+                    if (deleteIngredients.includes(item.id)) {
+                      setDeleteIngredients((prev) => prev.filter((i) => i !== item.id));
                     } else {
-                      setDeleteIngredients((prev) => [...prev, item.text]);
+                      setDeleteIngredients((prev) => [...prev, item.id]);
                     }
                   } else {
-                    setDeleteIngredients((prev) => [...prev, item.text]);
+                    setDeleteIngredients((prev) => [...prev, item.id]);
                   }
                 }}
                 className={
                   styles.recipeBuilder__container__dop__ingredients__products__filters__icon
                 }
-                svg={<item.svg active={!deleteIngredients.includes(item.text)} />}
+                svg={<item.svg active={!deleteIngredients.includes(item.id)} />}
                 text={item.text}
                 classNameText={
                   styles.recipeBuilder__container__dop__ingredients__products__filters__text
@@ -279,10 +382,15 @@ export function RecipeBuilder() {
         </div>
       </div>
       <div className={styles.recipeBuilder__buttons}>
-        <DefaultButton className={styles.recipeBuilder__buttons__button} text={'Применить'} />
+        <DefaultButton
+          handleClick={() => createRecipes()}
+          className={styles.recipeBuilder__buttons__button}
+          text={'Применить'}
+        />
         <DefaultButton
           className={`${styles.recipeBuilder__buttons__button} ${styles.recipeBuilder__buttons__button__spec}`}
           text={'Очистить всё'}
+          handleClick={() => handleReset()}
         />
       </div>
     </div>

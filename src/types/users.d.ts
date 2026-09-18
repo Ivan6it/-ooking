@@ -25,6 +25,7 @@ export interface User {
   gender: 'male' | 'female' | 'none';
   birthday: Date | null;
   liked: number[];
+  agreement: boolean;
   cookbooks: Cookbook[];
   shoppinglist: Shoppinglist[];
   stars: Stars[];

@@ -20,7 +20,11 @@ type KitchenName =
   | 'Turkish'
   | 'none';
 
-export function RecipeCarousel() {
+type RecipeCarouselProps = {
+  setFilterKitchen(value: string): void;
+};
+
+export function RecipeCarousel({ setFilterKitchen }: RecipeCarouselProps) {
   const [quantityClick, setQuantityClick] = useState(0);
   const [kitchens, setKitchens] = useState<Kitchen[]>([]);
   const [isSliding, setIsSliding] = useState<'none' | 'down' | 'up'>('none');
@@ -114,8 +118,14 @@ export function RecipeCarousel() {
           <button
             onClick={
               activeKitchen === kitchen.id
-                ? () => setActiveKitchen('none')
-                : () => setActiveKitchen(kitchen.id as KitchenName)
+                ? () => {
+                    setActiveKitchen('none');
+                    setFilterKitchen('none');
+                  }
+                : () => {
+                    setActiveKitchen(kitchen.id as KitchenName);
+                    setFilterKitchen(kitchen.id);
+                  }
             }
             key={kitchen.id}
             className={`${styles.recipeCarousel__cuisines_cuisine} ${kitchen.id === activeKitchen ? styles.recipeCarousel__cuisines_cuisine__active : ''}`}

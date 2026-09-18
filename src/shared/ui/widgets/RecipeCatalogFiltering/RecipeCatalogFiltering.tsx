@@ -3,8 +3,6 @@ import { DefaultButton } from '@/shared/ui/buttons/defaultButton';
 import { Select } from '@/shared/ui/select';
 import { CardFoodCatalog } from '@/shared/ui/widgets/CardFoodCatalog';
 import type { FoodsState } from '@/store/foodsListSlice';
-import type { RootState } from '@/store';
-import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 
 type FilterItem = {
@@ -25,10 +23,19 @@ type FilterData = {
   }>;
 };
 
-export function RecipeCatalogFiltering() {
+type RecipeCatalogFilteringProps = {
+  setKitchen(value: string): void;
+  setDopSort(value: string): void;
+  foods: FoodsState['foods'];
+};
+
+export function RecipeCatalogFiltering({
+  setKitchen,
+  setDopSort,
+  foods,
+}: RecipeCatalogFilteringProps) {
   const [kitchensData, setKitchensData] = useState<FilterData | null>(null);
   const [itemsValue, setItemsValues] = useState(15);
-  const { foods }: FoodsState = useSelector<RootState, FoodsState>((state) => state.foodsList);
   const visibleFoods = foods.slice(0, itemsValue);
   useEffect(() => {
     const loadData = async () => {
@@ -59,17 +66,18 @@ export function RecipeCatalogFiltering() {
           <span className={styles.recipeCatalogFiltering__filters__filter__text}>
             Сортировать по:
           </span>
-          <Select options={additional[0].kitchens || []} />
+          <Select onChange={(value) => setKitchen(value)} options={additional[0].kitchens || []} />
         </div>
         <div className={styles.recipeCatalogFiltering__filters__filter}>
           <span className={styles.recipeCatalogFiltering__filters__filter__text}>
             Сортировать по:
           </span>
-          <Select options={additional[1].filters || []} />
+          <Select onChange={(value) => setDopSort(value)} options={additional[1].filters || []} />
         </div>
       </div>
       <div className={styles.recipeCatalogFiltering__catalog}>
         <div className={styles.recipeCatalogFiltering__catalog__recipes}>
+          {foods.length === 0 && <p>Подходящих рецептов не нашлось, измените параметры фильтров</p>}
           {visibleFoods.map((food, index) => (
             <CardFoodCatalog
               key={index}

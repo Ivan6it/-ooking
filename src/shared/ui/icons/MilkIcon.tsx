@@ -16,7 +16,7 @@ export function MilkIcon({ active = true }: MilkIconProps) {
             height="95"
             fill="none"
             viewBox="0 0 95 95">
-            <circle cx="47.5" cy="47.5" r="45.5" fill="#edffe3" stroke="#fd3b3b" stroke-width="4" />
+            <circle cx="47.5" cy="47.5" r="45.5" fill="#edffe3" stroke="#fd3b3b" strokeWidth="4" />
           </svg>
 
           <svg
@@ -26,7 +26,7 @@ export function MilkIcon({ active = true }: MilkIconProps) {
             style={{ position: 'absolute', bottom: '13px', left: '13px', zIndex: '1' }}
             fill="none"
             viewBox="0 0 68 67">
-            <path stroke="#fd3b3b" stroke-width="4" d="m1.403 65.425 65-64" />
+            <path stroke="#fd3b3b" strokeWidth="4" d="m1.403 65.425 65-64" />
           </svg>
           <div
             style={{

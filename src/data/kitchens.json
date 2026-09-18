@@ -1,78 +1,78 @@
 [
   {
-    "id": "Russian",
+    "id": "ru",
     "name": "Русская кухня",
     "image": "/images/Cuisines/Russian cuisine.png",
     "alt": "Изображение русской кухни"
   },
   {
-    "id": "Asian",
+    "id": "asia",
     "name": "Азиатская кухня",
     "image": "/images/Cuisines/Asian cuisine.png",
     "alt": "Изображение азиатской кухни"
   },
   {
-    "id": "British",
+    "id": "gb",
     "name": "Британская кухня",
     "image": "/images/Cuisines/British cuisine.png",
     "alt": "Изображение британской кухни"
   },
   {
-    "id": "Chinese",
+    "id": "cn",
     "name": "Китайская кухня",
     "image": "/images/Cuisines/Chinese cuisine.png",
     "alt": "Изображение китайской кухни"
   },
   {
-    "id": "French",
+    "id": "fr",
     "name": "Французская кухня",
     "image": "/images/Cuisines/French cuisine.png",
     "alt": "Изображение французской кухни"
   },
   {
-    "id": "German",
+    "id": "de",
     "name": "Немецкая кухня",
     "image": "/images/Cuisines/German cuisine.png",
     "alt": "Изображение немецкой кухни"
   },
   {
-    "id": "Greek",
+    "id": "gr",
     "name": "Греческая кухня",
     "image": "/images/Cuisines/Greek cuisine.png",
     "alt": "Изображение греческой кухни"
   },
   {
-    "id": "Indian",
+    "id": "in",
     "name": "Индийская кухня",
     "image": "/images/Cuisines/Indian cuisine.png",
     "alt": "Изображение индийской кухни"
   },
   {
-    "id": "Italian",
+    "id": "it",
     "name": "Итальянская кухня",
     "image": "/images/Cuisines/Italian cuisine.png",
     "alt": "Изображение итальянской кухни"
   },
   {
-    "id": "Spanish",
+    "id": "es",
     "name": "Испанская кухня",
     "image": "/images/Cuisines/Spanish cuisine.png",
     "alt": "Изображение испанской кухни"
   },
   {
-    "id": "Japanese",
+    "id": "jp",
     "name": "Японская кухня",
     "image": "/images/Cuisines/Japanese cuisine.png",
     "alt": "Изображение японской кухни"
   },
   {
-    "id": "Mexican",
+    "id": "mx",
     "name": "Мексиканская кухня",
     "image": "/images/Cuisines/Mexican cuisine.png",
     "alt": "Изображение мексиканской кухни"
   },
   {
-    "id": "Turkish",
+    "id": "tr",
     "name": "Турецкая кухня",
     "image": "/images/Cuisines/Turkish cuisine.png",
     "alt": "Изображение турецкой кухни"

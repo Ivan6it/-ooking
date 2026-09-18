@@ -2,30 +2,17 @@ import styles from './DirectorySectionPage.module.css';
 import { DirectorySectionItem } from '@/shared/ui/widgets/DirectorySectionItem';
 import { Mailing } from '@/shared/ui/widgets/Mailing';
 import { useParams, Link } from 'react-router-dom';
-import { NotFoundPage } from '@/shared/ui/pages/NotFoundPage';
-import { useEffect, useState } from 'react';
-import type { DirectorySectionData } from '@/types/directorySection';
+import { useSelector } from 'react-redux';
+import { NotFoundPage } from '../NotFoundPage';
 
 export default function DirectorySectionPage() {
-  const [directorySection, setDirectorySection] = useState<DirectorySectionData[]>([]);
   const { sectionName } = useParams<{ sectionName: string | undefined }>();
-
-  useEffect(() => {
-    const loadData = async () => {
-      const res = await fetch('/api/directorySection');
-      if (!res.ok) {
-        throw new Error('Failed to fetch directorySection');
-      }
-      const data = await res.json();
-      setDirectorySection(data);
-    };
-    loadData();
-  }, []);
+  const { directorySection, loading } = useSelector((state: any) => state.directorySection);
 
   const currentSection = sectionName
-    ? directorySection.filter((section) => section.id === sectionName)
+    ? directorySection.filter((section: any) => section.id === sectionName)
     : [];
-  if (currentSection.length === 0) {
+  if (loading || currentSection.length === 0) {
     return <NotFoundPage />;
   }
 
@@ -39,7 +26,7 @@ export default function DirectorySectionPage() {
       </span>
       <h2 className={styles.directorySectionPage__heading}>{currentSection[0].name}</h2>
       <ul className={styles.directorySectionPage__list}>
-        {currentSection[0].products.map((item) => (
+        {currentSection[0].products.map((item: any) => (
           <li key={item.name}>
             <DirectorySectionItem sectionName={sectionName!} data={item} />
           </li>

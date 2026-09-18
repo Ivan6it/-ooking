@@ -50,9 +50,10 @@
 }
 
 .recipeCatalogFiltering__catalog__recipes {
+  min-width: 55vw;
   display: grid;
   grid-template-columns: repeat(3, max-content);
   column-gap: 1.73vw;
   row-gap: 30px;
-  justify-content: space-between;
+  justify-content: start;
 }

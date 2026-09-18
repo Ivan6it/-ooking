@@ -477,6 +477,7 @@ const server = http.createServer(async (req, res) => {
             gender: 'none',
             birthday: null,
             liked: [],
+            agreement: false,
             cookbooks: [],
             shoppinglist: [],
           };

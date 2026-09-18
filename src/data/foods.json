@@ -23,7 +23,7 @@
         "5": 90
       }
     ],
-    "views": 409,
+    "views": 414,
     "prepTime": 120,
     "complexity": "normal",
     "sharpness": 1,
@@ -389,7 +389,7 @@
         "5": 49
       }
     ],
-    "views": 291,
+    "views": 294,
     "prepTime": 50,
     "complexity": "easy",
     "sharpness": 1,
@@ -671,7 +671,7 @@
         "5": 32
       }
     ],
-    "views": 233,
+    "views": 237,
     "prepTime": 40,
     "complexity": "easy",
     "sharpness": 1,
@@ -703,7 +703,7 @@
         ]
       },
       {
-        "Яйца": "6 шт.",
+        "Яйцо": "6 шт.",
         "step": [
           2,
           4
@@ -921,8 +921,8 @@
       "easyRecipes",
       "ru",
       "containsMilk",
-      "containsEgg",
-      "containsOnion"
+      "containsOnion",
+      "containsEgg"
     ]
   },
   {
@@ -949,7 +949,7 @@
         "5": 56
       }
     ],
-    "views": 322,
+    "views": 325,
     "prepTime": 45,
     "complexity": "normal",
     "sharpness": 2,
@@ -1244,7 +1244,7 @@
         "5": 39
       }
     ],
-    "views": 279,
+    "views": 281,
     "prepTime": 55,
     "complexity": "normal",
     "sharpness": 1,
@@ -1528,7 +1528,7 @@
         "5": 30
       }
     ],
-    "views": 209,
+    "views": 210,
     "prepTime": 30,
     "complexity": "easy",
     "sharpness": 0,
@@ -1762,7 +1762,7 @@
         "5": 34
       }
     ],
-    "views": 246,
+    "views": 248,
     "prepTime": 55,
     "complexity": "easy",
     "sharpness": 1,
@@ -2044,7 +2044,7 @@
         "5": 50
       }
     ],
-    "views": 381,
+    "views": 382,
     "prepTime": 50,
     "complexity": "easy",
     "sharpness": 1,
@@ -2131,7 +2131,7 @@
         ]
       },
       {
-        "Молотый чёрный перец": "1/2 ч. л.",
+        "Чёрный молотый перец": "1/2 ч. л.",
         "step": [
           4
         ]
@@ -2319,7 +2319,7 @@
         "5": 41
       }
     ],
-    "views": 320,
+    "views": 323,
     "prepTime": 35,
     "complexity": "easy",
     "sharpness": 1,
@@ -2600,7 +2600,7 @@
         "5": 61
       }
     ],
-    "views": 431,
+    "views": 432,
     "prepTime": 60,
     "complexity": "easy",
     "sharpness": 1,
@@ -2887,7 +2887,7 @@
         "5": 52
       }
     ],
-    "views": 345,
+    "views": 347,
     "prepTime": 55,
     "complexity": "easy",
     "sharpness": 1,
@@ -3187,7 +3187,7 @@
         "5": 56
       }
     ],
-    "views": 400,
+    "views": 401,
     "prepTime": 35,
     "complexity": "easy",
     "sharpness": 1,
@@ -3475,7 +3475,7 @@
         "5": 57
       }
     ],
-    "views": 347,
+    "views": 348,
     "prepTime": 55,
     "complexity": "hard",
     "sharpness": 1,
@@ -3736,7 +3736,7 @@
         "5": 53
       }
     ],
-    "views": 317,
+    "views": 318,
     "prepTime": 90,
     "complexity": "normal",
     "sharpness": 2,
@@ -3802,7 +3802,7 @@
         ]
       },
       {
-        "Свежий имбирь": "15 г",
+        "Имбирь": "15 г",
         "step": [
           3
         ]
@@ -4010,7 +4010,7 @@
         "5": 60
       }
     ],
-    "views": 370,
+    "views": 371,
     "prepTime": 35,
     "complexity": "easy",
     "sharpness": 1,
@@ -4287,7 +4287,7 @@
         "5": 68
       }
     ],
-    "views": 393,
+    "views": 395,
     "prepTime": 50,
     "complexity": "normal",
     "sharpness": 1,
@@ -4558,7 +4558,7 @@
         "5": 52
       }
     ],
-    "views": 306,
+    "views": 307,
     "prepTime": 75,
     "complexity": "normal",
     "sharpness": 1,
@@ -4840,7 +4840,7 @@
         "5": 56
       }
     ],
-    "views": 328,
+    "views": 329,
     "prepTime": 65,
     "complexity": "normal",
     "sharpness": 1,
@@ -5123,7 +5123,7 @@
         "5": 50
       }
     ],
-    "views": 299,
+    "views": 300,
     "prepTime": 100,
     "complexity": "hard",
     "sharpness": 2,
@@ -5155,7 +5155,7 @@
         ]
       },
       {
-        "Фасоль": "200 г",
+        "Фасоль консервированная": "200 г",
         "step": [
           2,
           4
@@ -5406,7 +5406,7 @@
         "5": 55
       }
     ],
-    "views": 321,
+    "views": 322,
     "prepTime": 130,
     "complexity": "hard",
     "sharpness": 1,
@@ -5689,7 +5689,7 @@
         "5": 57
       }
     ],
-    "views": 343,
+    "views": 344,
     "prepTime": 70,
     "complexity": "normal",
     "sharpness": 2,
@@ -5771,20 +5771,20 @@
         ]
       },
       {
-        "Молотый чёрный перец": "½ ч. л.",
+        "Чёрный молотый перец": "½ ч. л.",
         "step": [
           1,
           4
         ]
       },
       {
-        "Молотая паприка": "½ ч. л.",
+        "Паприка": "½ ч. л.",
         "step": [
           1
         ]
       },
       {
-        "Молотый имбирь": "½ ч. л.",
+        "Имбирь": "½ ч. л.",
         "step": [
           4
         ]
@@ -5968,7 +5968,7 @@
         "5": 66
       }
     ],
-    "views": 391,
+    "views": 392,
     "prepTime": 60,
     "complexity": "normal",
     "sharpness": 1,
@@ -6037,14 +6037,14 @@
         ]
       },
       {
-        "Молотый чёрный перец": "½ ч. л.",
+        "Чёрный молотый перец": "½ ч. л.",
         "step": [
           1,
           4
         ]
       },
       {
-        "Молотая паприка": "½ ч. л.",
+        "Паприка": "½ ч. л.",
         "step": [
           1
         ]
@@ -6227,7 +6227,7 @@
         "5": 63
       }
     ],
-    "views": 370,
+    "views": 371,
     "prepTime": 55,
     "complexity": "normal",
     "sharpness": 1,
@@ -6294,14 +6294,14 @@
         ]
       },
       {
-        "Молотый чёрный перец": "½ ч. л.",
+        "Чёрный молотый перец": "½ ч. л.",
         "step": [
           1,
           4
         ]
       },
       {
-        "Молотая паприка": "½ ч. л.",
+        "Паприка": "½ ч. л.",
         "step": [
           1
         ]
@@ -6481,7 +6481,7 @@
         "5": 51
       }
     ],
-    "views": 331,
+    "views": 332,
     "prepTime": 50,
     "complexity": "easy",
     "sharpness": 1,
@@ -6551,7 +6551,7 @@
         ]
       },
       {
-        "Молотый чёрный перец": "½ ч. л.",
+        "Чёрный молотый перец": "½ ч. л.",
         "step": [
           1,
           4
@@ -6710,8 +6710,8 @@
       "easyRecipes",
       "ru",
       "containsMilk",
-      "containsEgg",
-      "containsOnion"
+      "containsOnion",
+      "containsEgg"
     ]
   },
   {
@@ -6738,7 +6738,7 @@
         "5": 72
       }
     ],
-    "views": 430,
+    "views": 431,
     "prepTime": 75,
     "complexity": "normal",
     "sharpness": 1,
@@ -6784,7 +6784,7 @@
         ]
       },
       {
-        "Яйца": "3 шт.",
+        "Яйцо": "3 шт.",
         "step": [
           3,
           4
@@ -6811,7 +6811,7 @@
         ]
       },
       {
-        "Молотый чёрный перец": "½ ч. л.",
+        "Чёрный молотый перец": "½ ч. л.",
         "step": [
           3
         ]
@@ -6965,8 +6965,8 @@
       "easyRecipes",
       "fr",
       "containsMilk",
-      "containsEgg",
-      "containsOnion"
+      "containsOnion",
+      "containsEgg"
     ]
   },
   {
@@ -6993,7 +6993,7 @@
         "5": 79
       }
     ],
-    "views": 456,
+    "views": 458,
     "prepTime": 45,
     "complexity": "easy",
     "sharpness": 1,
@@ -7026,7 +7026,7 @@
         ]
       },
       {
-        "Сливки": "150 мл",
+        "Сливки 10%": "150 мл",
         "step": [
           4,
           5
@@ -7061,7 +7061,7 @@
         ]
       },
       {
-        "Молотый чёрный перец": "½ ч. л.",
+        "Чёрный молотый перец": "½ ч. л.",
         "step": [
           1,
           4
@@ -7257,7 +7257,7 @@
         "5": 62
       }
     ],
-    "views": 376,
+    "views": 377,
     "prepTime": 55,
     "complexity": "easy",
     "sharpness": 1,
@@ -7333,7 +7333,7 @@
         ]
       },
       {
-        "Молотый чёрный перец": "½ ч. л.",
+        "Чёрный молотый перец": "½ ч. л.",
         "step": [
           1,
           4
@@ -7534,7 +7534,7 @@
         "5": 65
       }
     ],
-    "views": 383,
+    "views": 384,
     "prepTime": 70,
     "complexity": "normal",
     "sharpness": 1,
@@ -7611,7 +7611,7 @@
         ]
       },
       {
-        "Молотый чёрный перец": "½ ч. л.",
+        "Чёрный молотый перец": "½ ч. л.",
         "step": [
           1,
           4
@@ -7815,7 +7815,7 @@
         "5": 70
       }
     ],
-    "views": 404,
+    "views": 405,
     "prepTime": 60,
     "complexity": "normal",
     "sharpness": 1,
@@ -7891,7 +7891,7 @@
         ]
       },
       {
-        "Молотый чёрный перец": "½ ч. л.",
+        "Чёрный молотый перец": "½ ч. л.",
         "step": [
           1,
           4
@@ -8080,13 +8080,13 @@
         "3": 8
       },
       {
-        "4": 35
+        "4": 36
       },
       {
         "5": 75
       }
     ],
-    "views": 440,
+    "views": 444,
     "prepTime": 65,
     "complexity": "normal",
     "sharpness": 1,
@@ -8366,7 +8366,7 @@
         "5": 78
       }
     ],
-    "views": 454,
+    "views": 458,
     "prepTime": 55,
     "complexity": "normal",
     "sharpness": 1,
@@ -8399,7 +8399,7 @@
         ]
       },
       {
-        "Свекла": "400 г",
+        "Свёкла": "400 г",
         "step": [
           2,
           5

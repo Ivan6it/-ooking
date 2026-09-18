@@ -4,21 +4,118 @@ import { IconOKey } from '../../icons';
 import { DefaultButton } from '@/shared/ui/buttons/defaultButton';
 import styles from './Mailing.module.css';
 import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateUser } from '@/store/userSlice';
+import type { AppDispatch } from '@/store';
 
 export function Mailing({ small = false }) {
   const [name, setName] = useState('');
   const [mail, setMail] = useState('');
+  const [error, setError] = useState('');
+  const [errorName, setErrorName] = useState('');
+  const [errorMail, setErrorMail] = useState('');
+  const [agreementForm, setAgreementForm] = useState(false);
 
+  const userAgreement = useSelector((state: any) => state.user.userData.agreement);
+  const userId = useSelector((state: any) => state.user.userData.id);
+  const dispatch = useDispatch<AppDispatch>();
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
   };
-
   const handleMailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMail(e.target.value);
   };
 
+  function validateFormFieldsName(value: string): boolean {
+    const namePattern = /^[^0-9_@!]+$/;
+
+    if (!namePattern.test(value)) {
+      setErrorName('Имя содержит недопустимые символы');
+      return false;
+    }
+
+    if (value.trim().length < 2) {
+      setErrorName('Имя должно содержать минимум 2 символа');
+      return false;
+    }
+
+    return true;
+  }
+
+  function validateFormFieldsEmail(value: string): boolean {
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    if (!emailPattern.test(value)) {
+      setErrorMail('Некорректный адрес электронной почты');
+      return false;
+    }
+
+    return true;
+  }
+
+  function submitEvent() {
+    setErrorName('');
+    setErrorMail('');
+    setError('');
+
+    if (!small) {
+      if (name.trim().length === 0) {
+        setErrorName('Введите имя');
+        return;
+      }
+
+      if (!validateFormFieldsName(name)) {
+        return;
+      }
+
+      if (mail.trim().length === 0) {
+        setErrorMail('Введите почту');
+        return;
+      }
+
+      if (!validateFormFieldsEmail(mail)) {
+        return;
+      }
+
+      if (!agreementForm) {
+        setError('Нужно принять соглашение');
+        return;
+      }
+
+      dispatch(
+        updateUser({
+          userData: {
+            id: userId,
+            agreement: true,
+          },
+        }),
+      );
+    } else {
+      if (mail.trim().length === 0) {
+        setErrorMail('Введите почту');
+        return;
+      }
+      if (!validateFormFieldsEmail(mail)) {
+        return;
+      }
+      if (!agreementForm) {
+        setError('Нужно принять соглашение');
+        return;
+      }
+      dispatch(
+        updateUser({
+          userData: {
+            id: userId,
+            agreement: true,
+          },
+        }),
+      );
+    }
+  }
+
   return (
     <div className={`${styles.mailing} ${small ? styles.mailing__small : ''}`}>
+      {userAgreement && <div className={styles.mailing__overlay}>Вы подписаны!</div>}
       <form className={`${styles.mailing__form} ${small ? styles.mailing__form__small : ''}`}>
         <h2
           className={`${styles.mailing__form__heading} ${small ? styles.mailing__form__heading__small : ''}`}>
@@ -32,9 +129,11 @@ export function Mailing({ small = false }) {
             value={name}
             placeholder="Ваше имя"
             onChange={handleNameChange}
+            error={errorName}
           />
         )}
         <Input
+          error={errorMail}
           classInput={`${styles.mailing__form__input} ${small ? styles.mailing__form__input__small : ''}`}
           type="email"
           id="email"
@@ -44,7 +143,11 @@ export function Mailing({ small = false }) {
         />
         <div
           className={`${styles.mailing__form__personal} ${small ? styles.mailing__form__personal__small : ''}`}>
-          <IconActive className={styles.mailing__form__personal__button} svg={<IconOKey />} />
+          <IconActive
+            handleClick={() => setAgreementForm((prev) => !prev)}
+            className={styles.mailing__form__personal__button}
+            svg={<IconOKey active={agreementForm} />}
+          />
           <p
             className={`${styles.mailing__form__personal__text} ${small ? styles.mailing__form__personal__text__small : ''}`}>
             Я подтверждаю согласие на&nbsp;
@@ -55,10 +158,13 @@ export function Mailing({ small = false }) {
               обработку персональных данных
             </a>
           </p>
+          {error && <p className={styles.mailing__form__personal__error}>{error}</p>}
         </div>
         <DefaultButton
           className={`${styles.mailing__form__button} ${small ? styles.mailing__form__button__small : ''}`}
           text="Подписаться"
+          disabled={userAgreement === undefined}
+          handleClick={() => submitEvent()}
         />
       </form>
       <div>

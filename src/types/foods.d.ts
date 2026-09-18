@@ -5,6 +5,7 @@ export interface Food {
   image: string;
   imgAlt: string;
   likes: number;
+  productTags: string[];
   stars: { [key: string]: number }[];
   views: number;
   prepTime: number;

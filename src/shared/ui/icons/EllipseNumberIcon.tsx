@@ -20,7 +20,7 @@ export function EllipseNumberIcon({ number, active = false }: EllipseNumberIconP
             textAnchor="middle"
             dominantBaseline="middle"
             fontSize="24"
-            fill="rgba(28, 31, 29, 1)" // цвет текста (по умолчанию твой основной цвет)
+            fill="rgba(28, 31, 29, 1)"
             fontWeight="600">
             {number}
           </text>
@@ -33,14 +33,14 @@ export function EllipseNumberIcon({ number, active = false }: EllipseNumberIconP
           height="57"
           fill="none"
           viewBox="0 0 57 57">
-          <circle cx="28.5" cy="28.5" r="27.5" fill="#edffe3" stroke="#67bb5a" stroke-width="2" />
+          <circle cx="28.5" cy="28.5" r="27.5" fill="#edffe3" stroke="#67bb5a" strokeWidth="2" />
           <text
             x="50%"
             y="50%"
             textAnchor="middle"
             dominantBaseline="middle"
             fontSize="24"
-            fill="rgba(28, 31, 29, 1)" // цвет текста (по умолчанию твой основной цвет)
+            fill="rgba(28, 31, 29, 1)"
             fontWeight="600">
             {number}
           </text>

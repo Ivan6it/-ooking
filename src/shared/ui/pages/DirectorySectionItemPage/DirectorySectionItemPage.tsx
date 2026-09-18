@@ -4,12 +4,12 @@ import { getGenitive } from '@/utils/russian';
 import { Comments } from '@/shared/ui/widgets/Comments';
 import { Mailing } from '@/shared/ui/widgets/Mailing';
 import { useParams, Link } from 'react-router-dom';
-import { NotFoundPage } from '../NotFoundPage';
 import { useSelector, useDispatch } from 'react-redux';
 import type { RootState, AppDispatch } from '@/store';
 import type { FoodsState } from '@/store/foodsListSlice';
 import { useState } from 'react';
 import { updateDirectoryItemComments } from '@/store/directorySectionSlice';
+import { NotFoundPage } from '../NotFoundPage';
 
 export default function DirectorySectionItemPage() {
   const { sectionName, itemId } = useParams();
@@ -20,8 +20,9 @@ export default function DirectorySectionItemPage() {
     id: 0,
     name: '',
   });
+  const recipesData = itemId ? foods.filter((item) => item.productTags.includes(itemId)) : [];
 
-  const { directorySection } = useSelector((state: RootState) => state.directorySection);
+  const { directorySection, loading } = useSelector((state: RootState) => state.directorySection);
   const userState = useSelector((state: any) => state.user.userData.id);
   const dispatch = useDispatch<AppDispatch>();
 
@@ -132,7 +133,7 @@ export default function DirectorySectionItemPage() {
 
   const currentSection = directorySection.filter((item) => item.id === sectionName)[0];
   const currentSectionItem = currentSection?.products?.filter((item) => item.id === itemId)[0];
-  if (!currentSectionItem) {
+  if (!currentSectionItem && !loading) {
     return <NotFoundPage />;
   }
 
@@ -205,9 +206,9 @@ export default function DirectorySectionItemPage() {
       <h4 className={styles.directorySectionItemPage__heading}>Применения</h4>
       <p>{currentSectionItem.application}</p>
       <SectionCards
-        foods={foods}
+        foods={recipesData.slice(0, 8)}
         className={styles.directorySectionItemPage__cards}
-        ogrinicator={'none'}
+        ogrinicator={true}
         heading={`Рецепты из ${getGenitive(currentSectionItem.name)}`}
       />
       <Comments
