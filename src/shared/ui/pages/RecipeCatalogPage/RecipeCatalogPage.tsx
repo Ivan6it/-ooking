@@ -8,9 +8,11 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import type { FoodsState } from '@/store/foodsListSlice';
 import type { RootState } from '@/store';
+import type { FilterGroup } from '@/types/filters';
+import type { Food } from '@/types/foods';
 
 interface FiltersData {
-  main?: any[];
+  main?: FilterGroup[];
 }
 
 export default function RecipeCatalogPage() {
@@ -44,16 +46,18 @@ export default function RecipeCatalogPage() {
     });
     return score === filters.length;
   });
-  function sortedDop(item: string | null, recipes: any) {
+  function sortedDop(item: string | null, recipes: Food[]) {
     if (item === 'date') {
       return [...recipes].sort((a, b) => b.date - a.date);
     } else if (item === 'like' || item === 'favourites') {
       return [...recipes].sort((a, b) => b.likes - a.likes);
     } else {
-      return [...recipes].sort((a, b) => b.energy.replace(/\D/g, '') - a.energy.replace(/\D/g, ''));
+      return [...recipes].sort(
+        (a, b) => Number(b.energy.replace(/\D/g, '')) - Number(a.energy.replace(/\D/g, '')),
+      );
     }
   }
-  function sortedKitchen(filter: string, recipes: any) {
+  function sortedKitchen(filter: string, recipes: Food[]) {
     const upRecipes = [];
     const downRecipes = [];
     for (let i = 0; i < recipes.length; i++) {

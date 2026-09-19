@@ -5,6 +5,7 @@ import { PlusEllipse } from '@/shared/ui/icons';
 import type { Food } from '@/types/foods';
 import type { Cookbook } from '@/types/users';
 import { useSelector } from 'react-redux';
+import type { RootState } from '@/store';
 
 type CookbooksProps = {
   handleClick?: (recipes: Food[], name: string) => void;
@@ -12,12 +13,13 @@ type CookbooksProps = {
 };
 
 export function Cookbooks({ handleClick, createBook }: CookbooksProps) {
-  const user = useSelector((state: any) => state.user.userData);
+  const user = useSelector((state: RootState) => state.user.userData);
   return (
     <div className={styles.cookbooks}>
-      {user.cookbooks.map((item: Cookbook, index: number) => (
-        <CookbooksItem key={index} handleClick={handleClick} data={item} />
-      ))}
+      {'cookbooks' in user &&
+        user.cookbooks.map((item: Cookbook, index: number) => (
+          <CookbooksItem key={index} handleClick={handleClick} data={item} />
+        ))}
       <IconActive
         handleClick={() => createBook()}
         className={styles.cookbooks__container}

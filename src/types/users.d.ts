@@ -1,7 +1,7 @@
 export interface Shoppinglist {
   id: number;
-  buyingredients: number[] | [];
-  purchasedingredients: number[] | [];
+  buyingredients: number[];
+  purchasedingredients: number[];
 }
 
 export interface Cookbook {

@@ -12,6 +12,8 @@ import { ShoppingList } from '../../widgets/ShoppingList';
 import { ShoppingListItem } from '@/shared/ui/widgets/ShoppingListItem';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import type { RootState } from '@/store';
+import type { Cookbook, Shoppinglist } from '@/types/users';
 
 export default function ProfileUserPage() {
   const [createBook, setCreateBook] = useState(false);
@@ -25,8 +27,8 @@ export default function ProfileUserPage() {
 
   const [shopListId, setShopListId] = useState<number | null>(null);
 
-  const users = useSelector((state: any) => state.user.userData);
-  const foods = useSelector((state: any) => state.foodsList.foods);
+  const users = useSelector((state: RootState) => state.user.userData);
+  const foods = useSelector((state: RootState) => state.foodsList.foods);
 
   function createBookFunction() {
     setCreateBook((prev) => !prev);
@@ -49,7 +51,9 @@ export default function ProfileUserPage() {
   }
 
   const cookbook = visibleBook
-    ? users.cookbooks.find((item: any) => item.name === visibleBook.name)
+    ? 'cookbooks' in users
+      ? users.cookbooks.find((item: Cookbook) => item.name === visibleBook.name)
+      : undefined
     : null;
 
   const catalog = cookbook
@@ -57,7 +61,11 @@ export default function ProfileUserPage() {
     : [];
 
   const shopList =
-    shopListId !== null ? users.shoppinglist.find((item: any) => item.id === shopListId) : null;
+    shopListId !== null
+      ? 'shoppinglist' in users
+        ? users.shoppinglist.find((item: Shoppinglist) => item.id === shopListId)
+        : undefined
+      : null;
 
   const shopListData =
     shopList && foods.length > 0
@@ -80,7 +88,7 @@ export default function ProfileUserPage() {
           <img
             loading="lazy"
             className={styles.profileUserPage__profile__container__img}
-            src={users.image}
+            src={'image' in users ? users.image : undefined}
           />
 
           <Link to={'/profile/setting'}>
@@ -91,7 +99,9 @@ export default function ProfileUserPage() {
         </div>
 
         <div className={styles.profileUserPage__profile__info}>
-          <span className={styles.profileUserPage__profile__info__name}>{users.name}</span>
+          <span className={styles.profileUserPage__profile__info__name}>
+            {'name' in users ? users.name : undefined}
+          </span>
           <span>Член сообщества</span>
         </div>
       </div>
@@ -162,7 +172,15 @@ export default function ProfileUserPage() {
         </>
       )}
 
-      {shopListData?.recipe && <ShoppingListItem handleBack={handleBack} data={shopListData} />}
+      {shopListData?.recipe && (
+        <ShoppingListItem
+          handleBack={handleBack}
+          data={{
+            ...shopListData,
+            recipe: shopListData.recipe,
+          }}
+        />
+      )}
 
       {visibleBook !== null && catalog.length === 0 && (
         <div className={styles.profileUserPage__sectionCards__empty}>

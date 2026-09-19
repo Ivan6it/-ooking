@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import type { Food } from '@/types/foods';
+import type { Food, FoodStars } from '@/types/foods';
 
 export interface FoodsState {
   foods: Food[];
@@ -12,14 +12,6 @@ const initialState: FoodsState = {
   loading: false,
   error: null,
 };
-
-type Stars = {
-  '1': number;
-  '2': number;
-  '3': number;
-  '4': number;
-  '5': number;
-}[];
 
 export const fetchFoods = createAsyncThunk(
   'foodsList/fetchFoods',
@@ -63,8 +55,8 @@ export const updateFoodViews = createAsyncThunk(
       const data = await res.json();
 
       return data.food;
-    } catch (err: any) {
-      return rejectWithValue(err.message || 'Network error');
+    } catch (err) {
+      return rejectWithValue(err instanceof Error ? err.message : 'Network error');
     }
   },
 );
@@ -107,15 +99,15 @@ export const updateFoodComments = createAsyncThunk(
       const data = await res.json();
 
       return data.food;
-    } catch (err: any) {
-      return rejectWithValue(err.message || 'Network error');
+    } catch (err) {
+      return rejectWithValue(err instanceof Error ? err.message : 'Network error');
     }
   },
 );
 
 export const updateFoodStars = createAsyncThunk(
   'foodsList/updateFoodStars',
-  async ({ id, stars }: { id: number; stars: Stars }, { rejectWithValue }) => {
+  async ({ id, stars }: { id: number; stars: FoodStars[] }, { rejectWithValue }) => {
     try {
       const res = await fetch('/api/foods', {
         method: 'PUT',
@@ -137,8 +129,8 @@ export const updateFoodStars = createAsyncThunk(
       const data = await res.json();
 
       return data.food;
-    } catch (err: any) {
-      return rejectWithValue(err.message || 'Network error');
+    } catch (err) {
+      return rejectWithValue(err instanceof Error ? err.message : 'Network error');
     }
   },
 );
@@ -167,8 +159,8 @@ export const updateFood = createAsyncThunk(
       const data = await res.json();
 
       return data.food;
-    } catch (err: any) {
-      return rejectWithValue(err.message || 'Network error');
+    } catch (err) {
+      return rejectWithValue(err instanceof Error ? err.message : 'Network error');
     }
   },
 );

@@ -8,8 +8,12 @@ import { useNavigate } from 'react-router';
 
 export function LikeSection() {
   const { foods }: FoodsState = useSelector<RootState, FoodsState>((state) => state.foodsList);
-  const userLiked = useSelector((state: any) => state.user.userData.liked);
-  const visibleRecipes = foods.filter((item) => userLiked.find((i: number) => i === item.id));
+  const userLiked = useSelector((state: RootState) =>
+    'liked' in state.user.userData ? state.user.userData.liked : undefined,
+  );
+  const visibleRecipes = foods.filter((item) =>
+    userLiked ? userLiked.find((i: number) => i === item.id) : [],
+  );
   const navigate = useNavigate();
 
   return (

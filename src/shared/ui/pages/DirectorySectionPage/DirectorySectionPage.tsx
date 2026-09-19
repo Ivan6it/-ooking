@@ -4,13 +4,15 @@ import { Mailing } from '@/shared/ui/widgets/Mailing';
 import { useParams, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { NotFoundPage } from '../NotFoundPage';
+import type { RootState } from '@/store';
+import type { DirectorySectionData, DirectoryProduct } from '@/types/directorySection';
 
 export default function DirectorySectionPage() {
   const { sectionName } = useParams<{ sectionName: string | undefined }>();
-  const { directorySection, loading } = useSelector((state: any) => state.directorySection);
+  const { directorySection, loading } = useSelector((state: RootState) => state.directorySection);
 
   const currentSection = sectionName
-    ? directorySection.filter((section: any) => section.id === sectionName)
+    ? directorySection.filter((section: DirectorySectionData) => section.id === sectionName)
     : [];
   if (loading || currentSection.length === 0) {
     return <NotFoundPage />;
@@ -26,7 +28,7 @@ export default function DirectorySectionPage() {
       </span>
       <h2 className={styles.directorySectionPage__heading}>{currentSection[0].name}</h2>
       <ul className={styles.directorySectionPage__list}>
-        {currentSection[0].products.map((item: any) => (
+        {currentSection[0].products.map((item: DirectoryProduct) => (
           <li key={item.name}>
             <DirectorySectionItem sectionName={sectionName!} data={item} />
           </li>

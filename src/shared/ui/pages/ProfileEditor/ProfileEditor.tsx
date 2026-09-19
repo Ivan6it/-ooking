@@ -13,7 +13,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout, updateUser } from '@/store/userSlice';
 import type { User } from '@/types/users';
-import type { AppDispatch } from '@/store';
+import type { AppDispatch, RootState } from '@/store';
 
 type FileState = {
   fileImage: File | null;
@@ -23,6 +23,13 @@ type FileState = {
 type BirthdayState = {
   oldDate: Date | null;
   nextDate: Date | null;
+};
+
+type Gender = 'male' | 'female' | 'none';
+
+type GenderResult = {
+  oldGender: Gender | '' | undefined;
+  nextGender: Gender | '';
 };
 
 export default function ProfileEditor() {
@@ -39,7 +46,7 @@ export default function ProfileEditor() {
     password2: false,
     text2: '',
   });
-  const [genderVerificationResult, setGenderVerificationResult] = useState({
+  const [genderVerificationResult, setGenderVerificationResult] = useState<GenderResult>({
     oldGender: '',
     nextGender: '',
   });
@@ -55,7 +62,7 @@ export default function ProfileEditor() {
 
   const calendarRef = useRef<HTMLDivElement>(null);
   const today = new Date();
-  const user = useSelector((state: any) => state.user.userData);
+  const user = useSelector((state: RootState) => state.user.userData);
 
   const options = [
     { value: 'none', name: 'Выберите пол' },
@@ -64,8 +71,9 @@ export default function ProfileEditor() {
   ];
 
   useEffect(() => {
-    if (!user?.name) return;
-
+    if (!('name' in user) || !('gender' in user) || !('birthday' in user) || !('image' in user)) {
+      return;
+    }
     setNameVerificationResult({
       name: user.name,
       nameResult: false,
@@ -105,6 +113,10 @@ export default function ProfileEditor() {
     setPreviewUrl(avatarUser);
   }, [user]);
 
+  if (!('name' in user) || !('gender' in user) || !('birthday' in user) || !('image' in user)) {
+    return;
+  }
+
   const handleSave = () => {
     const updateData: Partial<User> & { id: number } = {
       id: user.id,
@@ -114,7 +126,7 @@ export default function ProfileEditor() {
       updateData.name = nameVerificationResult.name;
     }
 
-    if (detectedGender) {
+    if (detectedGender && genderVerificationResult.nextGender !== '') {
       updateData.gender = genderVerificationResult.nextGender;
     }
 
@@ -327,9 +339,14 @@ export default function ProfileEditor() {
           <div className={styles.profileEditor__container__select}>
             <label>Пол</label>
             <Select
-              onChange={(val) =>
-                setGenderVerificationResult((prev) => ({ ...prev, nextGender: val }))
-              }
+              onChange={(val) => {
+                if (val === '' || val === 'none' || val === 'male' || val === 'female') {
+                  setGenderVerificationResult((prev) => ({
+                    ...prev,
+                    nextGender: val,
+                  }));
+                }
+              }}
               defaultOption={genderDefault}
               classValue={styles.profileEditor__container__select__classValue}
               firstElement={false}

@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import type { DirectorySectionData } from '@/types/directorySection';
+import type { DirectorySectionData, DirectoryComment } from '@/types/directorySection';
 
 export interface DirectorySectionState {
   directorySection: DirectorySectionData[];
@@ -24,8 +24,8 @@ export const fetchDirectorySection = createAsyncThunk(
       }
 
       return await res.json();
-    } catch (err: any) {
-      return rejectWithValue(err.message || 'Network error');
+    } catch (err) {
+      return rejectWithValue(err instanceof Error ? err.message : 'Network error');
     }
   },
 );
@@ -38,7 +38,7 @@ export const updateDirectoryItemComments = createAsyncThunk(
       comments,
     }: {
       id: string;
-      comments: any[];
+      comments: DirectoryComment[];
     },
     { rejectWithValue },
   ) => {
@@ -63,8 +63,8 @@ export const updateDirectoryItemComments = createAsyncThunk(
       const data = await res.json();
 
       return data.item;
-    } catch (err: any) {
-      return rejectWithValue(err.message || 'Network error');
+    } catch (err) {
+      return rejectWithValue(err instanceof Error ? err.message : 'Network error');
     }
   },
 );

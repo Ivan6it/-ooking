@@ -161,19 +161,20 @@ export function RecipeBuilder({ setGenerateRecipes }: RecipeBuilderProps) {
                 score++;
               }
             });
-            if (score > 0) {
-              return [item, score];
-            }
+            return [item, score];
           })
         : recipesFilterAdditional;
-    const scoreListRecipes = recipesFilterProducts.filter((i) => i !== undefined);
-    const preResult = scoreListRecipes.sort((a, b) => {
-      const arrA = a as unknown as [Food, number];
-      const arrB = b as unknown as [Food, number];
-      return arrB[1] - arrA[1];
-    });
-    const result = preResult.map((item) => (item as [Food, number])[0]);
-    setGenerateRecipes(result);
+    const preResult =
+      productsInStock.length > 0
+        ? recipesFilterProducts.sort((a, b) => {
+            const arrA = a as unknown as [Food, number];
+            const arrB = b as unknown as [Food, number];
+            return arrB[1] - arrA[1];
+          })
+        : recipesFilterProducts;
+    const result =
+      productsInStock.length > 0 ? preResult.map((item) => (item as [Food, number])[0]) : preResult;
+    setGenerateRecipes(result as Food[]);
   }
 
   function handleReset() {
@@ -383,7 +384,9 @@ export function RecipeBuilder({ setGenerateRecipes }: RecipeBuilderProps) {
       </div>
       <div className={styles.recipeBuilder__buttons}>
         <DefaultButton
-          handleClick={() => createRecipes()}
+          handleClick={() => {
+            createRecipes();
+          }}
           className={styles.recipeBuilder__buttons__button}
           text={'Применить'}
         />

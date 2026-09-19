@@ -367,7 +367,8 @@
     "liked": [],
     "agreement": false,
     "cookbooks": [],
-    "shoppinglist": []
+    "shoppinglist": [],
+    "stars": []
   },
   {
     "id": 1789748010033,
@@ -388,5 +389,48 @@
         "stars": 4
       }
     ]
+  },
+  {
+    "id": 1789774918172,
+    "name": "Иван",
+    "mail": "rzv124dsa53@mail.ru",
+    "password": "dsad321",
+    "surname": "",
+    "image": "/images/imageUsers/Anonim.jpg",
+    "gender": "none",
+    "birthday": null,
+    "liked": [],
+    "agreement": false,
+    "cookbooks": [],
+    "shoppinglist": []
+  },
+  {
+    "id": 1789833052787,
+    "name": "Иван",
+    "mail": "rzv124dsdsdas53@mail.ru",
+    "password": "dsadas321",
+    "surname": "",
+    "image": "/images/imageUsers/Anonim.jpg",
+    "gender": "none",
+    "birthday": null,
+    "liked": [
+      3,
+      6,
+      24,
+      25
+    ],
+    "agreement": true,
+    "cookbooks": [
+      {
+        "name": "Выглядит интересно",
+        "recipes": [
+          25,
+          6,
+          24
+        ],
+        "id": "1789838339509"
+      }
+    ],
+    "shoppinglist": []
   }
 ]

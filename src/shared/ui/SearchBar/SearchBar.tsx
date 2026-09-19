@@ -17,6 +17,11 @@ export function SearchBar({ placeholder, className, value, onChange }: SearchBar
           type="text"
           value={value}
           onChange={(e) => onChange(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+            }
+          }}
           placeholder={placeholder}
         />
         <SearchIcon className={styles.searchIcon} />

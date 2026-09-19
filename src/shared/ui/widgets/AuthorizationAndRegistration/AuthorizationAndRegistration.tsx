@@ -17,13 +17,11 @@ export function AuthorizationAndRegistration() {
   const [nameError, setNameError] = useState({ text: '', active: false });
   const [emailError, setEmailError] = useState({ text: '', active: false });
   const [passwordError, setPasswordError] = useState({ text: '', active: false });
-  const [isTouched, setIsTouched] = useState(false);
   const [agreement, setAgreement] = useState(false);
 
   const dispatch = useDispatch<AppDispatch>();
   const userState = useSelector((state: RootState) => state.user);
   const isLoading = userState.loading;
-  const errorMessage = userState.error;
   const isOpen = userState.isAuthModalOpen;
 
   const hasData = Object.keys(userState.userData).length > 0;
@@ -97,17 +95,14 @@ export function AuthorizationAndRegistration() {
   }
 
   function handleBlurName() {
-    setIsTouched(true);
     setNameError({ text: validateFormFieldsName(name), active: true });
   }
 
   function handleBlurEmail() {
-    setIsTouched(true);
     setEmailError({ text: validateFormFieldsEmail(mail), active: true });
   }
 
   function handleBlurPassword() {
-    setIsTouched(true);
     setPasswordError({ text: validateFormFieldsPassword(password), active: true });
   }
 

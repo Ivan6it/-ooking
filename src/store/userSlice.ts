@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import type { User } from '@/types/users';
 
 export interface UserState {
-  userData: User | {};
+  userData: User | Record<string, never>;
   loading: boolean;
   error: { status?: number; message: string } | string | null;
   isAuthModalOpen: boolean;
@@ -62,9 +62,9 @@ export const loginUser = createAsyncThunk(
       const data = await res.json();
       localStorage.setItem('token', data.token);
       return data.user;
-    } catch (err: any) {
+    } catch (err) {
       console.error('Login API Error:', err);
-      return rejectWithValue(err.message || 'Network error');
+      return rejectWithValue(err instanceof Error ? err.message : 'Network error');
     }
   },
 );
@@ -104,8 +104,8 @@ export const registerUser = createAsyncThunk(
       const userData = await userRes.json();
 
       return userData.user;
-    } catch (err: any) {
-      return rejectWithValue(err.message || 'Network error');
+    } catch (err) {
+      return rejectWithValue(err instanceof Error ? err.message : 'Network error');
     }
   },
 );
@@ -168,8 +168,8 @@ export const updateUser = createAsyncThunk(
       const data = await res.json();
 
       return data.user;
-    } catch (err: any) {
-      return rejectWithValue(err.message || 'Network error');
+    } catch (err) {
+      return rejectWithValue(err instanceof Error ? err.message : 'Network error');
     }
   },
 );

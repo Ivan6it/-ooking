@@ -7,7 +7,8 @@ import { DefaultButton } from '../../buttons/defaultButton';
 import { CreateBook } from '@/shared/ui/widgets/CreateBook';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateUser } from '@/store/userSlice';
-import type { AppDispatch } from '@/store';
+import type { AppDispatch, RootState } from '@/store';
+import type { Cookbook } from '@/types/users';
 
 type AddRecipeInBookModalProps = {
   closeModal: () => void;
@@ -25,7 +26,7 @@ export function AddRecipeInBookModal({
   idRecipe,
 }: AddRecipeInBookModalProps) {
   const [openModalCreateBook, setOpenModalCreateBook] = useState(false);
-  const user = useSelector((state: any) => state.user.userData);
+  const user = useSelector((state: RootState) => state.user.userData);
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
@@ -41,9 +42,9 @@ export function AddRecipeInBookModal({
     };
   }, [openModalCreateBook]);
 
-  const options = user.cookbooks;
+  const cookbooks = 'cookbooks' in user ? user.cookbooks : [];
 
-  const result = options.map((item: any) => ({
+  const result = cookbooks.map((item: Cookbook) => ({
     name: item.name,
     value: item.id,
   }));
@@ -51,13 +52,16 @@ export function AddRecipeInBookModal({
   const [selectBook, setSelectBook] = useState(result[0]?.value || '');
 
   useEffect(() => {
-    if (user.cookbooks.length > 0 && !selectBook) {
-      setSelectBook(user.cookbooks[0].id);
+    if (cookbooks.length > 0 && !selectBook) {
+      setSelectBook(cookbooks[0].id);
     }
-  }, [user.cookbooks, selectBook]);
+  }, [cookbooks, selectBook]);
 
   function addRecipes() {
-    const newCookbook = user.cookbooks.map((item: any) => {
+    if (!('id' in user)) {
+      return;
+    }
+    const newCookbook = cookbooks.map((item: Cookbook) => {
       if (item.id === selectBook) {
         return { ...item, recipes: [...item.recipes, idRecipe] };
       }
@@ -90,7 +94,7 @@ export function AddRecipeInBookModal({
             alt={imgAlt}
             src={img}></img>
           <span className={styles.addRecipeInBookModal__text}>{name}</span>
-          {user.cookbooks.length === 0 ? (
+          {cookbooks.length === 0 ? (
             <div style={{ marginBottom: '15px' }}></div>
           ) : (
             <Select

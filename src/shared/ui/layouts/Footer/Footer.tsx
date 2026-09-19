@@ -6,7 +6,7 @@ import { ButtonLink } from '@/shared/ui/buttonLinks';
 import { useState } from 'react';
 import { Input } from '@/shared/ui/input';
 import { useDispatch, useSelector } from 'react-redux';
-import type { AppDispatch } from '@/store';
+import type { AppDispatch, RootState } from '@/store';
 import { updateUser } from '@/store/userSlice';
 
 export function Footer() {
@@ -14,7 +14,7 @@ export function Footer() {
   const [errorMail, setErrorMail] = useState('');
 
   const dispatch = useDispatch<AppDispatch>();
-  const userData = useSelector((state: any) => state.user.userData);
+  const userData = useSelector((state: RootState) => state.user.userData);
   function validateFormFieldsEmail(value: string): boolean {
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
@@ -37,15 +37,16 @@ export function Footer() {
     if (!validateFormFieldsEmail(email)) {
       return;
     }
-
-    dispatch(
-      updateUser({
-        userData: {
-          id: userData.id,
-          agreement: true,
-        },
-      }),
-    );
+    if ('id' in userData) {
+      dispatch(
+        updateUser({
+          userData: {
+            id: userData.id,
+            agreement: true,
+          },
+        }),
+      );
+    }
   }
 
   return (
@@ -81,7 +82,7 @@ export function Footer() {
             />
           </div>
         </div>
-        {!userData.agreement && (
+        {'agreement' in userData && !userData.agreement && (
           <form className={styles.footer__nav__form}>
             <p className={styles.footer__nav__form__text}>Подпишитесь на рассылку:</p>
             <Input

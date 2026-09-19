@@ -10,6 +10,11 @@ import type { FoodsState } from '@/store/foodsListSlice';
 import { useState } from 'react';
 import { updateDirectoryItemComments } from '@/store/directorySectionSlice';
 import { NotFoundPage } from '../NotFoundPage';
+import type { DirectoryComment, Answer } from '@/types/directorySection';
+
+function getCurrentDate() {
+  return Date.now();
+}
 
 export default function DirectorySectionItemPage() {
   const { sectionName, itemId } = useParams();
@@ -23,7 +28,9 @@ export default function DirectorySectionItemPage() {
   const recipesData = itemId ? foods.filter((item) => item.productTags.includes(itemId)) : [];
 
   const { directorySection, loading } = useSelector((state: RootState) => state.directorySection);
-  const userState = useSelector((state: any) => state.user.userData.id);
+  const userState = useSelector((state: RootState) =>
+    'id' in state.user.userData ? state.user.userData.id : undefined,
+  );
   const dispatch = useDispatch<AppDispatch>();
 
   const hasData = !!userState;
@@ -40,10 +47,14 @@ export default function DirectorySectionItemPage() {
   }
 
   function sendComment() {
+    if (comment.trim().length === 0 || userState === undefined) {
+      return;
+    }
     if (comment.trim().length !== 0) {
       if (answer.id !== 0 && !answer.value) {
+        const date = getCurrentDate();
         const newComment = {
-          date: Date.now(),
+          date,
           user: {
             id: userState,
           },
@@ -51,7 +62,7 @@ export default function DirectorySectionItemPage() {
           replyTo: answer.id,
         };
 
-        const comments = currentSectionItem.comments?.map((i: any) => {
+        const comments = currentSectionItem.comments?.map((i: DirectoryComment) => {
           if (i.date === answer.id) {
             return {
               ...i,
@@ -76,8 +87,9 @@ export default function DirectorySectionItemPage() {
           name: '',
         });
       } else if (answer.id !== 0 && answer.value) {
+        const date = getCurrentDate();
         const newComment = {
-          date: Date.now(),
+          date,
           user: {
             id: userState,
           },
@@ -85,8 +97,8 @@ export default function DirectorySectionItemPage() {
           replyTo: answer.id,
         };
 
-        const comments = currentSectionItem.comments?.map((i: any) => {
-          if (i.answers?.some((item: any) => item.date === answer.id)) {
+        const comments = currentSectionItem.comments?.map((i: DirectoryComment) => {
+          if (i.answers?.some((item: Answer) => item.date === answer.id)) {
             return {
               ...i,
               answers: [...(i.answers ?? []), newComment],
@@ -110,8 +122,9 @@ export default function DirectorySectionItemPage() {
           name: '',
         });
       } else {
+        const date = getCurrentDate();
         const newComment = {
-          date: Date.now(),
+          date,
           user: {
             id: userState,
           },

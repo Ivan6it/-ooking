@@ -6,6 +6,7 @@ import { ShareMinIcon } from '@/shared/ui/icons';
 import type { DirectoryComment } from '@/types/directorySection';
 import { useDispatch, useSelector } from 'react-redux';
 import { openAuthModal } from '@/store/userSlice';
+import type { RootState } from '@/store';
 
 type User = (typeof users)[number];
 
@@ -24,7 +25,9 @@ export function CommentsItem({
 }: CommentsItemProps) {
   const user = users.filter((item) => item.id === data.user.id)[0] as User;
   const name = users.filter((item) => item.id === adressId)[0];
-  const userSession = useSelector((state: any) => state.user.userData.id);
+  const userSession = useSelector((state: RootState) =>
+    'id' in state.user.userData ? state.user.userData.id : undefined,
+  );
   const hasData = !!userSession;
   const dispatch = useDispatch();
 
@@ -32,9 +35,11 @@ export function CommentsItem({
     if (!hasData) {
       dispatch(openAuthModal());
     } else {
-      awners
-        ? answerSelectUser(true, data.date, user.name)
-        : answerSelectUser(false, data.date, user.name);
+      if (awners) {
+        answerSelectUser(true, data.date, user.name);
+      } else {
+        answerSelectUser(false, data.date, user.name);
+      }
     }
   }
 

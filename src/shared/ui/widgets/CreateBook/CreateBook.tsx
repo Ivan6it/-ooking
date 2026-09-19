@@ -6,7 +6,8 @@ import { CrossIcon } from '@/shared/ui/icons';
 import { IconActive } from '../../iconActive';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateUser } from '@/store/userSlice';
-import type { AppDispatch } from '@/store';
+import type { AppDispatch, RootState } from '@/store';
+import type { Cookbook } from '@/types/users';
 
 type CreateBookProps = {
   closeModal: () => void;
@@ -29,18 +30,21 @@ export function CreateBook({ closeModal }: CreateBookProps) {
     };
   }, []);
 
-  const user = useSelector((state: any) => state.user.userData);
+  const user = useSelector((state: RootState) => state.user.userData);
   const dispatch = useDispatch<AppDispatch>();
 
   function createBook() {
+    if (!('cookbooks' in user) || !('id' in user)) {
+      return;
+    }
     setError('');
     const newNameBookList = bookName.trim();
-    if (user.cookbooks.some((name: any) => name.name === newNameBookList)) {
+    if (user.cookbooks.some((name: Cookbook) => name.name === newNameBookList)) {
       setError('Название книги не должно совпадать с уже имеющимимся');
     } else if (newNameBookList.length < 2) {
       setError('Название должно содержать не менее 2 символов');
     } else if (/^[a-zA-Zа-яА-ЯёЁ0-9 ]+$/.test(newNameBookList)) {
-      const newCookBooks = { name: newNameBookList, recipes: [], id: Date.now() };
+      const newCookBooks = { name: newNameBookList, recipes: [], id: String(Date.now()) };
       setError('');
       dispatch(
         updateUser({

@@ -5,17 +5,17 @@ import { getIngredientCountText } from '@/shared/helpers/helpersFunction';
 import { ShopList } from '@/shared/ui/widgets/ShopList';
 import { useNavigate } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
-import type { AppDispatch } from '@/store';
+import type { AppDispatch, RootState } from '@/store';
 import { updateUser } from '@/store/userSlice';
 
-type Shoppinglist = {
+type ShoppinglistFood = {
   recipe: Food;
-  buyingredients: number[] | [];
-  purchasedingredients: number[] | [];
+  buyingredients: number[];
+  purchasedingredients: number[];
 };
 
 type ShoppingListItemProps = {
-  data: Shoppinglist;
+  data: ShoppinglistFood;
   handleBack: () => void;
 };
 
@@ -23,13 +23,20 @@ export function ShoppingListItem({ data, handleBack }: ShoppingListItemProps) {
   const buyingredients = data.buyingredients.map((i) => data.recipe.ingredients[i]);
   const purchasedingredients = data.purchasedingredients.map((i) => data.recipe.ingredients[i]);
   const navigate = useNavigate();
-  const userState = useSelector((state: any) => state.user.userData.id);
-  const userShopList = useSelector((state: any) => state.user.userData.shoppinglist);
+  const userState = useSelector((state: RootState) =>
+    'id' in state.user.userData ? state.user.userData.id : undefined,
+  );
+  const userShopList = useSelector((state: RootState) =>
+    'shoppinglist' in state.user.userData ? state.user.userData.shoppinglist : undefined,
+  );
 
   const dispatch = useDispatch<AppDispatch>();
 
   function handleMoveIngredient(index: number) {
-    const newShoppingList = userShopList.map((item: any) => {
+    if (!userState || !userShopList) {
+      return;
+    }
+    const newShoppingList = userShopList.map((item) => {
       if (item.id !== data.recipe.id) {
         return item;
       }
@@ -37,11 +44,11 @@ export function ShoppingListItem({ data, handleBack }: ShoppingListItemProps) {
       return {
         ...item,
         buyingredients: isBuying
-          ? item.buyingredients.filter((i: any) => i !== index)
+          ? item.buyingredients.filter((i) => i !== index)
           : [...item.buyingredients, index],
         purchasedingredients: isBuying
           ? [...item.purchasedingredients, index]
-          : item.purchasedingredients.filter((i: any) => i !== index),
+          : item.purchasedingredients.filter((i) => i !== index),
       };
     });
 

@@ -3,9 +3,11 @@ import { Mailing } from '@/shared/ui/widgets/Mailing';
 import { DirectorySection } from '@/shared/ui/widgets/DirectorySection';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import type { RootState } from '@/store';
+import type { DirectorySectionData } from '@/types/directorySection';
 
 export default function GuidePage() {
-  const { directorySection } = useSelector((state: any) => state.directorySection);
+  const { directorySection } = useSelector((state: RootState) => state.directorySection);
 
   return (
     <div className={styles.guidePage}>
@@ -21,7 +23,7 @@ export default function GuidePage() {
         <br /> Пусть каждый шаг в рецепте будет понятен — без догадок, без сомнений.
       </p>
       <ul className={styles.guidePage__list}>
-        {directorySection.map((item: any) => (
+        {directorySection.map((item: DirectorySectionData) => (
           <li key={item.id}>
             <Link
               style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}

@@ -1,3 +1,45 @@
+export type FoodStars = {
+  [key:string]: number;
+}
+
+export type FoodCommentAnswer = {
+  date: number;
+  user: {
+    id: number;
+  };
+  comment: string;
+  replyTo?: number;
+};
+
+export type FoodComment = {
+  date: number;
+  user: {
+    id: number;
+  };
+  comment: string;
+  answers?: FoodCommentAnswer[];
+};
+
+export type FoodIngredient = {
+  step: number[];
+  [name: string]: string | number[];
+};
+
+export type FoodInventoryItem = {
+  id: string;
+  name: string;
+};
+
+export type FoodInventoryStep = {
+  id: number;
+  tools: string[];
+};
+
+export type FoodDescriptionStep = {
+  step: string;
+  imageStep: string[];
+};
+
 export interface Food {
   id: number;
   date: number;
@@ -6,7 +48,7 @@ export interface Food {
   imgAlt: string;
   likes: number;
   productTags: string[];
-  stars: { [key: string]: number }[];
+  stars: FoodStars[];
   views: number;
   prepTime: number;
   complexity: 'easy' | 'normal' | 'hard';
@@ -18,19 +60,11 @@ export interface Food {
   steps: number;
   tagsSearch: string[];
   tags: string[];
-  comments?: Array<{
-    date: number;
-    user: { id: number };
-    comment: string;
-    answers?: Array<{ date: number; user: { id: number }; comment: string; replyTo?: number }>;
-  }>;
-  ingredients: Array<{
-    step: number[];
-    [name: string]: string | number[];
-  }>;
+  comments?: FoodComment[];
+  ingredients: FoodIngredient[];
   additionalIngredients: string[];
   description: string;
-  inventory: { id: string; name: string }[];
-  inventorySteps: { id: number; tools: string[] }[];
-  descriptionStep: Array<{ step: string; imageStep: string[] }>;
+  inventory: FoodInventoryItem[];
+  inventorySteps: FoodInventoryStep[];
+  descriptionStep: FoodDescriptionStep[];
 }

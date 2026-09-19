@@ -6,8 +6,9 @@ import { AddRecipeInBookModal } from '@/shared/ui/widgets/AddRecipeInBookModal';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { openAuthModal, updateUser } from '@/store/userSlice';
-import type { AppDispatch } from '@/store';
+import type { AppDispatch, RootState } from '@/store';
 import { updateFood } from '@/store/foodsListSlice';
+import type { Cookbook } from '@/types/users';
 
 type CardFoodCatalogProps = {
   name: string;
@@ -31,32 +32,46 @@ export function CardFoodCatalog({
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
-  const userState = useSelector((state: any) => state.user.userData.id);
+  const userState = useSelector((state: RootState) =>
+    'id' in state.user.userData ? state.user.userData.id : undefined,
+  );
   const hasData = !!userState;
 
-  const favorites = useSelector((state: any) => state.user.userData.cookbooks);
-  const recipeFavorites = favorites
-    ? favorites.find((item: any) => item.recipes.find((i: number) => i === id))
-    : '';
+  const favorites = useSelector((state: RootState) =>
+    'cookbooks' in state.user.userData ? state.user.userData.cookbooks : undefined,
+  );
+  const recipeFavorites =
+    favorites?.some((item: Cookbook) => item.recipes.some((i: number) => i === id)) ?? false;
 
-  const isLikedData = useSelector((state: any) => state.user.userData.liked);
-  const isLiked = isLikedData ? isLikedData.find((i: number) => i === id) : '';
+  const isLikedData = useSelector((state: RootState) =>
+    'liked' in state.user.userData ? state.user.userData.liked : undefined,
+  );
+  const isLiked = isLikedData?.some((i: number) => i === id) ?? false;
   function clickLike(e: React.MouseEvent) {
     e.stopPropagation();
     if (!hasData) {
       dispatch(openAuthModal());
     } else {
-      const newLiked = isLiked ? isLikedData.filter((i: number) => i !== id) : [...isLikedData, id];
+      const newLiked = isLiked
+        ? isLikedData
+          ? isLikedData.filter((i: number) => i !== id)
+          : []
+        : [...(isLikedData ? isLikedData : []), id];
       dispatch(updateUser({ userData: { id: userState, liked: newLiked } }));
       dispatch(updateFood({ id: id, likes: isLiked ? quantityLike - 1 : quantityLike + 1 }));
     }
   }
 
   function removeFavorite() {
-    const newCookbook = favorites.map((item: any) => ({
-      ...item,
-      recipes: item.recipes.filter((i: number) => i !== id),
-    }));
+    if (!userState) {
+      return;
+    }
+    const newCookbook = favorites
+      ? favorites.map((item: Cookbook) => ({
+          ...item,
+          recipes: item.recipes.filter((i: number) => i !== id),
+        }))
+      : [];
     dispatch(
       updateUser({
         userData: {
@@ -72,7 +87,11 @@ export function CardFoodCatalog({
     if (!hasData) {
       dispatch(openAuthModal());
     } else {
-      recipeFavorites ? removeFavorite() : setAddMarkBook(true);
+      if (recipeFavorites) {
+        removeFavorite();
+      } else {
+        setAddMarkBook(true);
+      }
     }
   }
 

@@ -1,7 +1,7 @@
 import styles from './AuthButton.module.css';
 
 type AuthButtonProps = {
-  handleClick?: () => {};
+  handleClick?: () => void;
   text: string;
 };
 

@@ -653,7 +653,7 @@
     "name": "Куриная фриттата с овощами и сыром",
     "image": "/images/ImageRecipes/3.jpg",
     "imgAlt": "Фото куриной фриттаты с овощами и сыром",
-    "likes": 67,
+    "likes": 68,
     "stars": [
       {
         "1": 1
@@ -1244,7 +1244,7 @@
         "5": 39
       }
     ],
-    "views": 281,
+    "views": 282,
     "prepTime": 55,
     "complexity": "normal",
     "sharpness": 1,
@@ -1510,7 +1510,7 @@
     "name": "Овсяные оладьи с творогом и яблоком",
     "image": "/images/ImageRecipes/6.jpg",
     "imgAlt": "Фото овсяных оладий с творогом и яблоком",
-    "likes": 58,
+    "likes": 59,
     "stars": [
       {
         "1": 1
@@ -2319,7 +2319,7 @@
         "5": 41
       }
     ],
-    "views": 323,
+    "views": 324,
     "prepTime": 35,
     "complexity": "easy",
     "sharpness": 1,
@@ -6463,7 +6463,7 @@
     "name": "Печёночные оладьи из говяжьей печени с гречкой",
     "image": "/images/ImageRecipes/24.jpg",
     "imgAlt": "Фото печёночных оладий из говяжьей печени с гречкой",
-    "likes": 91,
+    "likes": 92,
     "stars": [
       {
         "1": 1
@@ -6720,7 +6720,7 @@
     "name": "Французский киш с ветчиной и сыром",
     "image": "/images/ImageRecipes/25.jpg",
     "imgAlt": "Фото французского киша с ветчиной и сыром",
-    "likes": 119,
+    "likes": 120,
     "stars": [
       {
         "1": 1

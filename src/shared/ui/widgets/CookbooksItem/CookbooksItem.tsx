@@ -23,7 +23,7 @@ export function CookbooksItem({ data, handleClick }: CookbooksItemProps) {
   const [error, setError] = useState('');
   const { foods }: FoodsState = useSelector<RootState, FoodsState>((state) => state.foodsList);
 
-  const user = useSelector((state: any) => state.user.userData);
+  const user = useSelector((state: RootState) => state.user.userData);
   const dispatch = useDispatch<AppDispatch>();
 
   const selectRef = useRef<HTMLDivElement>(null);
@@ -50,7 +50,10 @@ export function CookbooksItem({ data, handleClick }: CookbooksItemProps) {
   }
 
   function deleteBook() {
-    const newBooksList = user.cookbooks.filter((item: any) => item.name !== data.name);
+    if (!('cookbooks' in user) || !('id' in user)) {
+      return;
+    }
+    const newBooksList = user.cookbooks.filter((item: Cookbook) => item.name !== data.name);
     dispatch(
       updateUser({
         userData: {
@@ -63,16 +66,19 @@ export function CookbooksItem({ data, handleClick }: CookbooksItemProps) {
   }
 
   function confirmRename() {
+    if (!('cookbooks' in user) || !('id' in user)) {
+      return;
+    }
     setError('');
     const newNameBook = nameBook.trim();
     if (newNameBook.length < 2) {
       setError('Минимум 2 символа');
     } else if (!/^[a-zA-Zа-яА-ЯёЁ0-9 ]+$/.test(newNameBook)) {
       setError('Недопустимые символы');
-    } else if (user.cookbooks.some((item: any) => item.name === newNameBook)) {
+    } else if (user.cookbooks.some((item: Cookbook) => item.name === newNameBook)) {
       setError('Такое имя уже существует');
     } else {
-      const rename = user.cookbooks.map((item: any) => {
+      const rename = user.cookbooks.map((item: Cookbook) => {
         if (item.name === data.name) {
           return { ...item, name: newNameBook };
         }
@@ -91,7 +97,7 @@ export function CookbooksItem({ data, handleClick }: CookbooksItemProps) {
   }
 
   const recipes = foods.filter((item) => data.recipes.includes(item.id));
-  let recipesList: Food[] = [];
+  const recipesList: Food[] = [];
   if (recipes.length > 3) {
     recipesList.push(...recipes.slice(0, 3));
   } else {

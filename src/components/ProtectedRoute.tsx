@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import { openAuthModal } from '@/store/userSlice';
+import type  {RootState } from '@/store'
 
 interface Props {
   children: React.ReactNode;
@@ -9,7 +10,7 @@ interface Props {
 
 export function ProtectedRoute({ children }: Props) {
   const dispatch = useDispatch();
-  const authStatus = useSelector((state: any) => state.user.authStatus);
+  const authStatus = useSelector((state: RootState) => state.user.authStatus);
 
   useEffect(() => {
     if (authStatus === 'unauthenticated') {

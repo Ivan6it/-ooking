@@ -8,7 +8,7 @@ import type { Filters } from '@/types/filters';
 
 type SectionFiltersProps = {
   filtersGroup: Filters['filtersGroup'];
-  setFiltersRecipes(value: any): void;
+  setFiltersRecipes: React.Dispatch<React.SetStateAction<Record<string, string>>>;
   recipesFiltered(): void;
 };
 
@@ -26,7 +26,7 @@ export function SectionFilters({
       ...prev,
       [groupName]: value,
     }));
-    setFiltersRecipes((prev: any) => ({
+    setFiltersRecipes((prev) => ({
       ...prev,
       [groupName]: id,
     }));

@@ -14,7 +14,9 @@ export function Header() {
   const [textInput, setTextInput] = useState('');
   const [recipes, setRecipes] = useState<Food[]>([]);
   const dispatch = useDispatch();
-  const hasUser = useSelector((state: any) => state.user.userData.id);
+  const hasUser = useSelector((state: RootState) =>
+    'id' in state.user.userData ? state.user.userData.id : undefined,
+  );
   const { foods }: FoodsState = useSelector<RootState, FoodsState>((state) => state.foodsList);
 
   const navigate = useNavigate();

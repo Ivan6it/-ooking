@@ -61,7 +61,6 @@ export function Input({
   const [passwordError, setPasswordError] = useState({ text: '', active: false });
   const [name, setName] = useState('');
   const [nameError, setNameError] = useState({ text: '', active: false });
-  const [isTouched, setIsTouched] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [password, setPassword] = useState('');
 
@@ -91,7 +90,6 @@ export function Input({
   }
 
   function handleBlurName() {
-    setIsTouched(true);
     setNameError({ text: validateFormFieldsName(name), active: true });
   }
 
@@ -112,7 +110,6 @@ export function Input({
   }
 
   function handleBlurPassword() {
-    setIsTouched(true);
     setPasswordError({ text: validateFormFieldsPassword(password), active: true });
   }
 

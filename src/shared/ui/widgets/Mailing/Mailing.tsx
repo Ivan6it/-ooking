@@ -6,7 +6,7 @@ import styles from './Mailing.module.css';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateUser } from '@/store/userSlice';
-import type { AppDispatch } from '@/store';
+import type { AppDispatch, RootState } from '@/store';
 
 export function Mailing({ small = false }) {
   const [name, setName] = useState('');
@@ -16,8 +16,12 @@ export function Mailing({ small = false }) {
   const [errorMail, setErrorMail] = useState('');
   const [agreementForm, setAgreementForm] = useState(false);
 
-  const userAgreement = useSelector((state: any) => state.user.userData.agreement);
-  const userId = useSelector((state: any) => state.user.userData.id);
+  const userAgreement = useSelector((state: RootState) =>
+    'agreement' in state.user.userData ? state.user.userData.agreement : undefined,
+  );
+  const userId = useSelector((state: RootState) =>
+    'id' in state.user.userData ? state.user.userData.id : undefined,
+  );
   const dispatch = useDispatch<AppDispatch>();
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
@@ -54,6 +58,9 @@ export function Mailing({ small = false }) {
   }
 
   function submitEvent() {
+    if (!userId) {
+      return;
+    }
     setErrorName('');
     setErrorMail('');
     setError('');

@@ -4,7 +4,8 @@ import { useState } from 'react';
 import { DefaultButton } from '@/shared/ui/buttons/defaultButton';
 import { useSelector, useDispatch } from 'react-redux';
 import { openAuthModal, updateUser } from '@/store/userSlice';
-import type { AppDispatch } from '@/store';
+import type { AppDispatch, RootState } from '@/store';
+import type { Shoppinglist } from '@/types/users';
 
 type Product = {
   step: number[];
@@ -36,9 +37,15 @@ export function ShopList({
 }: ShopListProps) {
   const [listItems, setListItems] = useState<number[]>([]);
 
-  const userState = useSelector((state: any) => state.user.userData.id);
-  const userShopList = useSelector((state: any) => state.user.userData.shoppinglist);
-  const beRecipeShopList = userShopList ? userShopList.some((i: any) => i.id === id) : null;
+  const userState = useSelector((state: RootState) =>
+    'id' in state.user.userData ? state.user.userData.id : undefined,
+  );
+  const userShopList = useSelector((state: RootState) =>
+    'shoppinglist' in state.user.userData ? state.user.userData.shoppinglist : undefined,
+  );
+  const beRecipeShopList = userShopList
+    ? userShopList.some((i: Shoppinglist) => i.id === id)
+    : null;
 
   const hasData = !!userState;
   const dispatch = useDispatch<AppDispatch>();
@@ -47,6 +54,9 @@ export function ShopList({
     if (!hasData) {
       dispatch(openAuthModal());
     } else {
+      if (!userShopList) {
+        return;
+      }
       dispatch(
         updateUser({
           userData: {
@@ -70,6 +80,9 @@ export function ShopList({
     if (!hasData) {
       dispatch(openAuthModal());
     } else {
+      if (!userShopList) {
+        return;
+      }
       const allItems = baseItem.map((_, index) => index);
       dispatch(
         updateUser({

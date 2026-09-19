@@ -37,6 +37,8 @@ import {
   updateFoodComments,
 } from '@/store/foodsListSlice';
 import { openAuthModal, updateUser } from '@/store/userSlice';
+import type { Stars, Cookbook } from '@/types/users';
+import type { FoodComment, FoodCommentAnswer, FoodStars } from '@/types/foods';
 
 type JsonIngredient = {
   step: number[];
@@ -62,16 +64,27 @@ export default function RecipePage() {
 
   const idRecipe = useParams<{ recipeId: string | undefined }>();
   const recipes = foods.filter((x) => x.id == +idRecipe.recipeId!)[0];
-  if (!recipes) {
-    return <NotFoundPage />;
-  }
-  const userState = useSelector((state: any) => state.user.userData.id);
+  const userState = useSelector((state: RootState) =>
+    'id' in state.user.userData ? state.user.userData.id : undefined,
+  );
   const hasData = !!userState;
   const dispatch = useDispatch<AppDispatch>();
 
   function setCommentText(e: React.ChangeEvent<HTMLTextAreaElement>) {
     setComment(e.target.value);
   }
+
+  useEffect(() => {
+    const loadData = async () => {
+      const res = await fetch('/api/additionalIngredients');
+      if (!res.ok) {
+        throw new Error('Failed to fetch ingredients');
+      }
+      const data = await res.json();
+      setAddIngrerdients(data);
+    };
+    loadData();
+  }, []);
 
   const popupRef = useRef<HTMLDivElement>(null);
 
@@ -99,44 +112,66 @@ export default function RecipePage() {
     );
   }, [recipes?.id]);
 
-  const isLikedData = useSelector((state: any) => state.user.userData.liked);
-  const isLiked = isLikedData ? isLikedData.find((i: number) => i === recipes.id) : null;
+  const isLikedData = useSelector((state: RootState) =>
+    'liked' in state.user.userData ? state.user.userData.liked : undefined,
+  );
+  const isLiked = isLikedData?.includes(recipes.id) ?? false;
 
   const commentsRecipe = recipes.comments;
 
-  const stars = useSelector((state: any) => state.user.userData.stars);
-  const starValue = stars?.find((i: any) => i.id === recipes.id);
+  const stars = useSelector((state: RootState) =>
+    'stars' in state.user.userData ? state.user.userData.stars : undefined,
+  );
+  const starValue = stars?.find((i: Stars) => i.id === recipes.id);
 
-  const favorites = useSelector((state: any) => state.user.userData.cookbooks);
-  const recipeFavorites = favorites
-    ? favorites.find((item: any) => item.recipes.find((i: number) => i === recipes.id))
-    : '';
+  const favorites = useSelector((state: RootState) =>
+    'cookbooks' in state.user.userData ? state.user.userData.cookbooks : undefined,
+  );
+  const recipeFavorites =
+    favorites?.some((item: Cookbook) => item.recipes.some((i: number) => i === recipes.id)) ??
+    false;
+
+  if (!recipes) {
+    return <NotFoundPage />;
+  }
 
   function removeFavorite() {
-    const newCookbook = favorites.map((item: any) => ({
-      ...item,
-      recipes: item.recipes.filter((i: number) => i !== recipes.id),
-    }));
-    dispatch(
-      updateUser({
-        userData: {
-          id: userState,
-          cookbooks: newCookbook,
-        },
-      }),
-    );
+    const newCookbook = favorites
+      ? favorites.map((item: Cookbook) => ({
+          ...item,
+          recipes: item.recipes.filter((i: number) => i !== recipes.id),
+        }))
+      : undefined;
+    if (userState) {
+      dispatch(
+        updateUser({
+          userData: {
+            id: userState,
+            cookbooks: newCookbook,
+          },
+        }),
+      );
+    }
+  }
+
+  function getCurrentDate() {
+    return Date.now();
   }
 
   function sendComment() {
+    if (userState === undefined) {
+      return;
+    }
     if (comment.trim().length !== 0) {
       if (answer.id !== 0 && !answer.value) {
+        const date = getCurrentDate();
         const newComment = {
-          date: Date.now(),
+          date,
           user: { id: userState },
           comment: comment,
           replyTo: answer.id,
         };
-        const comments = recipes.comments?.map((i: any) => {
+        const comments = recipes.comments?.map((i: FoodComment) => {
           if (i.date === answer.id) {
             return { ...i, answers: [...(i.answers ?? []), newComment] };
           }
@@ -151,14 +186,15 @@ export default function RecipePage() {
         setComment('');
         setAnswer({ value: false, id: 0, name: '' });
       } else if (answer.id !== 0 && answer.value) {
+        const date = getCurrentDate();
         const newComment = {
-          date: Date.now(),
+          date,
           user: { id: userState },
           comment: comment,
           replyTo: answer.id,
         };
-        const comments = recipes.comments?.map((i: any) => {
-          if (i.answers.some((item: any) => item.date === answer.id)) {
+        const comments = recipes.comments?.map((i: FoodComment) => {
+          if (i.answers && i.answers.some((item: FoodCommentAnswer) => item.date === answer.id)) {
             return { ...i, answers: [...(i.answers ?? []), newComment] };
           }
           return i;
@@ -172,8 +208,12 @@ export default function RecipePage() {
         setComment('');
         setAnswer({ value: false, id: 0, name: '' });
       } else {
+        if (userState === undefined) {
+          return;
+        }
+        const date = getCurrentDate();
         const newComment = {
-          date: Date.now(),
+          date,
           user: { id: userState },
           comment: comment,
           answers: [],
@@ -221,7 +261,11 @@ export default function RecipePage() {
     if (!hasData) {
       dispatch(openAuthModal());
     } else {
-      recipeFavorites ? removeFavorite() : setAddMarkBook(true);
+      if (recipeFavorites) {
+        removeFavorite();
+      } else {
+        setAddMarkBook(true);
+      }
     }
   }
 
@@ -231,11 +275,11 @@ export default function RecipePage() {
       return;
     }
 
-    const userRecipeStar = stars?.find((item: any) => item.id === recipes.id);
+    const userRecipeStar = stars?.find((item: Stars) => item.id === recipes.id);
 
     // 1. У пользователя вообще нет оценок
     if (!stars || stars.length === 0) {
-      const newStars = recipes.stars.map((item: any) => {
+      const newStars = recipes.stars.map((item: FoodStars) => {
         const key = Object.keys(item)[0];
 
         if (Number(key) === number) {
@@ -266,7 +310,7 @@ export default function RecipePage() {
 
     // 2. У пользователя есть оценки, но текущего рецепта среди них нет
     if (!userRecipeStar) {
-      const newStars = recipes.stars.map((item: any) => {
+      const newStars = recipes.stars.map((item: FoodStars) => {
         const key = Object.keys(item)[0];
 
         if (Number(key) === number) {
@@ -303,7 +347,7 @@ export default function RecipePage() {
 
     // 3. Оценка совпадает — убираем оценку
     if (userRecipeStar.stars === number) {
-      const newStars = recipes.stars.map((item: any) => {
+      const newStars = recipes.stars.map((item: FoodStars) => {
         const key = Object.keys(item)[0];
 
         if (Number(key) === number) {
@@ -324,7 +368,7 @@ export default function RecipePage() {
         updateUser({
           userData: {
             id: userState,
-            stars: stars.filter((item: any) => item.id !== recipes.id),
+            stars: stars.filter((item: Stars) => item.id !== recipes.id),
           },
         }),
       );
@@ -334,7 +378,7 @@ export default function RecipePage() {
     // 4. Оценка другая — убираем старую и добавляем новую
     const oldStar = userRecipeStar.stars;
 
-    const newStars = recipes.stars.map((item: any) => {
+    const newStars = recipes.stars.map((item: FoodStars) => {
       const key = Object.keys(item)[0];
 
       if (Number(key) === oldStar) {
@@ -359,7 +403,7 @@ export default function RecipePage() {
       updateUser({
         userData: {
           id: userState,
-          stars: stars.map((item: any) => {
+          stars: stars.map((item: Stars) => {
             if (item.id === recipes.id) {
               return {
                 ...item,
@@ -379,27 +423,17 @@ export default function RecipePage() {
     if (!hasData) {
       dispatch(openAuthModal());
     } else {
-      const newLiked = isLiked
-        ? isLikedData.filter((i: number) => i !== recipes.id)
-        : [...isLikedData, recipes.id];
-      dispatch(updateUser({ userData: { id: userState, liked: newLiked } }));
-      dispatch(
-        updateFood({ id: recipes.id, likes: isLiked ? recipes.likes - 1 : recipes.likes + 1 }),
-      );
+      if (isLikedData) {
+        const newLiked = isLiked
+          ? isLikedData.filter((i: number) => i !== recipes.id)
+          : [...isLikedData, recipes.id];
+        dispatch(updateUser({ userData: { id: userState, liked: newLiked } }));
+        dispatch(
+          updateFood({ id: recipes.id, likes: isLiked ? recipes.likes - 1 : recipes.likes + 1 }),
+        );
+      }
     }
   }
-
-  useEffect(() => {
-    const loadData = async () => {
-      const res = await fetch('/api/additionalIngredients');
-      if (!res.ok) {
-        throw new Error('Failed to fetch ingredients');
-      }
-      const data = await res.json();
-      setAddIngrerdients(data);
-    };
-    loadData();
-  }, []);
 
   const addIngredients = addIngrenients as AdditionalIngredients;
   let textComplexity;
@@ -678,31 +712,56 @@ export default function RecipePage() {
                       handleClick={() => {
                         clickStar(1);
                       }}
-                      svg={<StarIcon classPath={styles.stars} active={starValue?.stars > 0} />}
+                      svg={
+                        <StarIcon
+                          classPath={styles.stars}
+                          active={starValue ? starValue?.stars > 0 : false}
+                        />
+                      }
                     />
                     <IconActive
                       handleClick={() => {
                         clickStar(2);
                       }}
-                      svg={<StarIcon classPath={styles.stars} active={starValue?.stars > 1} />}
+                      svg={
+                        <StarIcon
+                          classPath={styles.stars}
+                          active={starValue ? starValue?.stars > 1 : false}
+                        />
+                      }
                     />
                     <IconActive
                       handleClick={() => {
                         clickStar(3);
                       }}
-                      svg={<StarIcon classPath={styles.stars} active={starValue?.stars > 2} />}
+                      svg={
+                        <StarIcon
+                          classPath={styles.stars}
+                          active={starValue ? starValue?.stars > 2 : false}
+                        />
+                      }
                     />
                     <IconActive
                       handleClick={() => {
                         clickStar(4);
                       }}
-                      svg={<StarIcon classPath={styles.stars} active={starValue?.stars > 3} />}
+                      svg={
+                        <StarIcon
+                          classPath={styles.stars}
+                          active={starValue ? starValue?.stars > 3 : false}
+                        />
+                      }
                     />
                     <IconActive
                       handleClick={() => {
                         clickStar(5);
                       }}
-                      svg={<StarIcon classPath={styles.stars} active={starValue?.stars > 4} />}
+                      svg={
+                        <StarIcon
+                          classPath={styles.stars}
+                          active={starValue ? starValue?.stars > 4 : false}
+                        />
+                      }
                     />
                   </div>
                 </div>

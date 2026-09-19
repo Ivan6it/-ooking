@@ -46,7 +46,11 @@ export function SectionCards({
         />
       )}
       {ogrinicator === 'none' && (
-        <DefaultButton className={styles.directorySectionItemPage__button} text="Загрузить еще" />
+        <DefaultButton
+          handleClick={() => clickMore!()}
+          className={styles.directorySectionItemPage__button}
+          text="Загрузить еще"
+        />
       )}
     </div>
   );
